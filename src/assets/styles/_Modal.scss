@@ -1,0 +1,36 @@
+.modal-content {
+  background-color: #2a3042 !important;
+  border: 1px solid #32394e !important;
+  border-radius: .4rem !important;
+  color: #bfc8e2 !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+}
+
+.modal-body{
+  color: #bfc8e2 !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+
+  h2,h3,h4,h5,p,span{
+    color: #bfc8e2 !important;
+  }
+}
+
+.modal-header {
+  border-bottom: 1px solid #32394e !important;
+}
+
+.modal-title{
+  font-weight: bold !important;
+  text-transform: capitalize !important;
+}
+
+.modal-footer {
+  border-top: 1px solid #32394e !important;
+}
+
+.close,.close:hover,.close:focus{
+  color: #ffffff !important;
+  outline: none;
+}

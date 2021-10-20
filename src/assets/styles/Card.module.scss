@@ -1,0 +1,31 @@
+@import "Reset";
+
+.card {
+  background-color: #2a3042;
+  border: 0 solid #32394e;
+  border-radius: .25rem;
+  position: relative;
+  word-wrap: break-word;
+  margin-bottom: 24px;
+  box-shadow: 0 .75rem 1.5rem rgba(18,38,63,.03);
+}
+.cardBody {
+  background-color: transparent;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.cardBody h4{
+  font-family: "Montserrat", sans-serif;
+  color: #f6f6f6;
+  font-size: 2.19rem;
+  margin: 0;
+}
+
+.cardBody small{
+  font-size: 0.875rem;
+  font-family: "Montserrat", sans-serif;
+  color: #f6f6f6;
+}
