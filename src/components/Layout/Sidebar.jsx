@@ -1,41 +1,7 @@
 import React, { Component } from "react";
-import { FaAngleDown, FaUserGraduate, FaDatabase } from "react-icons/fa";
+import { FaAngleDown, FaUserGraduate, FaCcMastercard, FaUsers, FaDatabase } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-
-const childMenuForUiKits = [
-  {
-    name: "Form Elements",
-    link: "/form-elements",
-  },
-  {
-    name: "Form Validation",
-    link: "/",
-  },
-  {
-    name: "Form TextArea",
-    link: "/",
-  },
-  {
-    name: "Form File Upload",
-    link: "/",
-  },
-];
-
-const childMenuForUserManagement = [
-  {
-    name: "Permission List",
-    link: "/permission-list",
-  },
-  {
-    name: "Total User List",
-    link: "/user-list",
-  },
-  {
-    name: "Total Role List",
-    link: "/role-list",
-  },
-];
 
 class Sidebar extends Component {
   constructor(props) {
@@ -95,9 +61,8 @@ class Sidebar extends Component {
   renderSingleMenu = (path, icon, menuName, hoverState, active) => {
     return (
       <li
-        className={`${
-          this.state[hoverState] ? "nav-item hover-open" : "nav-item"
-        } ${active ? active : ""}`}
+        className={`${this.state[hoverState] ? "nav-item hover-open" : "nav-item"
+          } ${active ? active : ""}`}
         onMouseEnter={() => this.navItemHover(hoverState)}
         onMouseLeave={() => this.navItemHover(hoverState)}
       >
@@ -161,19 +126,29 @@ class Sidebar extends Component {
           "isHoverItemOne",
           "active"
         )}
-        {this.renderCollapseAbleMenu(
+        {this.renderSingleMenu(
+          "/",
           <FaUserGraduate />,
-          "User Management",
-          "isHoverItemTwo",
-          "navItemOne",
-          childMenuForUserManagement
+          "Course Management",
+          "isHoverItemTwo"
         )}
-        {this.renderCollapseAbleMenu(
+        {this.renderSingleMenu(
+          "/",
+          <FaUsers />,
+          "Student Management",
+          "isHoverItemThree"
+        )}
+        {this.renderSingleMenu(
+          "/",
+          <FaCcMastercard />,
+          "Sales Management",
+          "isHoverItemFour"
+        )}
+        {this.renderSingleMenu(
+          "/",
           <FaDatabase />,
-          "Ui Kits",
-          "isHoverItemFour",
-          "navItemTwo",
-          childMenuForUiKits
+          "Report Generatrion",
+          "isHoverItemFive"
         )}
       </>
     );

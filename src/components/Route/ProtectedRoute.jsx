@@ -15,7 +15,7 @@ export default class ProtectedRoute extends Component {
         <FormContextProvider>
           <Dashboard>
             <Switch>
-              <Route exact={true} path="/" component={DashboardBody} />
+              <Route exact={true} path="/dashboard" component={DashboardBody} />
               <Route
                 exact={true}
                 path="/form-elements"

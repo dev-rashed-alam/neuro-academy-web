@@ -63,16 +63,16 @@ export default class DashboardBody extends Component {
       <>
         <Row>
           <Col xs={6} sm={6} md={3}>
-            <CustomCard value="$508" name="All Time Sales" />
+            <CustomCard value="$123000" name="All Time Sales" />
           </Col>
           <Col xs={6} sm={6} md={3}>
             <CustomCard value="1,287" name="Total Purchases" />
           </Col>
           <Col xs={6} sm={6} md={3}>
-            <CustomCard value="1214" name="All Time Orders" />
+            <CustomCard value="1214" name="Total Students" />
           </Col>
           <Col xs={6} sm={6} md={3}>
-            <CustomCard value="$789" name="Total Growth" />
+            <CustomCard value="50" name="Total Courses" />
           </Col>
         </Row>
 
