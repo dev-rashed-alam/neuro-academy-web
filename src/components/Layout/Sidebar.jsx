@@ -120,26 +120,26 @@ class Sidebar extends Component {
     return (
       <>
         {this.renderSingleMenu(
-          "/",
+          "/dashboard",
           <MdDashboard />,
           "Dashboard",
           "isHoverItemOne",
           "active"
         )}
         {this.renderSingleMenu(
-          "/",
+          "/courses",
           <FaUserGraduate />,
           "Course Management",
           "isHoverItemTwo"
         )}
         {this.renderSingleMenu(
-          "/",
+          "/students",
           <FaUsers />,
           "Student Management",
           "isHoverItemThree"
         )}
         {this.renderSingleMenu(
-          "/",
+          "/sales",
           <FaCcMastercard />,
           "Sales Management",
           "isHoverItemFour"
