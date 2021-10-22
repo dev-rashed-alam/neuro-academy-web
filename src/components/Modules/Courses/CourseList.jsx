@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import React, {useState} from "react";
+import {Col, Row} from "react-bootstrap";
 import TableComponent from "../../CommonComponents/Table/Table";
-import CourseForm from "./Form";
-import { Button } from "../../CommonComponents/Button";
-import { MdAddCircle } from "react-icons/md";
+import CourseForm from "./CourseForm";
+import {Button} from "../../CommonComponents/Button";
+import {MdAddCircle} from "react-icons/md";
 
 const tableColumn = [
     {
@@ -61,38 +61,38 @@ const tableData = [
 
 const CourseList = () => {
 
-    const [modal,setModal] = useState(false)
+    const [modal, setModal] = useState(false)
 
 
     return (
         <>
-        <Row className="p-20">
-          <Col>
-            <h3>Course Summary</h3>
-          </Col>
-          <Col>
-            <Button
-              icon={<MdAddCircle />}
-              name="Add New Course"
-              className="btn btn-primary float-right"
-              onClickEvent={() => setModal(!modal)}
+            <Row className="p-20">
+                <Col>
+                    <h3>Course Summary</h3>
+                </Col>
+                <Col>
+                    <Button
+                        icon={<MdAddCircle/>}
+                        name="Add New Course"
+                        className="btn btn-primary float-right"
+                        onClickEvent={() => setModal(!modal)}
+                    />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <TableComponent
+                        tableColumn={tableColumn}
+                        tableData={tableData}
+                        selection={true}
+                        pagination={true}
+                    />
+                </Col>
+            </Row>
+            <CourseForm
+                modalShow={modal}
+                triggerModal={() => setModal(!modal)}
             />
-          </Col>
-        </Row>
-        <Row>
-            <Col>
-                <TableComponent
-                    tableColumn={tableColumn}
-                    tableData={tableData}
-                    selection={true}
-                    pagination={true}
-                />
-            </Col>
-        </Row>
-        <CourseForm
-          modalShow={modal}
-          triggerModal={() => setModal(!modal)}
-        />
         </>
     )
 };
