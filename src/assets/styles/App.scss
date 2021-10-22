@@ -86,14 +86,14 @@
 .sidebar {
   min-height: calc(100vh - 70px);
   background: #2a3042;
-  font-family: "Poppins",sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   position: fixed;
   padding: 0;
   width: 240px;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
-  overflow: hidden scroll;
+  overflow: hidden;
   height: calc(100vh - 70px);
 
   .nav {
@@ -154,8 +154,8 @@
       }
     }
 
-    .nav-item.active {
-      > .nav-link {
+    .nav-item {
+      > .active {
         background: initial;
         position: relative;
 
@@ -406,8 +406,8 @@
     display: flex;
     margin-top: 0.5rem;
   }
-  .sidebar{
-    overflow: hidden scroll;
+  .sidebar {
+    overflow: hidden;
     height: auto;
   }
 }
@@ -429,16 +429,16 @@
 
     .sidebar {
       width: 240px;
-      overflow: hidden scroll;
+      overflow: hidden;
       height: auto;
     }
   }
 
-  .main-panel{
+  .main-panel {
     width: 100%;
     margin: 0 auto !important;
 
-    .content-wrapper{
+    .content-wrapper {
       padding: 2.5rem 0;
     }
   }
@@ -468,7 +468,7 @@
     border-bottom-right-radius: 30px;
     color: #ffffff;
 
-    &:not(:first-child){
+    &:not(:first-child) {
       color: #ffffff;
       background-color: transparent !important;
     }
@@ -527,7 +527,7 @@
             width: 2rem;
             margin-right: 1rem !important;
 
-            .avatar-title{
+            .avatar-title {
               align-items: center;
               background-color: #556ee6;
               color: #fff;
@@ -553,7 +553,7 @@
               font-size: 0.7rem;
             }
 
-            svg{
+            svg {
               font-size: 15px;
               padding-bottom: 3px;
             }

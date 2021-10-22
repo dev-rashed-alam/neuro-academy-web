@@ -70,13 +70,6 @@ class DashboardHeader extends Component {
           <ul className="navbar-nav right-nav-style ml-auto pr-4">
             <DashboardNotification
               hoverOpen={this.hoverOpen}
-              stateValue={this.state.isOpenNotification}
-              stateName="isOpenNotification"
-              title="Messages"
-              icon={<FaEnvelope />}
-            />
-            <DashboardNotification
-              hoverOpen={this.hoverOpen}
               stateValue={this.state.isOpenMessage}
               stateName="isOpenMessage"
               title="Notifications"

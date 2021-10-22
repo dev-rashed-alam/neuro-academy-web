@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { IoIosRedo } from "react-icons/io";
-import { FiChevronDown } from "react-icons/fi";
-import { FaUserCircle, FaRegEnvelopeOpen, FaCog } from "react-icons/fa";
+import {Link} from "react-router-dom";
+import {IoIosRedo} from "react-icons/io";
+import {FiChevronDown} from "react-icons/fi";
+import {FaUserCircle, FaRegEnvelopeOpen} from "react-icons/fa";
 import AvatarImage from "../../assets/images/avatar.jpg";
 import styled from "styled-components";
 
@@ -48,87 +48,75 @@ const Styles = styled.div`
 `;
 
 const Avatar = (props) => {
-  return (
-    <Styles>
-      <li
-        className={
-          props.stateValue
-            ? "navbar-dropdown hover-content-show"
-            : "navbar-dropdown"
-        }
-        onClick={() => props.hoverOpen(props.stateName)}
-      >
+    return (
+        <Styles>
+            <li
+                className={
+                    props.stateValue
+                        ? "navbar-dropdown hover-content-show"
+                        : "navbar-dropdown"
+                }
+                onClick={() => props.hoverOpen(props.stateName)}
+            >
         <span className="menu-icon">
           <img
-            className="rounded-circle header-profile-user"
-            src={AvatarImage}
-            alt="Header Avatar"
+              className="rounded-circle header-profile-user"
+              src={AvatarImage}
+              alt="Header Avatar"
           />
           <span className="d-none d-xl-inline-block ml-2 mr-1 admin-name">
             admin
-            <FiChevronDown />
+            <FiChevronDown/>
           </span>
         </span>
-        <div
-          className="nav-dropdown-hover"
-          onMouseLeave={() => props.hoverOpen(props.stateName)}
-        >
-          <div className="nav-dropdown-body">
-            <div className="wrapper">
-              <Link to="/">
-                <div className="media">
-                  <div className="avatar">
-                    <div className="avatar-title">
-                      <FaUserCircle />
+                <div
+                    className="nav-dropdown-hover"
+                    onMouseLeave={() => props.hoverOpen(props.stateName)}
+                >
+                    <div className="nav-dropdown-body">
+                        <div className="wrapper">
+                            <Link to="/">
+                                <div className="media">
+                                    <div className="avatar">
+                                        <div className="avatar-title">
+                                            <FaUserCircle/>
+                                        </div>
+                                    </div>
+                                    <div className="media-body">
+                                        <h6 className="mt-0 mb-1">Profile</h6>
+                                    </div>
+                                </div>
+                            </Link>
+                            <Link to="/">
+                                <div className="media">
+                                    <div className="avatar">
+                                        <div className="avatar-title">
+                                            <FaRegEnvelopeOpen/>
+                                        </div>
+                                    </div>
+                                    <div className="media-body">
+                                        <h6 className="mt-0 mb-1">Notification</h6>
+                                    </div>
+                                </div>
+                            </Link>
+                            <Link to="/">
+                                <div className="media">
+                                    <div className="avatar">
+                                        <div className="avatar-title">
+                                            <IoIosRedo/>
+                                        </div>
+                                    </div>
+                                    <div className="media-body">
+                                        <h6 className="mt-0 mb-1">Logout</h6>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
                     </div>
-                  </div>
-                  <div className="media-body">
-                    <h6 className="mt-0 mb-1">Profile</h6>
-                  </div>
                 </div>
-              </Link>
-              <Link to="/">
-                <div className="media">
-                  <div className="avatar">
-                    <div className="avatar-title">
-                      <FaRegEnvelopeOpen />
-                    </div>
-                  </div>
-                  <div className="media-body">
-                    <h6 className="mt-0 mb-1">Messages</h6>
-                  </div>
-                </div>
-              </Link>
-              <Link to="/">
-                <div className="media">
-                  <div className="avatar">
-                    <div className="avatar-title">
-                      <FaCog />
-                    </div>
-                  </div>
-                  <div className="media-body">
-                    <h6 className="mt-0 mb-1">Settings</h6>
-                  </div>
-                </div>
-              </Link>
-              <Link to="/">
-                <div className="media">
-                  <div className="avatar">
-                    <div className="avatar-title">
-                      <IoIosRedo />
-                    </div>
-                  </div>
-                  <div className="media-body">
-                    <h6 className="mt-0 mb-1">Logout</h6>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </li>
-    </Styles>
-  );
+            </li>
+        </Styles>
+    );
 };
 
 export default Avatar;

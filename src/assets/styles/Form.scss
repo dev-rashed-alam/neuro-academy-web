@@ -49,6 +49,7 @@ label{
 .select__menu{
   background-color: #2e3548 !important;
   color: #bfc8e2 !important;
+  z-index: 9999 !important;
 }
 
 input[type="checkbox"]{

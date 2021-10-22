@@ -27,7 +27,7 @@ const CourseForm = (props) => {
             onHide={props.triggerModal}
             size="lg"
             title="Add New Course"
-            scrollable={false}
+            scrollable={true}
             showCloseButton={true}
             buttons={[
                 {
@@ -86,17 +86,29 @@ const CourseForm = (props) => {
             </Row>
             <Row>
                 <Col>
-                    <EditorComponent name="courseFeature"/>
+                    <EditorComponent
+                        name="courseFeature"
+                        controlId="course_feature"
+                        label="Add Course Feature"
+                    />
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <EditorComponent name="shortDescription"/>
+                    <EditorComponent
+                        name="shortDescription"
+                        controlId="short_description"
+                        label="Add Short Description"
+                    />
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <EditorComponent name="longDescription"/>
+                    <EditorComponent
+                        name="longDescription"
+                        controlId="long_description"
+                        label="Add Long Description"
+                    />
                 </Col>
             </Row>
         </ModalComponent>
