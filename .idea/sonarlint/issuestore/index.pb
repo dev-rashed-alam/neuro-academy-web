@@ -13,8 +13,6 @@ j
 :src/components/CommonComponents/Form/CheckboxComponent.jsx,a\2\a222e46dd552c199f958235e14ee1d41a4c54243
 l
 <src/components/CommonComponents/Form/DatePickerComponent.jsx,d\6\d6789e40e36fe77b6bcbf859c1b5c3555fdb12c5
-Z
-*src/components/CommonComponents/Button.jsx,b\c\bc4095271eef5ab21c2843373bef0714826ffcb8
 X
 (src/components/CommonComponents/Card.jsx,f\b\fb2af0910bb16dfa8e59de251868bd61cf6b8639
 b
@@ -63,5 +61,23 @@ V
 &src/components/Context/FormContext.jsx,a\2\a2a97dee53a65583dffd75dbd2774701ea2c92ca
 _
 /src/components/Modules/Students/StudentList.jsx,a\2\a2592878ee29338379bc649fe05cbdf6460abeb4
-W
-'src/components/Route/ProtectedRoute.jsx,e\c\ec1597e5dd74a786a110ad6df4dbf7569543fef8
+M
+src/assets/styles/_Reset.scss,d\2\d230198d1915b2f30ee84d7c9a29ea9ee9aac825
+A
+public/index.html,f\4\f43ecdf8d666ee908aacce037b4cd72159e4741b
+J
+src/assets/styles/App.scss,a\d\ad83c1982838870b54ca961efdfbaf87ea97f3e4
+h
+8src/components/CommonComponents/Form/SelectComponent.jsx,0\2\022e443aaa79c9dcc9a7a36af6d78dd7c91aae1f
+Q
+!src/components/Layout/Sidebar.jsx,2\a\2a1a56335d77c54643ae7f4f49ee9c01595bdc98
+]
+-src/components/Modules/Courses/CourseForm.jsx,c\2\c2675a822b379085d7154ad0dadc9d0c8021f072
+_
+/src/components/CommonComponents/Table/Table.jsx,0\e\0ed37098125ef2a0693b9c67bc0c4d7d5f206ea1
+P
+ src/components/Layout/Avatar.jsx,d\9\d9afd3d3483095c7b84b27a20df39312aa506fc3
+Y
+)src/components/Layout/DashboardHeader.jsx,f\0\f078fafcce593795bcb6fee9e432d782cd11803a
+<
+package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
