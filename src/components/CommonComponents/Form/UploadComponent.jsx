@@ -2,6 +2,26 @@ import React from "react";
 import "../../../assets/styles/Upload.scss"
 import {Col, Container, Form, Row} from "react-bootstrap";
 import {Button} from "../Button";
+import "../../../assets/styles/Form.scss";
+import Select from "react-select";
+const customStyles = {
+    menu: (base) => ({
+        ...base,
+        marginTop: "2px",
+    }),
+    option: (base) => ({
+        padding: "8px 12px",
+        "&:hover": {
+            backgroundColor: "#000000 !important",
+        },
+    }),
+};
+
+const options = [
+    {value: "1", label: "Serial 1"},
+    {value: "2", label: "Serial 2"},
+    {value: "3", label: "Serial 3"},
+]
 
 const UploadComponent = () => {
 
@@ -21,18 +41,28 @@ const UploadComponent = () => {
                             alt="img"
                         />
                         <span
-                            className="upl"
+                            className="uploadDescription"
                             id="upload">
                             Upload Attachment
                         </span>
                         <input type="file" className="upload up" id="up" onChange={handleFileName}/>
                     </div>
                 </Col>
-                <Col md={7}>
+                <Col md={3}>
+                    <Select
+                        styles={customStyles}
+                        options={options}
+                        placeholder="Select Serial"
+                        className="basic-single"
+                        classNamePrefix="select"
+                        name="selectSerial"
+                    />
+                </Col>
+                <Col md={4}>
                     <Form.Control
                         className="form-style"
                         type="text"
-                        placeholder="Enter File Name"
+                        placeholder="Enter Title"
                         name="name"
                     />
                 </Col>

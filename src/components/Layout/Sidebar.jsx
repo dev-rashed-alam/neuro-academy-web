@@ -17,6 +17,9 @@ class Sidebar extends Component {
             navItemThree: false,
             isHoverItemOne: false,
             isHoverItemTwo: false,
+            isHoverItemFive: false,
+            isHoverItemSix: false,
+            isHoverItemSeven: false,
         };
     }
 
@@ -145,10 +148,22 @@ class Sidebar extends Component {
                     "isHoverItemFour"
                 )}
                 {this.renderSingleMenu(
+                    "/categories",
+                    <FaCcMastercard/>,
+                    "Category Management",
+                    "isHoverItemFive"
+                )}
+                {this.renderSingleMenu(
+                    "/coupons",
+                    <FaCcMastercard/>,
+                    "Coupon Management",
+                    "isHoverItemSix"
+                )}
+                {this.renderSingleMenu(
                     "/",
                     <FaDatabase/>,
                     "Report Generate",
-                    "isHoverItemFive"
+                    "isHoverItemSeven"
                 )}
             </>
         );

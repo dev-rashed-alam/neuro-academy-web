@@ -67,12 +67,6 @@ A
 public/index.html,f\4\f43ecdf8d666ee908aacce037b4cd72159e4741b
 J
 src/assets/styles/App.scss,a\d\ad83c1982838870b54ca961efdfbaf87ea97f3e4
-h
-8src/components/CommonComponents/Form/SelectComponent.jsx,0\2\022e443aaa79c9dcc9a7a36af6d78dd7c91aae1f
-Q
-!src/components/Layout/Sidebar.jsx,2\a\2a1a56335d77c54643ae7f4f49ee9c01595bdc98
-]
--src/components/Modules/Courses/CourseForm.jsx,c\2\c2675a822b379085d7154ad0dadc9d0c8021f072
 _
 /src/components/CommonComponents/Table/Table.jsx,0\e\0ed37098125ef2a0693b9c67bc0c4d7d5f206ea1
 P
@@ -81,3 +75,9 @@ Y
 )src/components/Layout/DashboardHeader.jsx,f\0\f078fafcce593795bcb6fee9e432d782cd11803a
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
+h
+8src/components/CommonComponents/Form/EditorComponent.jsx,d\3\d3a258dbde8460f070292091f996f4a1340323da
+]
+-src/components/Modules/Forms/FormElements.jsx,e\6\e6eb20e5a3d2694347e69ede02ee13e043dffcc7
+K
+src/assets/styles/Form.scss,e\b\eb800bb0edd307f1ba3296f3f7156c47030cce67
