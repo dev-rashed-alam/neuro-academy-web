@@ -5,8 +5,6 @@ b
 2src/components/CommonComponents/Chart/BarChart.jsx,d\c\dcc31cf9bcb7b3e1abed3e57dfe6511fd5ad6c57
 m
 =src/components/CommonComponents/Form/RadioButtonComponent.jsx,6\6\66dcf7288a9dbbb08c5c39a4fc3aeb0f1dc1de64
-b
-2src/components/CommonComponents/ModalComponent.jsx,5\6\5675eb73590fc6f3aa9570e6b6e55382d49dffdf
 g
 7src/components/CommonComponents/Chart/DoughnutChart.jsx,c\a\cadf07e9f6427b330e9b2014365063f99b377261
 j
@@ -57,8 +55,6 @@ A
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 S
 #src/components/Layout/Dashboard.jsx,9\2\92fbab651c496a956340bae08d09bad5574a4e51
-V
-&src/components/Context/FormContext.jsx,a\2\a2a97dee53a65583dffd75dbd2774701ea2c92ca
 _
 /src/components/Modules/Students/StudentList.jsx,a\2\a2592878ee29338379bc649fe05cbdf6460abeb4
 M
@@ -78,6 +74,6 @@ Y
 h
 8src/components/CommonComponents/Form/EditorComponent.jsx,d\3\d3a258dbde8460f070292091f996f4a1340323da
 ]
--src/components/Modules/Forms/FormElements.jsx,e\6\e6eb20e5a3d2694347e69ede02ee13e043dffcc7
-K
-src/assets/styles/Form.scss,e\b\eb800bb0edd307f1ba3296f3f7156c47030cce67
+-src/components/Modules/Courses/CourseList.jsx,4\c\4c25209b02be01af01b6b21e1f8a403f3e2fa76b
+M
+src/assets/styles/Upload.scss,e\2\e21ec806e29e4448666af4d878c4944bc2155a03

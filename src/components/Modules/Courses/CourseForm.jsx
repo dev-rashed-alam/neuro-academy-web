@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import {ModalComponent} from "../../CommonComponents/ModalComponent";
 import {Col, Row} from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
 import SelectComponent from "../../CommonComponents/Form/SelectComponent";
 import EditorComponent from "../../CommonComponents/Form/EditorComponent";
+import {Button} from "../../CommonComponents/Button";
+import UploadComponent from "../../CommonComponents/Form/UploadComponent";
+import {FormContext} from "../../Context/FormContext";
 
 const optionForModule = [
     {value: "Web Design", label: "Web Design"},
@@ -17,6 +20,19 @@ const optionForCourseUpload = [
 
 const CourseForm = (props) => {
 
+    const {videos, addDynamicVideos, removeDynamicVideos} = useContext(FormContext);
+
+    const renderDynamicAttachmentForVideos = () => {
+        return videos.map(item =>
+            <div className="pt-1 pb-1">
+                <UploadComponent
+                    identifier={item}
+                    clickHandler={removeDynamicVideos}
+                />
+            </div>
+        )
+    }
+
     const handleSubmit = () => {
         props.triggerModal();
     };
@@ -25,9 +41,9 @@ const CourseForm = (props) => {
         <ModalComponent
             show={props.modalShow}
             onHide={props.triggerModal}
-            size="lg"
+            size="xl"
             title="Add New Course"
-            scrollable={true}
+            scrollable={false}
             showCloseButton={true}
             buttons={[
                 {
@@ -108,6 +124,16 @@ const CourseForm = (props) => {
                         name="longDescription"
                         controlId="long_description"
                         label="Add Long Description"
+                    />
+                </Col>
+            </Row>
+            {renderDynamicAttachmentForVideos()}
+            <Row>
+                <Col>
+                    <Button
+                        name="Add Videos"
+                        className="btn btn-primary"
+                        onClickEvent={addDynamicVideos}
                     />
                 </Col>
             </Row>

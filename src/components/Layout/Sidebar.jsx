@@ -1,6 +1,7 @@
 import React, {Component} from "react";
-import {FaAngleDown, FaUserGraduate, FaCcMastercard, FaUsers, FaDatabase} from "react-icons/fa";
+import {FaAngleDown, FaUserGraduate, FaCodepen, FaUsers, FaDatabase, FaBookReader} from "react-icons/fa";
 import {MdDashboard} from "react-icons/md";
+import {GiPaintBucket} from "react-icons/gi";
 import {NavLink} from "react-router-dom";
 
 class Sidebar extends Component {
@@ -143,19 +144,19 @@ class Sidebar extends Component {
                 )}
                 {this.renderSingleMenu(
                     "/sales",
-                    <FaCcMastercard/>,
+                    <GiPaintBucket/>,
                     "Order Management",
                     "isHoverItemFour"
                 )}
                 {this.renderSingleMenu(
                     "/categories",
-                    <FaCcMastercard/>,
+                    <FaBookReader/>,
                     "Category Management",
                     "isHoverItemFive"
                 )}
                 {this.renderSingleMenu(
                     "/coupons",
-                    <FaCcMastercard/>,
+                    <FaCodepen/>,
                     "Coupon Management",
                     "isHoverItemSix"
                 )}

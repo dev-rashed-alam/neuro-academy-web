@@ -1,9 +1,10 @@
 import React from "react";
-import "../../../assets/styles/Upload.scss"
 import {Col, Container, Form, Row} from "react-bootstrap";
 import {Button} from "../Button";
 import "../../../assets/styles/Form.scss";
 import Select from "react-select";
+import FileComponent from "./FileComponent";
+
 const customStyles = {
     menu: (base) => ({
         ...base,
@@ -18,35 +19,22 @@ const customStyles = {
 };
 
 const options = [
-    {value: "1", label: "Serial 1"},
-    {value: "2", label: "Serial 2"},
-    {value: "3", label: "Serial 3"},
+    {value: "1", label: "#1"},
+    {value: "2", label: "#2"},
+    {value: "3", label: "#3"},
+    {value: "4", label: "#4"},
+    {value: "5", label: "#5"},
+    {value: "6", label: "#6"},
+    {value: "7", label: "#7"},
+    {value: "8", label: "#8"},
 ]
-
-const UploadComponent = () => {
-
-    const handleFileName = (e) => {
-        e.preventDefault()
-        document.getElementById("upload").innerHTML = e.target.files[0].name
-    }
+const UploadComponent = ({identifier, clickHandler}) => {
 
     return (
-        <Container>
+        <Container key={`videos${identifier}`}>
             <Row>
-                <Col md={4}>
-                    <div className="fileUpload btn btn-orange">
-                        <img
-                            src="https://image.flaticon.com/icons/svg/136/136549.svg"
-                            className="icon"
-                            alt="img"
-                        />
-                        <span
-                            className="uploadDescription"
-                            id="upload">
-                            Upload Attachment
-                        </span>
-                        <input type="file" className="upload up" id="up" onChange={handleFileName}/>
-                    </div>
+                <Col md={4} className="pl-0">
+                    <FileComponent identifier={identifier}/>
                 </Col>
                 <Col md={3}>
                     <Select
@@ -55,7 +43,7 @@ const UploadComponent = () => {
                         placeholder="Select Serial"
                         className="basic-single"
                         classNamePrefix="select"
-                        name="selectSerial"
+                        name={`serial${identifier}`}
                     />
                 </Col>
                 <Col md={4}>
@@ -63,13 +51,14 @@ const UploadComponent = () => {
                         className="form-style"
                         type="text"
                         placeholder="Enter Title"
-                        name="name"
+                        name={`name${identifier}`}
                     />
                 </Col>
                 <Col md={1}>
                     <Button
-                        name="Delete"
-                        className="btn btn-primary"
+                        name="Remove"
+                        className="btn btn-danger"
+                        onClickEvent={() => clickHandler(identifier)}
                     />
                 </Col>
             </Row>
