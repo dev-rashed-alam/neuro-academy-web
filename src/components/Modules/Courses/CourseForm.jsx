@@ -7,6 +7,7 @@ import EditorComponent from "../../CommonComponents/Form/EditorComponent";
 import {Button} from "../../CommonComponents/Button";
 import UploadComponent from "../../CommonComponents/Form/UploadComponent";
 import {FormContext} from "../../Context/FormContext";
+import {fetchYoutubePlaylist} from "../../Config/ApiHandler";
 
 const optionForModule = [
     {value: "Web Design", label: "Web Design"},
@@ -14,20 +15,19 @@ const optionForModule = [
     {value: "Graphics Design", label: "Graphics Design"},
 ];
 const optionForCourseUpload = [
-    {value: "Youtube link", label: "Youtube Link"},
+    {value: "youtube", label: "Youtube Link"},
     {value: "custom", label: "Custom Upload"}
 ];
 
 const CourseForm = (props) => {
 
-    const {videos, addDynamicVideos, removeDynamicVideos} = useContext(FormContext);
+    const {videos, addDynamicVideos, inputData, addNewYoutubeVideos,youtubeVideos} = useContext(FormContext);
 
     const renderDynamicAttachmentForVideos = () => {
         return videos.map(item =>
             <div className="pt-1 pb-1">
                 <UploadComponent
                     identifier={item}
-                    clickHandler={removeDynamicVideos}
                 />
             </div>
         )
@@ -36,6 +36,65 @@ const CourseForm = (props) => {
     const handleSubmit = () => {
         props.triggerModal();
     };
+
+    const handleYoutubePlaylist = (pageToken) => {
+        let youtubeVideos = [];
+        fetchYoutubePlaylist(inputData["playlistId"], pageToken)
+            .then((response) => {
+                response.items.map((item) => {
+                    youtubeVideos.push(item.snippet)
+                })
+                addNewYoutubeVideos(youtubeVideos)
+                if ("nextPageToken" in response) {
+                    handleYoutubePlaylist(response.nextPageToken)
+                }
+            })
+            .catch(e => console.log(e))
+    }
+
+    const renderCustomVideoUpload = () => {
+        if (inputData["courseUploadType"] !== undefined && inputData["courseUploadType"] === "custom") {
+            return (
+                <Row>
+                    <Col>
+                        <Button
+                            name="Add Videos"
+                            className="btn btn-primary"
+                            onClickEvent={addDynamicVideos}
+                        />
+                    </Col>
+                </Row>
+            )
+        } else if (inputData["courseUploadType"] !== undefined && inputData["courseUploadType"] === "youtube") {
+            return (
+                <Row className="align-items-center">
+                    <Col>
+                        <TextComponent
+                            label="Youtube Playlist ID"
+                            placeHolder="Enter Playlist ID"
+                            name="playlistId"
+                            required={false}
+                            type="text"
+                            controlId="play_list_id"
+                            handleBlur={() => handleYoutubePlaylist(undefined)}
+                        />
+                    </Col>
+                    <Col>
+                        <TextComponent
+                            label="Total Videos"
+                            placeHolder="Total Videos"
+                            name="totalVideos"
+                            required={false}
+                            readOnly={true}
+                            value={youtubeVideos.length}
+                            type="text"
+                            controlId="total_videos"
+                        />
+                    </Col>
+                </Row>
+            )
+        }
+    }
 
     return (
         <ModalComponent
@@ -100,6 +159,8 @@ const CourseForm = (props) => {
                     />
                 </Col>
             </Row>
+            {renderDynamicAttachmentForVideos()}
+            {renderCustomVideoUpload()}
             <Row>
                 <Col>
                     <EditorComponent
@@ -124,16 +185,6 @@ const CourseForm = (props) => {
                         name="longDescription"
                         controlId="long_description"
                         label="Add Long Description"
-                    />
-                </Col>
-            </Row>
-            {renderDynamicAttachmentForVideos()}
-            <Row>
-                <Col>
-                    <Button
-                        name="Add Videos"
-                        className="btn btn-primary"
-                        onClickEvent={addDynamicVideos}
                     />
                 </Col>
             </Row>

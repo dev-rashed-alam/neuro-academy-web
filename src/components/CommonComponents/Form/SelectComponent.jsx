@@ -40,11 +40,11 @@ const SelectComponent = ({
       for (let item of val) {
         selectedValue.push(item.value);
       }
-      handleChange({ target: { name: "color", value: selectedValue } });
+      handleChange({ target: { name: name, value: selectedValue } });
     } else if (val) {
-      handleChange({ target: { name: "color", value: val.value } });
+      handleChange({ target: { name: name, value: val.value } });
     } else {
-      handleChange({ target: { name: "color", value: "" } });
+      handleChange({ target: { name: name, value: "" } });
     }
   };
 

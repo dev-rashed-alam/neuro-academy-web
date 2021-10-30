@@ -21,8 +21,6 @@ V
 &src/components/Modules/Login/Login.jsx,c\6\c66a72e110a82de9e229c359af382b6786c37da5
 _
 /src/components/Layout/DashboardNotification.jsx,e\f\efa520e683a306d4020a1f86c13fcf7b0b383006
-Q
-!src/components/Config/Constant.js,3\a\3a346dfa75fd2215079dfeb434616d5391e6ea4a
 S
 #src/assets/styles/Login.module.scss,5\d\5de7e1c259e119e3bb224194ca43f781cf5d4e75
 M
@@ -53,8 +51,6 @@ A
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-S
-#src/components/Layout/Dashboard.jsx,9\2\92fbab651c496a956340bae08d09bad5574a4e51
 _
 /src/components/Modules/Students/StudentList.jsx,a\2\a2592878ee29338379bc649fe05cbdf6460abeb4
 M
@@ -77,3 +73,25 @@ h
 -src/components/Modules/Courses/CourseList.jsx,4\c\4c25209b02be01af01b6b21e1f8a403f3e2fa76b
 M
 src/assets/styles/Upload.scss,e\2\e21ec806e29e4448666af4d878c4944bc2155a03
+`
+0src/components/Modules/Category/CategoryForm.jsx,8\9\89523f04dd0124d2d88920d43935918dd66632a9
+]
+-src/components/Modules/Coupons/CouponForm.jsx,b\5\b59627e8ee35aff79c5fea401574dba16d640a8e
+]
+-src/components/Modules/Coupons/CouponList.jsx,8\9\89f49aa84f5fd55d82b343fabcfadb0fbd2f910b
+`
+0src/components/Modules/Category/CategoryList.jsx,a\4\a4227d939b73f4820d7cd989bcfde6425c59499e
+Q
+!src/components/Layout/Sidebar.jsx,2\a\2a1a56335d77c54643ae7f4f49ee9c01595bdc98
+b
+2src/components/CommonComponents/ModalComponent.jsx,5\6\5675eb73590fc6f3aa9570e6b6e55382d49dffdf
+Z
+*src/components/CommonComponents/Button.jsx,b\c\bc4095271eef5ab21c2843373bef0714826ffcb8
+K
+src/assets/styles/Form.scss,e\b\eb800bb0edd307f1ba3296f3f7156c47030cce67
+]
+-src/components/Modules/Forms/FormElements.jsx,e\6\e6eb20e5a3d2694347e69ede02ee13e043dffcc7
+W
+'src/components/Route/ProtectedRoute.jsx,e\c\ec1597e5dd74a786a110ad6df4dbf7569543fef8
+S
+#src/components/Layout/Dashboard.jsx,9\2\92fbab651c496a956340bae08d09bad5574a4e51

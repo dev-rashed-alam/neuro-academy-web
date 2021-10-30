@@ -1,11 +1,23 @@
-import React from "react";
+import React, {useContext} from "react";
 import "../../../assets/styles/Upload.scss"
+import {FormContext} from "../../Context/FormContext";
+const FileComponent = ({identifier, addVideo, fileName}) => {
 
-const FileComponent = ({identifier}) => {
+    const {findTutorialById} = useContext(FormContext)
 
     const handleFileName = (e) => {
         e.preventDefault()
-        document.getElementById(`upload${identifier}`).innerHTML = e.target.files[0].name;
+
+        if (addVideo === undefined) {
+            document.getElementById(`upload${identifier}`).innerHTML = e.target.files[0].name;
+        } else {
+            let attachment = findTutorialById(identifier);
+            if (attachment !== undefined) {
+                addVideo(identifier, e.target.files[0], attachment.serial, attachment.title)
+            } else {
+                addVideo(identifier, e.target.files[0])
+            }
+        }
     }
 
     return (
@@ -18,7 +30,7 @@ const FileComponent = ({identifier}) => {
             <span
                 className="uploadDescription"
                 id={`upload${identifier}`}>
-                Upload Attachment {identifier}
+                {fileName()}
             </span>
             <input type="file" className="upload up" name={`attachment${identifier}`} id="up"
                    onChange={handleFileName}/>

@@ -12,8 +12,9 @@ const TextComponent = ({
   controlId,
   readOnly,
   value,
+  handleBlur,
 }) => {
-  const { handleChange, handleBlur } = useContext(FormContext);
+  const { handleChange } = useContext(FormContext);
 
   return (
     <Form.Group controlId={controlId}>
