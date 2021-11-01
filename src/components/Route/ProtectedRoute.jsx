@@ -9,6 +9,7 @@ import SalesList from "../Modules/Sales/SalesList";
 import CourseList from "../Modules/Courses/CourseList";
 import CategoryList from "../Modules/Category/CategoryList";
 import CouponList from "../Modules/Coupons/CouponList";
+import ArticleList from "../Modules/Articles/ArticleList";
 
 export default class ProtectedRoute extends Component {
   render() {
@@ -28,6 +29,7 @@ export default class ProtectedRoute extends Component {
               <Route exact={true} path="/courses" component={CourseList} />
               <Route exact={true} path="/categories" component={CategoryList} />
               <Route exact={true} path="/coupons" component={CouponList} />
+              <Route exact={true} path="/articles" component={ArticleList} />
             </Switch>
           </Dashboard>
         </FormContextProvider>

@@ -21,6 +21,7 @@ class Sidebar extends Component {
             isHoverItemFive: false,
             isHoverItemSix: false,
             isHoverItemSeven: false,
+            isHoverItemEight: false,
         };
     }
 
@@ -155,16 +156,22 @@ class Sidebar extends Component {
                     "isHoverItemFive"
                 )}
                 {this.renderSingleMenu(
+                    "/articles",
+                    <FaBookReader/>,
+                    "Article Management",
+                    "isHoverItemSix"
+                )}
+                {this.renderSingleMenu(
                     "/coupons",
                     <FaCodepen/>,
                     "Coupon Management",
-                    "isHoverItemSix"
+                    "isHoverItemSeven"
                 )}
                 {this.renderSingleMenu(
                     "/",
                     <FaDatabase/>,
                     "Report Generate",
-                    "isHoverItemSeven"
+                    "isHoverItemEight"
                 )}
             </>
         );

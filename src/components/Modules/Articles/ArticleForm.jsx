@@ -19,7 +19,7 @@ const optionForCourseUpload = [
     {value: "custom", label: "Custom Upload"}
 ];
 
-const CourseForm = (props) => {
+const ArticleForm = (props) => {
 
     const {videos, addDynamicVideos, inputData, addNewYoutubeVideos,youtubeVideos,tutorials} = useContext(FormContext);
 
@@ -110,7 +110,7 @@ const CourseForm = (props) => {
             show={props.modalShow}
             onHide={props.triggerModal}
             size="xl"
-            title="Add New Course"
+            title="Add New Article"
             scrollable={false}
             showCloseButton={true}
             buttons={[
@@ -129,71 +129,21 @@ const CourseForm = (props) => {
             <Row className="align-items-center">
                 <Col>
                     <TextComponent
-                        label="Course Title"
-                        placeHolder="Enter Course Title"
-                        name="courseTitle"
+                        label="Article Title"
+                        placeHolder="Enter Article Title"
+                        name="articleTitle"
                         required={false}
                         type="text"
-                        controlId="course_title"
-                    />
-                </Col>
-                <Col>
-                    <TextComponent
-                        label="Instructor Name"
-                        placeHolder="Enter Instructor Name"
-                        name="instructorName"
-                        required={false}
-                        type="text"
-                        controlId="instructor_name"
-                    />
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <SelectComponent
-                        label="Select Category"
-                        placeholder="Select Category"
-                        multiple={true}
-                        options={optionForModule}
-                        name="category"
-                    />
-                </Col>
-                <Col>
-                    <SelectComponent
-                        label="Select Course Upload Type"
-                        placeholder="Select Course Upload Type"
-                        multiple={false}
-                        options={optionForCourseUpload}
-                        name="courseUploadType"
-                    />
-                </Col>
-            </Row>
-            {renderDynamicAttachmentForVideos()}
-            {renderCustomVideoUpload()}
-            <Row>
-                <Col>
-                    <EditorComponent
-                        name="courseFeature"
-                        controlId="course_feature"
-                        label="Add Course Feature"
+                        controlId="article_title"
                     />
                 </Col>
             </Row>
             <Row>
                 <Col>
                     <EditorComponent
-                        name="shortDescription"
-                        controlId="short_description"
-                        label="Add Short Description"
-                    />
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <EditorComponent
-                        name="longDescription"
-                        controlId="long_description"
-                        label="Add Long Description"
+                        name="description"
+                        controlId="article_description"
+                        label="Article Description"
                     />
                 </Col>
             </Row>
@@ -201,4 +151,4 @@ const CourseForm = (props) => {
     );
 }
 
-export default CourseForm
+export default ArticleForm

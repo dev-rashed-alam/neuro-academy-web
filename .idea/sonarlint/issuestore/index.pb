@@ -35,9 +35,6 @@ N
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 D
 src/serviceWorker.js,9\2\920ab6ab4a57ee20a36df4e3e2e73b70f9969d14
-:
-
-src/App.js,1\e\1e43fa63aecd2127be034b3fb9d4caa172275714
 A
 public/robots.txt,d\a\dac799070c2d0c2fa24462b02c1f2dcc3fb3a1e9
 D
@@ -55,8 +52,6 @@ _
 /src/components/Modules/Students/StudentList.jsx,a\2\a2592878ee29338379bc649fe05cbdf6460abeb4
 M
 src/assets/styles/_Reset.scss,d\2\d230198d1915b2f30ee84d7c9a29ea9ee9aac825
-A
-public/index.html,f\4\f43ecdf8d666ee908aacce037b4cd72159e4741b
 J
 src/assets/styles/App.scss,a\d\ad83c1982838870b54ca961efdfbaf87ea97f3e4
 _
@@ -81,8 +76,6 @@ M
 -src/components/Modules/Coupons/CouponList.jsx,8\9\89f49aa84f5fd55d82b343fabcfadb0fbd2f910b
 `
 0src/components/Modules/Category/CategoryList.jsx,a\4\a4227d939b73f4820d7cd989bcfde6425c59499e
-Q
-!src/components/Layout/Sidebar.jsx,2\a\2a1a56335d77c54643ae7f4f49ee9c01595bdc98
 b
 2src/components/CommonComponents/ModalComponent.jsx,5\6\5675eb73590fc6f3aa9570e6b6e55382d49dffdf
 Z
@@ -91,7 +84,13 @@ K
 src/assets/styles/Form.scss,e\b\eb800bb0edd307f1ba3296f3f7156c47030cce67
 ]
 -src/components/Modules/Forms/FormElements.jsx,e\6\e6eb20e5a3d2694347e69ede02ee13e043dffcc7
-W
-'src/components/Route/ProtectedRoute.jsx,e\c\ec1597e5dd74a786a110ad6df4dbf7569543fef8
 S
 #src/components/Layout/Dashboard.jsx,9\2\92fbab651c496a956340bae08d09bad5574a4e51
+h
+8src/components/CommonComponents/Form/SelectComponent.jsx,0\2\022e443aaa79c9dcc9a7a36af6d78dd7c91aae1f
+h
+8src/components/CommonComponents/Form/UploadComponent.jsx,4\8\48e191c90fa8cf0149fea1922ca7f0d077619fc5
+f
+6src/components/CommonComponents/Form/FileComponent.jsx,5\6\56618cfc8eee96f1d58fe4aceabd2586ee46770c
+Q
+!src/components/Config/Constant.js,3\a\3a346dfa75fd2215079dfeb434616d5391e6ea4a
