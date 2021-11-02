@@ -17,8 +17,6 @@ b
 2src/components/Modules/Dashboard/DashboardBody.jsx,a\d\ad9d7eebf3396a01aea63a7532debdd4d71cd381
 Z
 *src/components/Modules/Sales/SalesList.jsx,2\2\22e4bd49510247b22e1ede88c8020cd0c0bbd26f
-V
-&src/components/Modules/Login/Login.jsx,c\6\c66a72e110a82de9e229c359af382b6786c37da5
 _
 /src/components/Layout/DashboardNotification.jsx,e\f\efa520e683a306d4020a1f86c13fcf7b0b383006
 S
@@ -31,8 +29,6 @@ L
 src/assets/styles/Table.scss,5\2\522969be5e51abf8cf558ead2667e28cb71b171f
 N
 src/assets/styles/_Button.scss,4\7\476993e89e364b73c207dfea0f3522723104e07f
-<
-src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 D
 src/serviceWorker.js,9\2\920ab6ab4a57ee20a36df4e3e2e73b70f9969d14
 A
@@ -92,5 +88,7 @@ h
 8src/components/CommonComponents/Form/UploadComponent.jsx,4\8\48e191c90fa8cf0149fea1922ca7f0d077619fc5
 f
 6src/components/CommonComponents/Form/FileComponent.jsx,5\6\56618cfc8eee96f1d58fe4aceabd2586ee46770c
-Q
-!src/components/Config/Constant.js,3\a\3a346dfa75fd2215079dfeb434616d5391e6ea4a
+f
+6src/components/CommonComponents/Form/TextComponent.jsx,5\b\5b9836b7bdac6490402a56be210547f14660cf6c
+A
+public/index.html,f\4\f43ecdf8d666ee908aacce037b4cd72159e4741b
