@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link, Redirect, useHistory, withRouter} from "react-router-dom";
 import styles from "../../../assets/styles/Login.module.scss";
 import {postMethod} from "../../Config/ApiHandler";
 
-const Login = () => {
+const Login = (props) => {
     const [inputData, setInputData] = useState({});
 
     const handleChange = (e) => {
@@ -21,15 +21,16 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         postMethod("/login", inputData).then((response) => {
-            if (response.data.is_admin === 1) {
+            console.log(response.data)
+            if (response.data.data.is_admin === 1) {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("name", response.data.name);
                 localStorage.setItem("email", response.data.email);
+                history.push("dashboard");
             }
         }).catch((error) => {
-            console.log(error.response.data.message)
+            console.log(error)
         })
-        // history.push("dashboard");
     }
 
     return (
@@ -51,4 +52,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default withRouter(Login)

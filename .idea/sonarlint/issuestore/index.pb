@@ -56,8 +56,6 @@ P
  src/components/Layout/Avatar.jsx,d\9\d9afd3d3483095c7b84b27a20df39312aa506fc3
 Y
 )src/components/Layout/DashboardHeader.jsx,f\0\f078fafcce593795bcb6fee9e432d782cd11803a
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 h
 8src/components/CommonComponents/Form/EditorComponent.jsx,d\3\d3a258dbde8460f070292091f996f4a1340323da
 ]
@@ -92,3 +90,11 @@ f
 6src/components/CommonComponents/Form/TextComponent.jsx,5\b\5b9836b7bdac6490402a56be210547f14660cf6c
 A
 public/index.html,f\4\f43ecdf8d666ee908aacce037b4cd72159e4741b
+_
+/src/components/Modules/Articles/ArticleForm.jsx,2\8\288d7cb25fcf7641d8f15a5b18dda8f402cd13da
+Q
+!src/components/Layout/Sidebar.jsx,2\a\2a1a56335d77c54643ae7f4f49ee9c01595bdc98
+_
+/src/components/Modules/Articles/ArticleList.jsx,b\3\b339df1cede011c96c529aa30b0fbcb29681d7a8
+<
+src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
