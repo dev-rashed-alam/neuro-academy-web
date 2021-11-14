@@ -7,13 +7,15 @@ function FormContextProvider(props) {
 
     const [youtubeVideos, setYoutubeVideos] = useState([]);
 
-    const addNewYoutubeVideos = (videos) => {
-        setYoutubeVideos((prevState => ([...prevState, ...videos])))
-    }
+    const [videos, setVideos] = useState([]);
 
     const [tutorials, setTutorials] = useState([]);
 
-    const [videos, setVideos] = useState([]);
+    const [loader,setLoader] = useState(false);
+
+    const addNewYoutubeVideos = (newVideos) => {
+        setYoutubeVideos((prevState => ([...prevState, ...newVideos])))
+    }
 
     const findTutorialById = (identifier) => {
         return tutorials.find(item => item.identifier === identifier);
@@ -90,7 +92,9 @@ function FormContextProvider(props) {
                 removeTutorial,
                 findTutorialById,
                 youtubeVideos,
-                addNewYoutubeVideos
+                addNewYoutubeVideos,
+                loader,
+                setLoader
             }}
         >
             {props.children}

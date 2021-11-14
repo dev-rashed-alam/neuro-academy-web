@@ -1,10 +1,12 @@
-import React, {useState} from "react";
-import {Link, Redirect, useHistory, withRouter} from "react-router-dom";
+import React, {useContext, useState} from "react";
+import {Link, useHistory, withRouter} from "react-router-dom";
 import styles from "../../../assets/styles/Login.module.scss";
 import {postMethod} from "../../Config/ApiHandler";
+import {FormContext} from "../../Context/FormContext";
 
 const Login = (props) => {
     const [inputData, setInputData] = useState({});
+    const {setLoader} = useContext(FormContext)
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -20,16 +22,19 @@ const Login = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoader(true)
         postMethod("/login", inputData).then((response) => {
             console.log(response.data)
             if (response.data.data.is_admin === 1) {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("name", response.data.name);
                 localStorage.setItem("email", response.data.email);
+                setLoader(false)
                 history.push("dashboard");
             }
         }).catch((error) => {
-            console.log(error)
+            setLoader(false)
+            console.log(error);
         })
     }
 
@@ -37,7 +42,8 @@ const Login = (props) => {
         <section className={styles.loginPage}>
             <div className={styles.form}>
                 <div className={styles.thumbnail}>
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/hat.svg" alt="logo"/>
+                    <img
+                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/hat.svg" alt="logo"/>
                 </div>
                 <form>
                     <input type="email" name="email" value={inputData.email} placeholder="Email Address"

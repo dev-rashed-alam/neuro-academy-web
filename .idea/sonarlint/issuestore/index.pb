@@ -3,14 +3,8 @@ c
 3src/components/CommonComponents/Chart/LineChart.jsx,8\c\8c3be90abec3c2a5f920a26d0febac67ddacc639
 b
 2src/components/CommonComponents/Chart/BarChart.jsx,d\c\dcc31cf9bcb7b3e1abed3e57dfe6511fd5ad6c57
-m
-=src/components/CommonComponents/Form/RadioButtonComponent.jsx,6\6\66dcf7288a9dbbb08c5c39a4fc3aeb0f1dc1de64
 g
 7src/components/CommonComponents/Chart/DoughnutChart.jsx,c\a\cadf07e9f6427b330e9b2014365063f99b377261
-j
-:src/components/CommonComponents/Form/CheckboxComponent.jsx,a\2\a222e46dd552c199f958235e14ee1d41a4c54243
-l
-<src/components/CommonComponents/Form/DatePickerComponent.jsx,d\6\d6789e40e36fe77b6bcbf859c1b5c3555fdb12c5
 X
 (src/components/CommonComponents/Card.jsx,f\b\fb2af0910bb16dfa8e59de251868bd61cf6b8639
 b
@@ -19,8 +13,6 @@ Z
 *src/components/Modules/Sales/SalesList.jsx,2\2\22e4bd49510247b22e1ede88c8020cd0c0bbd26f
 _
 /src/components/Layout/DashboardNotification.jsx,e\f\efa520e683a306d4020a1f86c13fcf7b0b383006
-S
-#src/assets/styles/Login.module.scss,5\d\5de7e1c259e119e3bb224194ca43f781cf5d4e75
 M
 src/assets/styles/_Modal.scss,0\7\07367abd7238c94d295437422850dbaba434a325
 R
@@ -56,22 +48,12 @@ P
  src/components/Layout/Avatar.jsx,d\9\d9afd3d3483095c7b84b27a20df39312aa506fc3
 Y
 )src/components/Layout/DashboardHeader.jsx,f\0\f078fafcce593795bcb6fee9e432d782cd11803a
-h
-8src/components/CommonComponents/Form/EditorComponent.jsx,d\3\d3a258dbde8460f070292091f996f4a1340323da
-]
--src/components/Modules/Courses/CourseList.jsx,4\c\4c25209b02be01af01b6b21e1f8a403f3e2fa76b
 M
 src/assets/styles/Upload.scss,e\2\e21ec806e29e4448666af4d878c4944bc2155a03
-`
-0src/components/Modules/Category/CategoryForm.jsx,8\9\89523f04dd0124d2d88920d43935918dd66632a9
 ]
 -src/components/Modules/Coupons/CouponForm.jsx,b\5\b59627e8ee35aff79c5fea401574dba16d640a8e
 ]
 -src/components/Modules/Coupons/CouponList.jsx,8\9\89f49aa84f5fd55d82b343fabcfadb0fbd2f910b
-`
-0src/components/Modules/Category/CategoryList.jsx,a\4\a4227d939b73f4820d7cd989bcfde6425c59499e
-b
-2src/components/CommonComponents/ModalComponent.jsx,5\6\5675eb73590fc6f3aa9570e6b6e55382d49dffdf
 Z
 *src/components/CommonComponents/Button.jsx,b\c\bc4095271eef5ab21c2843373bef0714826ffcb8
 K
@@ -98,3 +80,7 @@ _
 /src/components/Modules/Articles/ArticleList.jsx,b\3\b339df1cede011c96c529aa30b0fbcb29681d7a8
 <
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
+W
+'src/components/Route/ProtectedRoute.jsx,e\c\ec1597e5dd74a786a110ad6df4dbf7569543fef8
+<
+package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
