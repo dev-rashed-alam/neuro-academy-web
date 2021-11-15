@@ -5,6 +5,9 @@ import {FiChevronDown} from "react-icons/fi";
 import {FaUserCircle, FaRegEnvelopeOpen} from "react-icons/fa";
 import AvatarImage from "../../assets/images/avatar.jpg";
 import styled from "styled-components";
+import {postMethod} from "../Config/ApiHandler";
+import {toast} from "react-toastify";
+import {removeUserSession} from "../Config/SessionUtils";
 
 const Styles = styled.div`
   .header-profile-user {
@@ -48,6 +51,16 @@ const Styles = styled.div`
 `;
 
 const Avatar = (props) => {
+
+    const logout = () => {
+        postMethod("/admin/logout", {}).then((res) => {
+            removeUserSession();
+            toast.success("Logout Successful!");
+        }).catch((err) => {
+            toast.error(err.response.data.message)
+        })
+    }
+
     return (
         <Styles>
             <li
@@ -107,7 +120,7 @@ const Avatar = (props) => {
                                         </div>
                                     </div>
                                     <div className="media-body">
-                                        <h6 className="mt-0 mb-1">Logout</h6>
+                                        <a onClick={logout} className="mt-0 mb-1">Logout</a>
                                     </div>
                                 </div>
                             </Link>

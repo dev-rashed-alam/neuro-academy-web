@@ -11,8 +11,6 @@ b
 2src/components/Modules/Dashboard/DashboardBody.jsx,a\d\ad9d7eebf3396a01aea63a7532debdd4d71cd381
 Z
 *src/components/Modules/Sales/SalesList.jsx,2\2\22e4bd49510247b22e1ede88c8020cd0c0bbd26f
-_
-/src/components/Layout/DashboardNotification.jsx,e\f\efa520e683a306d4020a1f86c13fcf7b0b383006
 M
 src/assets/styles/_Modal.scss,0\7\07367abd7238c94d295437422850dbaba434a325
 R
@@ -44,10 +42,6 @@ J
 src/assets/styles/App.scss,a\d\ad83c1982838870b54ca961efdfbaf87ea97f3e4
 _
 /src/components/CommonComponents/Table/Table.jsx,0\e\0ed37098125ef2a0693b9c67bc0c4d7d5f206ea1
-P
- src/components/Layout/Avatar.jsx,d\9\d9afd3d3483095c7b84b27a20df39312aa506fc3
-Y
-)src/components/Layout/DashboardHeader.jsx,f\0\f078fafcce593795bcb6fee9e432d782cd11803a
 M
 src/assets/styles/Upload.scss,e\2\e21ec806e29e4448666af4d878c4944bc2155a03
 ]
@@ -60,8 +54,6 @@ K
 src/assets/styles/Form.scss,e\b\eb800bb0edd307f1ba3296f3f7156c47030cce67
 ]
 -src/components/Modules/Forms/FormElements.jsx,e\6\e6eb20e5a3d2694347e69ede02ee13e043dffcc7
-S
-#src/components/Layout/Dashboard.jsx,9\2\92fbab651c496a956340bae08d09bad5574a4e51
 h
 8src/components/CommonComponents/Form/SelectComponent.jsx,0\2\022e443aaa79c9dcc9a7a36af6d78dd7c91aae1f
 h
@@ -80,10 +72,6 @@ _
 /src/components/Modules/Articles/ArticleList.jsx,b\3\b339df1cede011c96c529aa30b0fbcb29681d7a8
 <
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
-W
-'src/components/Route/ProtectedRoute.jsx,e\c\ec1597e5dd74a786a110ad6df4dbf7569543fef8
-Q
-!src/components/Config/Constant.js,3\a\3a346dfa75fd2215079dfeb434616d5391e6ea4a
 j
 :src/components/CommonComponents/Form/CheckboxComponent.jsx,a\2\a222e46dd552c199f958235e14ee1d41a4c54243
 l
@@ -92,8 +80,6 @@ h
 8src/components/CommonComponents/Form/EditorComponent.jsx,d\3\d3a258dbde8460f070292091f996f4a1340323da
 m
 =src/components/CommonComponents/Form/RadioButtonComponent.jsx,6\6\66dcf7288a9dbbb08c5c39a4fc3aeb0f1dc1de64
-S
-#src/components/Config/ApiHandler.js,e\3\e3f927642765c02228ca5c07d1e801e906513d80
 `
 0src/components/Modules/Category/CategoryList.jsx,a\4\a4227d939b73f4820d7cd989bcfde6425c59499e
 `

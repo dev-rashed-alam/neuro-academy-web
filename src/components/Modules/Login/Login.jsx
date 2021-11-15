@@ -1,9 +1,10 @@
 import React, {useContext, useState} from "react";
-import {Link, useHistory, withRouter} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import styles from "../../../assets/styles/Login.module.scss";
 import {postMethod} from "../../Config/ApiHandler";
 import {FormContext} from "../../Context/FormContext";
 import {toast} from 'react-toastify';
+import {removeUserSession, setUserSession} from "../../Config/SessionUtils"
 
 const Login = (props) => {
     const [inputData, setInputData] = useState({});
@@ -19,25 +20,23 @@ const Login = (props) => {
 
     }
 
-    const history = useHistory();
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoader(true)
-        postMethod("/login", inputData).then((response) => {
+        postMethod("/api/login", inputData).then((response) => {
             console.log(response.data)
             if (response.data.data.is_admin === 1) {
-                localStorage.setItem("token", response.data.token);
-                localStorage.setItem("name", response.data.name);
-                localStorage.setItem("email", response.data.email);
-                setLoader(false)
+                setUserSession(response.data.data);
+                setLoader(false);
                 toast.success("Login Successful!");
-                history.push("dashboard");
+                props.history.push("dashboard");
+            } else {
+                removeUserSession();
             }
         }).catch((error) => {
-            setLoader(false)
+            removeUserSession();
+            setLoader(false);
             toast.error(error.response.data.message);
-            console.log(error);
         })
     }
 
