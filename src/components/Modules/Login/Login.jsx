@@ -3,6 +3,7 @@ import {Link, useHistory, withRouter} from "react-router-dom";
 import styles from "../../../assets/styles/Login.module.scss";
 import {postMethod} from "../../Config/ApiHandler";
 import {FormContext} from "../../Context/FormContext";
+import {toast} from 'react-toastify';
 
 const Login = (props) => {
     const [inputData, setInputData] = useState({});
@@ -30,10 +31,12 @@ const Login = (props) => {
                 localStorage.setItem("name", response.data.name);
                 localStorage.setItem("email", response.data.email);
                 setLoader(false)
+                toast.success("Login Successful!");
                 history.push("dashboard");
             }
         }).catch((error) => {
             setLoader(false)
+            toast.error(error.response.data.message);
             console.log(error);
         })
     }

@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/Route/ProtectedRoute";
 import Login from "./components/Modules/Login/Login";
 import LoaderComponent from "./components/CommonComponents/Loader/Loader";
 import {FormContext} from "./components/Context/FormContext";
+import Notification from "./components/CommonComponents/Notification";
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
                 </Switch>
             </Router>
             <LoaderComponent showLoader={loader}/>
+            <Notification/>
         </div>
     );
 }

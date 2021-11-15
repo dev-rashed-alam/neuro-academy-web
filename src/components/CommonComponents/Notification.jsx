@@ -1,17 +1,10 @@
 import React from "react";
-import 'antd-notifications-messages/lib/styles/index.css';
-import {notification} from 'antd-notifications-messages';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Notification = ({alert, type, title, description, duration}) => {
-    if (alert) {
-        return notification({
-            type,
-            title: title,
-            message: description,
-        })
-    } else {
-        return "";
-    }
-}
+const Notification = () => {
+    return <ToastContainer position="top-right"/>
+};
 
 export default Notification
+

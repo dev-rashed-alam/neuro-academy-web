@@ -10,7 +10,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "antd-notifications-messages": "^1.4.1",
     "axios": "^0.23.0",
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.3",
@@ -65,6 +64,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "react-toastify": "^8.1.0"
   }
 }
