@@ -17,8 +17,6 @@ R
 "src/assets/styles/Card.module.scss,3\e\3eecb41452d7b7fc2369ac932c6c3b613b19575c
 L
 src/assets/styles/Table.scss,5\2\522969be5e51abf8cf558ead2667e28cb71b171f
-N
-src/assets/styles/_Button.scss,4\7\476993e89e364b73c207dfea0f3522723104e07f
 D
 src/serviceWorker.js,9\2\920ab6ab4a57ee20a36df4e3e2e73b70f9969d14
 A
@@ -38,18 +36,12 @@ _
 /src/components/Modules/Students/StudentList.jsx,a\2\a2592878ee29338379bc649fe05cbdf6460abeb4
 M
 src/assets/styles/_Reset.scss,d\2\d230198d1915b2f30ee84d7c9a29ea9ee9aac825
-J
-src/assets/styles/App.scss,a\d\ad83c1982838870b54ca961efdfbaf87ea97f3e4
-_
-/src/components/CommonComponents/Table/Table.jsx,0\e\0ed37098125ef2a0693b9c67bc0c4d7d5f206ea1
 M
 src/assets/styles/Upload.scss,e\2\e21ec806e29e4448666af4d878c4944bc2155a03
 ]
 -src/components/Modules/Coupons/CouponForm.jsx,b\5\b59627e8ee35aff79c5fea401574dba16d640a8e
 ]
 -src/components/Modules/Coupons/CouponList.jsx,8\9\89f49aa84f5fd55d82b343fabcfadb0fbd2f910b
-Z
-*src/components/CommonComponents/Button.jsx,b\c\bc4095271eef5ab21c2843373bef0714826ffcb8
 K
 src/assets/styles/Form.scss,e\b\eb800bb0edd307f1ba3296f3f7156c47030cce67
 ]
@@ -70,8 +62,6 @@ Q
 !src/components/Layout/Sidebar.jsx,2\a\2a1a56335d77c54643ae7f4f49ee9c01595bdc98
 _
 /src/components/Modules/Articles/ArticleList.jsx,b\3\b339df1cede011c96c529aa30b0fbcb29681d7a8
-<
-src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 j
 :src/components/CommonComponents/Form/CheckboxComponent.jsx,a\2\a222e46dd552c199f958235e14ee1d41a4c54243
 l
@@ -80,10 +70,6 @@ h
 8src/components/CommonComponents/Form/EditorComponent.jsx,d\3\d3a258dbde8460f070292091f996f4a1340323da
 m
 =src/components/CommonComponents/Form/RadioButtonComponent.jsx,6\6\66dcf7288a9dbbb08c5c39a4fc3aeb0f1dc1de64
-`
-0src/components/Modules/Category/CategoryList.jsx,a\4\a4227d939b73f4820d7cd989bcfde6425c59499e
-`
-0src/components/Modules/Category/CategoryForm.jsx,8\9\89523f04dd0124d2d88920d43935918dd66632a9
 S
 #src/assets/styles/Login.module.scss,5\d\5de7e1c259e119e3bb224194ca43f781cf5d4e75
 b
@@ -94,7 +80,25 @@ M
 -src/components/Modules/Courses/CourseList.jsx,4\c\4c25209b02be01af01b6b21e1f8a403f3e2fa76b
 ]
 -src/components/Modules/Courses/CourseForm.jsx,c\2\c2675a822b379085d7154ad0dadc9d0c8021f072
-V
-&src/components/Context/FormContext.jsx,a\2\a2a97dee53a65583dffd75dbd2774701ea2c92ca
 a
 1src/components/CommonComponents/Loader/Loader.jsx,8\b\8bc68782153b60ca29cac0051bea0d003317834e
+<
+package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
+`
+0src/components/CommonComponents/Notification.jsx,5\2\52c4e0765faea4bcd619e718da0ae3519dbaeae4
+Q
+!src/components/Config/Constant.js,3\a\3a346dfa75fd2215079dfeb434616d5391e6ea4a
+W
+'src/components/Route/ProtectedRoute.jsx,e\c\ec1597e5dd74a786a110ad6df4dbf7569543fef8
+Y
+)src/components/Layout/DashboardHeader.jsx,f\0\f078fafcce593795bcb6fee9e432d782cd11803a
+<
+src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
+S
+#src/components/Layout/Dashboard.jsx,9\2\92fbab651c496a956340bae08d09bad5574a4e51
+_
+/src/components/Layout/DashboardNotification.jsx,e\f\efa520e683a306d4020a1f86c13fcf7b0b383006
+P
+ src/components/Layout/Avatar.jsx,d\9\d9afd3d3483095c7b84b27a20df39312aa506fc3
+S
+#src/components/Config/ApiHandler.js,e\3\e3f927642765c02228ca5c07d1e801e906513d80

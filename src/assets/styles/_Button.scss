@@ -15,6 +15,11 @@
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+.btn-sm{
+  padding: 4px 6px !important;
+  border-radius: 0 !important;
+}
+
 .btn-primary {
   color: #fff !important;
   background-color: #556ee6 !important;

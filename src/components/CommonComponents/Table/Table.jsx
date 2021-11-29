@@ -205,16 +205,13 @@ const IndeterminateCheckbox = React.forwardRef(
     }
 );
 
-function Table({columns, data, selection, pagination}) {
+function Table({columns, data, selection, pagination,paginationUtil}) {
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
         rows,
         prepareRow,
-        canPreviousPage,
-        canNextPage,
-        pageOptions,
         pageCount,
         gotoPage,
         nextPage,
@@ -303,21 +300,21 @@ function Table({columns, data, selection, pagination}) {
           <span>
             Page{" "}
               <strong>
-              {pageIndex + 1} of {pageOptions.length}
+              {paginationUtil.currentPage || 0} of {paginationUtil.totalPage || 0}
             </strong>
           </span>
-                    <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                    <button onClick={() => gotoPage(0)} disabled={!paginationUtil.firstPageUrl}>
                         <MdFirstPage/>
                     </button>
-                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                    <button onClick={() => previousPage()} disabled={!paginationUtil.previousPageUrl}>
                         <FiChevronLeft/>
                     </button>
-                    <button onClick={() => nextPage()} disabled={!canNextPage}>
+                    <button onClick={() => nextPage()} disabled={!paginationUtil.nextPageUrl}>
                         <FiChevronRight/>
                     </button>
                     <button
                         onClick={() => gotoPage(pageCount - 1)}
-                        disabled={!canNextPage}
+                        disabled={!paginationUtil.lastPageUrl}
                     >
                         <MdLastPage/>
                     </button>
@@ -327,9 +324,8 @@ function Table({columns, data, selection, pagination}) {
     );
 }
 
-function TableComponent({tableColumn, tableData, selection, pagination}) {
+function TableComponent({tableColumn, tableData, selection, pagination,paginationUtil}) {
     const columns = React.useMemo(() => tableColumn, [tableColumn]);
-    console.log(columns);
 
     const data = React.useMemo(() => tableData, [tableData]);
 
@@ -342,6 +338,7 @@ function TableComponent({tableColumn, tableData, selection, pagination}) {
                         data={data}
                         selection={selection}
                         pagination={pagination}
+                        paginationUtil={paginationUtil}
                     />
                 </Styles>
             </Card.Body>

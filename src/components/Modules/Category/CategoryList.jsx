@@ -1,9 +1,13 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import TableComponent from "../../CommonComponents/Table/Table";
 import CategoryForm from "./CategoryForm";
 import {Button} from "../../CommonComponents/Button";
 import {MdAddCircle} from "react-icons/md";
+import {getMethod} from "../../Config/ApiHandler";
+import {toast} from "react-toastify";
+import {FormContext} from "../../Context/FormContext";
+import {generatePagination, GeneratePagination} from "../../Config/HelperUtils"
 
 const tableColumn = [
     {
@@ -24,19 +28,47 @@ const tableColumn = [
     },
 ];
 
-const tableData = [
-    {
-        sl: 1,
-        categoryName: "Graphics Design",
-        status: "Enable",
-        action: "action"
-    },
-];
-
 
 const CategoryList = () => {
 
-    const [modal, setModal] = useState(false)
+    const [modal, setModal] = useState(false);
+    const [paginationUtil, setPaginationUtil] = useState({})
+    const [tableData, setTableDta] = useState([]);
+    const {setLoader} = useContext(FormContext)
+
+
+    useEffect(() => {
+        setLoader(true)
+        let url = "/admin/categories"
+        getMethod(url).then((response) => {
+            let resultSet = [];
+            let sl = 1;
+            for (let item of response.data.data) {
+                resultSet.push({
+                    sl: sl++,
+                    categoryName: item.title,
+                    status: renderStatusButton(item.status),
+                    action: "view"
+                })
+            }
+            setTableDta(resultSet);
+            setPaginationUtil(generatePagination(response.data))
+            console.log(paginationUtil)
+            setLoader(false)
+        }).catch((error) => {
+            setTableDta([]);
+            setLoader(false)
+            toast.error(error.response.data.message)
+        })
+    }, [])
+
+    const renderStatusButton = (statusFlag) => {
+        return <Button
+            name={statusFlag === 1 ? "Enable" : "Disable"}
+            className="btn btn-danger btn-sm"
+            onClickEvent={() => console.log("Clicked")}
+        />
+    }
 
 
     return (
@@ -59,8 +91,9 @@ const CategoryList = () => {
                     <TableComponent
                         tableColumn={tableColumn}
                         tableData={tableData}
-                        selection={true}
+                        selection={false}
                         pagination={true}
+                        paginationUtil={paginationUtil}
                     />
                 </Col>
             </Row>

@@ -37,14 +37,17 @@ const Styles = styled.div`
       .media {
         padding: 0.5rem 1rem !important;
       }
-
       .avatar-title {
         background-color: transparent !important;
         border-radius: 0 !important;
       }
 
-      .media-body {
-        padding-top: 10px;
+      .media-body button{
+        background-color: transparent;
+        border: none;
+        padding-top: 4px;
+        font-weight: bold;
+        color: #d5cdcd;
       }
     }
   }
@@ -88,42 +91,36 @@ const Avatar = (props) => {
                 >
                     <div className="nav-dropdown-body">
                         <div className="wrapper">
-                            <Link to="/">
-                                <div className="media">
-                                    <div className="avatar">
-                                        <div className="avatar-title">
-                                            <FaUserCircle/>
-                                        </div>
-                                    </div>
-                                    <div className="media-body">
-                                        <h6 className="mt-0 mb-1">Profile</h6>
+                            <div className="media">
+                                <div className="avatar">
+                                    <div className="avatar-title">
+                                        <FaUserCircle/>
                                     </div>
                                 </div>
-                            </Link>
-                            <Link to="/">
-                                <div className="media">
-                                    <div className="avatar">
-                                        <div className="avatar-title">
-                                            <FaRegEnvelopeOpen/>
-                                        </div>
-                                    </div>
-                                    <div className="media-body">
-                                        <h6 className="mt-0 mb-1">Notification</h6>
+                                <div className="media-body">
+                                    <button className="mt-0 mb-1">Profile</button>
+                                </div>
+                            </div>
+                            <div className="media">
+                                <div className="avatar">
+                                    <div className="avatar-title">
+                                        <FaRegEnvelopeOpen/>
                                     </div>
                                 </div>
-                            </Link>
-                            <Link to="/">
-                                <div className="media">
-                                    <div className="avatar">
-                                        <div className="avatar-title">
-                                            <IoIosRedo/>
-                                        </div>
-                                    </div>
-                                    <div className="media-body">
-                                        <a onClick={logout} className="mt-0 mb-1">Logout</a>
+                                <div className="media-body">
+                                    <button className="mt-0 mb-1">Notification</button>
+                                </div>
+                            </div>
+                            <div className="media">
+                                <div className="avatar">
+                                    <div className="avatar-title">
+                                        <IoIosRedo/>
                                     </div>
                                 </div>
-                            </Link>
+                                <div className="media-body">
+                                    <button onClick={logout} className="mt-0 mb-1">Logout</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
