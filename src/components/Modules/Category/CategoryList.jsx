@@ -4,10 +4,10 @@ import TableComponent from "../../CommonComponents/Table/Table";
 import CategoryForm from "./CategoryForm";
 import {Button} from "../../CommonComponents/Button";
 import {MdAddCircle} from "react-icons/md";
-import {getMethod} from "../../Config/ApiHandler";
+import {getMethod, postMethod} from "../../Config/ApiHandler";
 import {toast} from "react-toastify";
 import {FormContext} from "../../Context/FormContext";
-import {generatePagination, GeneratePagination} from "../../Config/HelperUtils"
+import {generatePagination, GeneratePagination, printApiErrors} from "../../Config/HelperUtils"
 
 const tableColumn = [
     {
@@ -35,39 +35,58 @@ const CategoryList = () => {
     const [paginationUtil, setPaginationUtil] = useState({})
     const [tableData, setTableDta] = useState([]);
     const {setLoader} = useContext(FormContext)
+    const [categoryListUrl, setCategoryListUrl] = useState("/admin/categories")
 
 
     useEffect(() => {
+        fetchCategoryList()
+    }, [categoryListUrl])
+
+    const fetchCategoryList = () => {
         setLoader(true)
-        let url = "/admin/categories"
-        getMethod(url).then((response) => {
+        getMethod(categoryListUrl).then((response) => {
             let resultSet = [];
             let sl = 1;
             for (let item of response.data.data) {
                 resultSet.push({
                     sl: sl++,
                     categoryName: item.title,
-                    status: renderStatusButton(item.status),
+                    status: renderStatusButton(item.status, item.id),
                     action: "view"
                 })
             }
             setTableDta(resultSet);
             setPaginationUtil(generatePagination(response.data))
-            console.log(paginationUtil)
             setLoader(false)
         }).catch((error) => {
             setTableDta([]);
             setLoader(false)
-            toast.error(error.response.data.message)
+            printApiErrors(error)
         })
-    }, [])
+    }
 
-    const renderStatusButton = (statusFlag) => {
+    const renderStatusButton = (statusFlag, id) => {
+        console.log(id + "  " + statusFlag)
         return <Button
+            key={"status_button_" + id}
             name={statusFlag === 1 ? "Enable" : "Disable"}
             className="btn btn-danger btn-sm"
-            onClickEvent={() => console.log("Clicked")}
+            onClickEvent={() => toggleCategoryStatus(statusFlag, id)}
         />
+    }
+
+    const toggleCategoryStatus = (status, id) => {
+        setLoader(true)
+        let postData = {};
+        postData.status = status === 0 ? 1 : 0;
+        postMethod("/admin/categories/status/" + id, postData).then((response) => {
+            setLoader(false)
+            toast.success("Status Update Successful!");
+            fetchCategoryList();
+        }).catch((error) => {
+            setLoader(false)
+            printApiErrors(error)
+        })
     }
 
 
@@ -92,13 +111,14 @@ const CategoryList = () => {
                         tableColumn={tableColumn}
                         tableData={tableData}
                         selection={false}
-                        pagination={true}
+                        triggerPagination={setCategoryListUrl}
                         paginationUtil={paginationUtil}
                     />
                 </Col>
             </Row>
             <CategoryForm
                 modalShow={modal}
+                fetchCategoryList={fetchCategoryList}
                 triggerModal={() => setModal(!modal)}
             />
         </>

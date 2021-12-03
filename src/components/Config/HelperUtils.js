@@ -1,15 +1,38 @@
+import {backendServerUrl} from "./Constant";
+import {toast} from "react-toastify";
+
 const generatePagination = (data) => {
-    console.log(data)
     return {
-        totalPage: data.total,
+        totalPage: data.last_page,
         currentPage: data.current_page,
-        nextPageUrl: data.next_page_url,
-        previousPageUrl: data.prev_page_url,
-        lastPageUrl: data.last_page_url,
-        firstPageUrl: data.first_page_url,
+        nextPageUrl: removeDomainAddressFromPagination(data.next_page_url),
+        previousPageUrl: removeDomainAddressFromPagination(data.prev_page_url),
+        lastPageUrl: removeDomainAddressFromPagination(data.last_page_url),
+        firstPageUrl: removeDomainAddressFromPagination(data.first_page_url),
+    }
+}
+
+const removeDomainAddressFromPagination = (data) => {
+    if (data && data.indexOf(backendServerUrl) !== -1) {
+        return data.split(backendServerUrl)[1]
+    } else {
+        return data;
+    }
+}
+
+const printApiErrors = (error) => {
+    if (error && error.response.data.error_type === "ValidationFailed") {
+        let data = [...error.response.data.data];
+        for (let item of data) {
+            toast.error(item)
+        }
+    } else if (error) {
+        toast.error(error.response.data.message)
     }
 }
 
 export {
-    generatePagination
+    generatePagination,
+    removeDomainAddressFromPagination,
+    printApiErrors
 }

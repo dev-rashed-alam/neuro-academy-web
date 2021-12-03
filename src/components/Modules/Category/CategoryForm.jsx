@@ -1,24 +1,36 @@
-import React from "react";
+import React, {useContext} from "react";
 import {ModalComponent} from "../../CommonComponents/ModalComponent";
 import {Col, Row} from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
 import SelectComponent from "../../CommonComponents/Form/SelectComponent";
+import {FormContext} from "../../Context/FormContext";
+import {postMethod} from "../../Config/ApiHandler";
+import {printApiErrors} from "../../Config/HelperUtils";
 
 const optionForStatus = [
-    {value: true, label: "Enable"},
-    {value: false, label: "Disable"},
+    {value: 1, label: "Enable"},
+    {value: 0, label: "Disable"},
 ];
 
-const CategoryForm = (props) => {
+const CategoryForm = ({fetchCategoryList, triggerModal, modalShow}) => {
+    const {setLoader, inputData} = useContext(FormContext)
 
     const handleSubmit = () => {
-        props.triggerModal();
+        setLoader(true)
+        postMethod("/admin/categories", inputData).then((response) => {
+            setLoader(false);
+            fetchCategoryList();
+            triggerModal();
+        }).catch((error) => {
+            setLoader(false);
+            printApiErrors(error)
+        })
     };
 
     return (
         <ModalComponent
-            show={props.modalShow}
-            onHide={props.triggerModal}
+            show={modalShow}
+            onHide={triggerModal}
             size="lg"
             title="Add New Category"
             scrollable={false}
@@ -31,7 +43,7 @@ const CategoryForm = (props) => {
                 },
                 {
                     name: "Close",
-                    action: handleSubmit,
+                    action: triggerModal,
                     className: "btn btn-danger",
                 },
             ]}
@@ -41,7 +53,7 @@ const CategoryForm = (props) => {
                     <TextComponent
                         label="Category Name"
                         placeHolder="Enter Category Name"
-                        name="categoryName"
+                        name="title"
                         required={false}
                         type="text"
                         controlId="category_name"

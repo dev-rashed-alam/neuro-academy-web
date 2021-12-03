@@ -15,7 +15,7 @@ const postMethod = (urlSegment, postData) => {
     return new Promise((resolve, reject) => {
         let url = backendServerUrl + urlSegment
         axios.post(url, postData, {
-            headers: {Authorization: getToken()},
+            headers: {Authorization: getToken(), id: 1},
         }).then(response => resolve(response)).catch(error => reject(error))
     })
 }

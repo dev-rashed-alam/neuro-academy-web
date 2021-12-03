@@ -205,19 +205,14 @@ const IndeterminateCheckbox = React.forwardRef(
     }
 );
 
-function Table({columns, data, selection, pagination,paginationUtil}) {
+function Table({columns, data, selection, paginationUtil, triggerPagination}) {
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
         rows,
         prepareRow,
-        pageCount,
-        gotoPage,
-        nextPage,
-        previousPage,
         state,
-        state: {pageIndex},
         preGlobalFilteredRows,
         setGlobalFilter,
         state: {selectedRowIds},
@@ -295,7 +290,7 @@ function Table({columns, data, selection, pagination,paginationUtil}) {
                     </tbody>
                 </table>
             </div>
-            {pagination && (
+            {(paginationUtil !== undefined) && (
                 <div className="pagination">
           <span>
             Page{" "}
@@ -303,17 +298,20 @@ function Table({columns, data, selection, pagination,paginationUtil}) {
               {paginationUtil.currentPage || 0} of {paginationUtil.totalPage || 0}
             </strong>
           </span>
-                    <button onClick={() => gotoPage(0)} disabled={!paginationUtil.firstPageUrl}>
+                    <button onClick={() => triggerPagination(paginationUtil.firstPageUrl)}
+                            disabled={!paginationUtil.firstPageUrl}>
                         <MdFirstPage/>
                     </button>
-                    <button onClick={() => previousPage()} disabled={!paginationUtil.previousPageUrl}>
+                    <button onClick={() => triggerPagination(paginationUtil.previousPageUrl)}
+                            disabled={!paginationUtil.previousPageUrl}>
                         <FiChevronLeft/>
                     </button>
-                    <button onClick={() => nextPage()} disabled={!paginationUtil.nextPageUrl}>
+                    <button onClick={() => triggerPagination(paginationUtil.nextPageUrl)}
+                            disabled={!paginationUtil.nextPageUrl}>
                         <FiChevronRight/>
                     </button>
                     <button
-                        onClick={() => gotoPage(pageCount - 1)}
+                        onClick={() => triggerPagination(paginationUtil.lastPageUrl)}
                         disabled={!paginationUtil.lastPageUrl}
                     >
                         <MdLastPage/>
@@ -324,7 +322,7 @@ function Table({columns, data, selection, pagination,paginationUtil}) {
     );
 }
 
-function TableComponent({tableColumn, tableData, selection, pagination,paginationUtil}) {
+function TableComponent({tableColumn, tableData, selection, pagination, paginationUtil, triggerPagination}) {
     const columns = React.useMemo(() => tableColumn, [tableColumn]);
 
     const data = React.useMemo(() => tableData, [tableData]);
@@ -339,6 +337,7 @@ function TableComponent({tableColumn, tableData, selection, pagination,paginatio
                         selection={selection}
                         pagination={pagination}
                         paginationUtil={paginationUtil}
+                        triggerPagination={triggerPagination}
                     />
                 </Styles>
             </Card.Body>
