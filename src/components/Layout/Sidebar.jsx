@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {FaAngleDown, FaUserGraduate, FaCodepen, FaUsers, FaDatabase, FaBookReader} from "react-icons/fa";
+import {FaAngleDown, FaUserGraduate, FaCodepen, FaUsers, FaDatabase, FaBookReader, FaBlog} from "react-icons/fa";
 import {MdDashboard} from "react-icons/md";
 import {GiPaintBucket} from "react-icons/gi";
 import {NavLink} from "react-router-dom";
@@ -157,7 +157,7 @@ class Sidebar extends Component {
                 )}
                 {this.renderSingleMenu(
                     "/articles",
-                    <FaBookReader/>,
+                    <FaBlog/>,
                     "Article Management",
                     "isHoverItemSix"
                 )}

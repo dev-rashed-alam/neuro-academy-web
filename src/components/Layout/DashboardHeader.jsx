@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiSearchEyeLine } from "react-icons/ri";
-import { FaFreeCodeCamp, FaEnvelope } from "react-icons/fa";
+import { FaFreeCodeCamp } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
 import { Link } from "react-router-dom";
 import DashboardNotification from "./DashboardNotification";

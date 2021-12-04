@@ -7,7 +7,7 @@ import {MdAddCircle} from "react-icons/md";
 import {getMethod, postMethod} from "../../Config/ApiHandler";
 import {toast} from "react-toastify";
 import {FormContext} from "../../Context/FormContext";
-import {generatePagination, GeneratePagination, printApiErrors} from "../../Config/HelperUtils"
+import {generatePagination, printApiErrors} from "../../Config/HelperUtils"
 
 const tableColumn = [
     {
@@ -36,6 +36,7 @@ const CategoryList = () => {
     const [tableData, setTableDta] = useState([]);
     const {setLoader} = useContext(FormContext)
     const [categoryListUrl, setCategoryListUrl] = useState("/admin/categories")
+    const [selectedCategory, setSelectedCategory] = useState({})
 
 
     useEffect(() => {
@@ -52,7 +53,7 @@ const CategoryList = () => {
                     sl: sl++,
                     categoryName: item.title,
                     status: renderStatusButton(item.status, item.id),
-                    action: "view"
+                    action: renderUpdateButton(item)
                 })
             }
             setTableDta(resultSet);
@@ -65,10 +66,21 @@ const CategoryList = () => {
         })
     }
 
-    const renderStatusButton = (statusFlag, id) => {
-        console.log(id + "  " + statusFlag)
+    const renderUpdateButton = (item) => {
         return <Button
-            key={"status_button_" + id}
+            name="Update"
+            className="btn btn-danger btn-sm"
+            onClickEvent={() => openModalForUpdate(item)}
+        />
+    }
+
+    const openModalForUpdate = (item) => {
+        setSelectedCategory(item);
+        setModal(true)
+    }
+
+    const renderStatusButton = (statusFlag, id) => {
+        return <Button
             name={statusFlag === 1 ? "Enable" : "Disable"}
             className="btn btn-danger btn-sm"
             onClickEvent={() => toggleCategoryStatus(statusFlag, id)}
@@ -118,6 +130,7 @@ const CategoryList = () => {
             </Row>
             <CategoryForm
                 modalShow={modal}
+                selectedCategory={selectedCategory}
                 fetchCategoryList={fetchCategoryList}
                 triggerModal={() => setModal(!modal)}
             />

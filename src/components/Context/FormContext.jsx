@@ -80,6 +80,7 @@ function FormContextProvider(props) {
         <FormContext.Provider
             value={{
                 inputData: values,
+                setInputData: setValues,
                 handleChange,
                 handleBlur,
                 handleSubmit,

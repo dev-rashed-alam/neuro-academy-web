@@ -32,7 +32,7 @@ const SelectComponent = ({
   disable,
   multiple,
 }) => {
-  const { handleChange, handleBlur } = useContext(FormContext);
+  const { handleChange } = useContext(FormContext);
 
   const functionForHandleChange = (val) => {
     if (Array.isArray(val)) {

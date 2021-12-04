@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import "../../../assets/styles/Form.scss";
 import { Form } from "react-bootstrap";
 import { FormContext } from "../../Context/FormContext";
@@ -24,7 +24,7 @@ const TextComponent = ({
         type={type}
         placeholder={placeHolder}
         name={name}
-        value={value}
+        value={value ? value : ""}
         onChange={handleChange}
         onBlur={handleBlur}
         required={required}

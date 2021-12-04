@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {IoIosRedo} from "react-icons/io";
 import {FiChevronDown} from "react-icons/fi";
 import {FaUserCircle, FaRegEnvelopeOpen} from "react-icons/fa";

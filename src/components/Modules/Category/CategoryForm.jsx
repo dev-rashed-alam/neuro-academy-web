@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {ModalComponent} from "../../CommonComponents/ModalComponent";
 import {Col, Row} from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
@@ -12,12 +12,21 @@ const optionForStatus = [
     {value: 0, label: "Disable"},
 ];
 
-const CategoryForm = ({fetchCategoryList, triggerModal, modalShow}) => {
-    const {setLoader, inputData} = useContext(FormContext)
+const CategoryForm = ({fetchCategoryList, triggerModal, modalShow, selectedCategory}) => {
+    const {setLoader, inputData, setInputData} = useContext(FormContext)
+
+    useEffect(() => {
+        setInputData({
+            ...inputData,
+            "title": selectedCategory.title,
+            "status": selectedCategory.status
+        });
+    }, [selectedCategory])
 
     const handleSubmit = () => {
         setLoader(true)
-        postMethod("/admin/categories", inputData).then((response) => {
+        let url = selectedCategory !== undefined ? "/admin/categories/" + selectedCategory.id : "/admin/categories";
+        postMethod(url, inputData).then((response) => {
             setLoader(false);
             fetchCategoryList();
             triggerModal();
@@ -32,9 +41,8 @@ const CategoryForm = ({fetchCategoryList, triggerModal, modalShow}) => {
             show={modalShow}
             onHide={triggerModal}
             size="lg"
-            title="Add New Category"
+            title={selectedCategory !== undefined ? "Update Selected Category" : "Add New Category"}
             scrollable={false}
-            showCloseButton={true}
             buttons={[
                 {
                     name: "Submit",
@@ -54,6 +62,7 @@ const CategoryForm = ({fetchCategoryList, triggerModal, modalShow}) => {
                         label="Category Name"
                         placeHolder="Enter Category Name"
                         name="title"
+                        value={selectedCategory.title}
                         required={false}
                         type="text"
                         controlId="category_name"
@@ -63,6 +72,7 @@ const CategoryForm = ({fetchCategoryList, triggerModal, modalShow}) => {
                     <SelectComponent
                         label="Select Status"
                         placeholder="Select Status"
+                        value={optionForStatus.find(item => item.value === selectedCategory.status)}
                         multiple={false}
                         options={optionForStatus}
                         name="status"
