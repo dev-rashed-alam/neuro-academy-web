@@ -31,8 +31,17 @@ const printApiErrors = (error) => {
     }
 }
 
+const formatDate = (date) => {
+    if (date) {
+        return date.split("T")[0]
+    } else {
+        return ""
+    }
+}
+
 export {
     generatePagination,
     removeDomainAddressFromPagination,
-    printApiErrors
+    printApiErrors,
+    formatDate
 }

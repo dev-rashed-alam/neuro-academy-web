@@ -38,14 +38,6 @@ M
 src/assets/styles/_Reset.scss,d\2\d230198d1915b2f30ee84d7c9a29ea9ee9aac825
 M
 src/assets/styles/Upload.scss,e\2\e21ec806e29e4448666af4d878c4944bc2155a03
-]
--src/components/Modules/Coupons/CouponForm.jsx,b\5\b59627e8ee35aff79c5fea401574dba16d640a8e
-]
--src/components/Modules/Coupons/CouponList.jsx,8\9\89f49aa84f5fd55d82b343fabcfadb0fbd2f910b
-K
-src/assets/styles/Form.scss,e\b\eb800bb0edd307f1ba3296f3f7156c47030cce67
-]
--src/components/Modules/Forms/FormElements.jsx,e\6\e6eb20e5a3d2694347e69ede02ee13e043dffcc7
 h
 8src/components/CommonComponents/Form/UploadComponent.jsx,4\8\48e191c90fa8cf0149fea1922ca7f0d077619fc5
 f
@@ -56,16 +48,12 @@ _
 /src/components/Modules/Articles/ArticleList.jsx,b\3\b339df1cede011c96c529aa30b0fbcb29681d7a8
 j
 :src/components/CommonComponents/Form/CheckboxComponent.jsx,a\2\a222e46dd552c199f958235e14ee1d41a4c54243
-l
-<src/components/CommonComponents/Form/DatePickerComponent.jsx,d\6\d6789e40e36fe77b6bcbf859c1b5c3555fdb12c5
 h
 8src/components/CommonComponents/Form/EditorComponent.jsx,d\3\d3a258dbde8460f070292091f996f4a1340323da
 m
 =src/components/CommonComponents/Form/RadioButtonComponent.jsx,6\6\66dcf7288a9dbbb08c5c39a4fc3aeb0f1dc1de64
 S
 #src/assets/styles/Login.module.scss,5\d\5de7e1c259e119e3bb224194ca43f781cf5d4e75
-b
-2src/components/CommonComponents/ModalComponent.jsx,5\6\5675eb73590fc6f3aa9570e6b6e55382d49dffdf
 M
 src/assets/styles/Loader.scss,5\3\53063fdb0107ce69c689403abc0b34e9e23bb0d3
 ]
@@ -92,7 +80,30 @@ _
 /src/components/CommonComponents/Table/Table.jsx,0\e\0ed37098125ef2a0693b9c67bc0c4d7d5f206ea1
 Q
 !src/components/Config/Constant.js,3\a\3a346dfa75fd2215079dfeb434616d5391e6ea4a
-T
-$src/components/Config/HelperUtils.js,8\1\81ffe4da5b9ddb1ca03f356332f57b9f26ad1e50
 V
 &src/components/Modules/Login/Login.jsx,c\6\c66a72e110a82de9e229c359af382b6786c37da5
+N
+src/assets/styles/_Button.scss,4\7\476993e89e364b73c207dfea0f3522723104e07f
+S
+#src/components/Config/ApiHandler.js,e\3\e3f927642765c02228ca5c07d1e801e906513d80
+V
+&src/components/Context/FormContext.jsx,a\2\a2a97dee53a65583dffd75dbd2774701ea2c92ca
+<
+src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
+a
+1src/components/CommonComponents/Loader/Loader.jsx,8\b\8bc68782153b60ca29cac0051bea0d003317834e
+:
+
+src/App.js,1\e\1e43fa63aecd2127be034b3fb9d4caa172275714
+Q
+!src/components/Layout/Sidebar.jsx,2\a\2a1a56335d77c54643ae7f4f49ee9c01595bdc98
+Y
+)src/components/Layout/DashboardHeader.jsx,f\0\f078fafcce593795bcb6fee9e432d782cd11803a
+h
+8src/components/CommonComponents/Form/SelectComponent.jsx,0\2\022e443aaa79c9dcc9a7a36af6d78dd7c91aae1f
+P
+ src/components/Layout/Avatar.jsx,d\9\d9afd3d3483095c7b84b27a20df39312aa506fc3
+f
+6src/components/CommonComponents/Form/TextComponent.jsx,5\b\5b9836b7bdac6490402a56be210547f14660cf6c
+_
+/src/components/Modules/Articles/ArticleForm.jsx,2\8\288d7cb25fcf7641d8f15a5b18dda8f402cd13da

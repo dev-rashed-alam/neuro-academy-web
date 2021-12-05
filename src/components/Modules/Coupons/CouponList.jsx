@@ -1,9 +1,13 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import TableComponent from "../../CommonComponents/Table/Table";
 import CouponForm from "./CouponForm";
 import {Button} from "../../CommonComponents/Button";
 import {MdAddCircle} from "react-icons/md";
+import {FormContext} from "../../Context/FormContext";
+import {getMethod, postMethod} from "../../Config/ApiHandler";
+import {formatDate, generatePagination, printApiErrors} from "../../Config/HelperUtils";
+import {toast} from "react-toastify";
 
 const tableColumn = [
     {
@@ -11,8 +15,24 @@ const tableColumn = [
         accessor: "sl",
     },
     {
-        Header: "Coupon",
-        accessor: "coupon",
+        Header: "Title",
+        accessor: "title",
+    },
+    {
+        Header: "Code",
+        accessor: "couponCode",
+    },
+    {
+        Header: "Percentage",
+        accessor: "discountPercent",
+    },
+    {
+        Header: "Created Date",
+        accessor: "createdDate",
+    },
+    {
+        Header: "Expiry Date",
+        accessor: "expiryDate",
     },
     {
         Header: "Status",
@@ -21,22 +41,90 @@ const tableColumn = [
     {
         Header: "Action",
         accessor: "action",
-    },
-];
-
-const tableData = [
-    {
-        sl: 1,
-        coupon: "Graphics Design",
-        status: "Enable",
-        action: "action"
-    },
+    }
 ];
 
 
 const CouponList = () => {
 
     const [modal, setModal] = useState(false)
+    const [paginationUtil, setPaginationUtil] = useState({})
+    const [tableData, setTableDta] = useState([]);
+    const {setLoader} = useContext(FormContext)
+    const [couponListUtil, setCouponListUtil] = useState("/admin/coupons")
+    const [selectedCoupon, setSelectedCoupon] = useState({})
+
+
+    useEffect(() => {
+        fetchCouponList()
+    }, [couponListUtil])
+
+    const fetchCouponList = () => {
+        setLoader(true)
+        getMethod(couponListUtil).then((response) => {
+            let resultSet = [];
+            let sl = 1;
+            for (let item of response.data.data) {
+                resultSet.push({
+                    sl: sl++,
+                    title: item.title,
+                    couponCode: item.code,
+                    discountPercent: item.percent,
+                    createdDate: formatDate(item.created_at),
+                    expiryDate: formatDate(item.expiry_date),
+                    status: renderStatusButton(item.status, item.id),
+                    action: renderUpdateButton(item)
+                })
+            }
+            setTableDta(resultSet);
+            setPaginationUtil(generatePagination(response.data))
+            setLoader(false)
+        }).catch((error) => {
+            setTableDta([]);
+            setLoader(false)
+            printApiErrors(error)
+        })
+    }
+
+    const renderUpdateButton = (item) => {
+        return <Button
+            name="Update"
+            className="btn btn-danger btn-sm"
+            onClickEvent={() => openModalForUpdate(item)}
+        />
+    }
+
+    const openModalForUpdate = (item) => {
+        setSelectedCoupon(item);
+        setModal(true)
+    }
+
+    const renderStatusButton = (statusFlag, id) => {
+        return <Button
+            name={statusFlag === 1 ? "Enable" : "Disable"}
+            className="btn btn-danger btn-sm"
+            onClickEvent={() => toggleCouponStatus(statusFlag, id)}
+        />
+    }
+
+    const toggleCouponStatus = (status, id) => {
+        setLoader(true)
+        let postData = {};
+        postData.status = status === 0 ? 1 : 0;
+        postMethod("/admin/coupons/status/" + id, postData).then((response) => {
+            setLoader(false)
+            toast.success("Status Update Successful!");
+            fetchCouponList();
+        }).catch((error) => {
+            setLoader(false)
+            printApiErrors(error)
+        })
+    }
+
+    const closeModal = () => {
+        setSelectedCoupon({});
+        setModal(!modal)
+    }
 
 
     return (
@@ -59,14 +147,17 @@ const CouponList = () => {
                     <TableComponent
                         tableColumn={tableColumn}
                         tableData={tableData}
-                        selection={true}
                         pagination={true}
+                        triggerPagination={setCouponListUtil}
+                        paginationUtil={paginationUtil}
                     />
                 </Col>
             </Row>
             <CouponForm
                 modalShow={modal}
-                triggerModal={() => setModal(!modal)}
+                selectedCoupon={selectedCoupon}
+                fetchCouponList={fetchCouponList}
+                triggerModal={closeModal}
             />
         </>
     )
