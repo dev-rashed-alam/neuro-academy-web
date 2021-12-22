@@ -25,8 +25,6 @@ D
 public/manifest.json,4\2\42e89cd2213b9d5dfae4f63522702c623170d792
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-9
-	.eslintrc,4\b\4be5f5e3cea171c304090be92469b2f2cb51039a
 A
 package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
 :
@@ -86,8 +84,6 @@ N
 src/assets/styles/_Button.scss,4\7\476993e89e364b73c207dfea0f3522723104e07f
 S
 #src/components/Config/ApiHandler.js,e\3\e3f927642765c02228ca5c07d1e801e906513d80
-V
-&src/components/Context/FormContext.jsx,a\2\a2a97dee53a65583dffd75dbd2774701ea2c92ca
 <
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 a
@@ -99,11 +95,7 @@ Q
 !src/components/Layout/Sidebar.jsx,2\a\2a1a56335d77c54643ae7f4f49ee9c01595bdc98
 Y
 )src/components/Layout/DashboardHeader.jsx,f\0\f078fafcce593795bcb6fee9e432d782cd11803a
-h
-8src/components/CommonComponents/Form/SelectComponent.jsx,0\2\022e443aaa79c9dcc9a7a36af6d78dd7c91aae1f
 P
  src/components/Layout/Avatar.jsx,d\9\d9afd3d3483095c7b84b27a20df39312aa506fc3
-f
-6src/components/CommonComponents/Form/TextComponent.jsx,5\b\5b9836b7bdac6490402a56be210547f14660cf6c
 _
 /src/components/Modules/Articles/ArticleForm.jsx,2\8\288d7cb25fcf7641d8f15a5b18dda8f402cd13da

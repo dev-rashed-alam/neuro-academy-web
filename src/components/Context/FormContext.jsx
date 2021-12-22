@@ -11,7 +11,7 @@ function FormContextProvider(props) {
 
     const [tutorials, setTutorials] = useState([]);
 
-    const [loader,setLoader] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     const addNewYoutubeVideos = (newVideos) => {
         setYoutubeVideos((prevState => ([...prevState, ...newVideos])))

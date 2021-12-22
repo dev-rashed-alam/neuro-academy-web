@@ -39,9 +39,14 @@ const formatDate = (date) => {
     }
 }
 
+const generateRandomNumber = () => {
+    return Math.abs(Math.random() * 1000000 + 1);
+}
+
 export {
     generatePagination,
     removeDomainAddressFromPagination,
     printApiErrors,
-    formatDate
+    formatDate,
+    generateRandomNumber
 }

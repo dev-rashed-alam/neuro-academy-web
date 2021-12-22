@@ -101,6 +101,10 @@ const CategoryList = () => {
         })
     }
 
+    const closeModal = () => {
+        setSelectedCategory({});
+        setModal(!modal)
+    }
 
     return (
         <>
@@ -132,7 +136,7 @@ const CategoryList = () => {
                 modalShow={modal}
                 selectedCategory={selectedCategory}
                 fetchCategoryList={fetchCategoryList}
-                triggerModal={() => setModal(!modal)}
+                triggerModal={closeModal}
             />
         </>
     )
