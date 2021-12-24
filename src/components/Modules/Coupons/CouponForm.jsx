@@ -1,16 +1,28 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {ModalComponent} from "../../CommonComponents/ModalComponent";
 import {Col, Row} from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
 import SelectComponent from "../../CommonComponents/Form/SelectComponent";
 import DatePickerComponent from "../../CommonComponents/Form/DatePickerComponent";
+import {FormContext} from "../../Context/FormContext";
 
 const optionForStatus = [
     {value: true, label: "Enable"},
     {value: false, label: "Disable"},
 ];
 
-const CouponForm = ({fetchCouponList, triggerModal, modalShow, selectedCoupon}) => {
+const CouponForm = ({triggerModal, modalShow, selectedCoupon}) => {
+    const {inputData, setInputData} = useContext(FormContext)
+
+    useEffect(() => {
+        setInputData({
+            ...inputData,
+            "title": selectedCoupon.title,
+            "couponCode": selectedCoupon.code,
+            "percentage": selectedCoupon.percent,
+            "expireDate": selectedCoupon.expiry_date,
+        });
+    }, [selectedCoupon])
 
     const handleSubmit = () => {
 
@@ -42,6 +54,7 @@ const CouponForm = ({fetchCouponList, triggerModal, modalShow, selectedCoupon}) 
                         label="Coupon Title"
                         placeHolder="Enter Coupon Title"
                         name="title"
+                        value={inputData.title}
                         required={false}
                         type="text"
                         controlId="coupon_title"
@@ -52,6 +65,7 @@ const CouponForm = ({fetchCouponList, triggerModal, modalShow, selectedCoupon}) 
                         label="Coupon Code"
                         placeHolder="Enter Coupon Code"
                         name="couponCode"
+                        value={inputData.couponCode}
                         required={false}
                         type="text"
                         controlId="coupon_code"
@@ -63,25 +77,18 @@ const CouponForm = ({fetchCouponList, triggerModal, modalShow, selectedCoupon}) 
                     <DatePickerComponent
                         label="Select Expiry Date"
                         placeHolder="dd-mm-yyyy"
+                        value={inputData.expireDate}
                     />
                 </Col>
                 <Col>
                     <TextComponent
                         label="Percentage"
                         placeHolder="Enter Discount Percentage"
+                        value={inputData.percentage}
                         name="percentage"
                         required={false}
                         type="text"
                         controlId="discount_percentage"
-                    />
-                </Col>
-                <Col>
-                    <SelectComponent
-                        label="Select Status"
-                        placeholder="Select Status"
-                        multiple={false}
-                        options={optionForStatus}
-                        name="status"
                     />
                 </Col>
             </Row>

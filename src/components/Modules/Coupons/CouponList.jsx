@@ -5,9 +5,8 @@ import CouponForm from "./CouponForm";
 import {Button} from "../../CommonComponents/Button";
 import {MdAddCircle} from "react-icons/md";
 import {FormContext} from "../../Context/FormContext";
-import {getMethod, postMethod} from "../../Config/ApiHandler";
+import {getMethod} from "../../Config/ApiHandler";
 import {formatDate, generatePagination, printApiErrors} from "../../Config/HelperUtils";
-import {toast} from "react-toastify";
 
 const tableColumn = [
     {
@@ -33,10 +32,6 @@ const tableColumn = [
     {
         Header: "Expiry Date",
         accessor: "expiryDate",
-    },
-    {
-        Header: "Status",
-        accessor: "status",
     },
     {
         Header: "Action",
@@ -72,7 +67,6 @@ const CouponList = () => {
                     discountPercent: item.percent,
                     createdDate: formatDate(item.created_at),
                     expiryDate: formatDate(item.expiry_date),
-                    status: renderStatusButton(item.status, item.id),
                     action: renderUpdateButton(item)
                 })
             }
@@ -97,28 +91,6 @@ const CouponList = () => {
     const openModalForUpdate = (item) => {
         setSelectedCoupon(item);
         setModal(true)
-    }
-
-    const renderStatusButton = (statusFlag, id) => {
-        return <Button
-            name={statusFlag === 1 ? "Enable" : "Disable"}
-            className="btn btn-danger btn-sm"
-            onClickEvent={() => toggleCouponStatus(statusFlag, id)}
-        />
-    }
-
-    const toggleCouponStatus = (status, id) => {
-        setLoader(true)
-        let postData = {};
-        postData.status = status === 0 ? 1 : 0;
-        postMethod("/admin/coupons/status/" + id, postData).then((response) => {
-            setLoader(false)
-            toast.success("Status Update Successful!");
-            fetchCouponList();
-        }).catch((error) => {
-            setLoader(false)
-            printApiErrors(error)
-        })
     }
 
     const closeModal = () => {

@@ -58,8 +58,6 @@ M
 -src/components/Modules/Courses/CourseList.jsx,4\c\4c25209b02be01af01b6b21e1f8a403f3e2fa76b
 ]
 -src/components/Modules/Courses/CourseForm.jsx,c\2\c2675a822b379085d7154ad0dadc9d0c8021f072
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 `
 0src/components/CommonComponents/Notification.jsx,5\2\52c4e0765faea4bcd619e718da0ae3519dbaeae4
 W
@@ -99,3 +97,15 @@ P
  src/components/Layout/Avatar.jsx,d\9\d9afd3d3483095c7b84b27a20df39312aa506fc3
 _
 /src/components/Modules/Articles/ArticleForm.jsx,2\8\288d7cb25fcf7641d8f15a5b18dda8f402cd13da
+9
+	.eslintrc,4\b\4be5f5e3cea171c304090be92469b2f2cb51039a
+f
+6src/components/CommonComponents/Form/TextComponent.jsx,5\b\5b9836b7bdac6490402a56be210547f14660cf6c
+T
+$src/components/Config/HelperUtils.js,8\1\81ffe4da5b9ddb1ca03f356332f57b9f26ad1e50
+V
+&src/components/Context/FormContext.jsx,a\2\a2a97dee53a65583dffd75dbd2774701ea2c92ca
+h
+8src/components/CommonComponents/Form/SelectComponent.jsx,0\2\022e443aaa79c9dcc9a7a36af6d78dd7c91aae1f
+`
+0src/components/Modules/Category/CategoryList.jsx,a\4\a4227d939b73f4820d7cd989bcfde6425c59499e

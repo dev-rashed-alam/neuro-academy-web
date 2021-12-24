@@ -16,13 +16,12 @@ const CategoryForm = ({fetchCategoryList, triggerModal, modalShow, selectedCateg
     const {setLoader, inputData, setInputData} = useContext(FormContext)
 
     useEffect(() => {
-        setLoader(true)
         let status = optionForStatus.find(item => item.value === selectedCategory.status)
         setInputData({
             ...inputData,
             "title": selectedCategory.title,
             "status": status
-        },setLoader(false));
+        });
     }, [selectedCategory])
 
     const handleSubmit = () => {
