@@ -5,27 +5,45 @@ import TextComponent from "../../CommonComponents/Form/TextComponent";
 import SelectComponent from "../../CommonComponents/Form/SelectComponent";
 import DatePickerComponent from "../../CommonComponents/Form/DatePickerComponent";
 import {FormContext} from "../../Context/FormContext";
+import {postMethod} from "../../Config/ApiHandler";
+import {printApiErrors, processDateForPost} from "../../Config/HelperUtils";
 
 const optionForStatus = [
     {value: true, label: "Enable"},
     {value: false, label: "Disable"},
 ];
 
-const CouponForm = ({triggerModal, modalShow, selectedCoupon}) => {
-    const {inputData, setInputData} = useContext(FormContext)
+const CouponForm = ({triggerModal, modalShow, selectedCoupon, fetchCouponList}) => {
+    const {inputData, setInputData, setLoader} = useContext(FormContext)
 
     useEffect(() => {
-        setInputData({
-            ...inputData,
-            "title": selectedCoupon.title,
-            "couponCode": selectedCoupon.code,
-            "percentage": selectedCoupon.percent,
-            "expireDate": selectedCoupon.expiry_date,
-        });
+        if (selectedCoupon) {
+            setInputData({
+                ...inputData,
+                "title": selectedCoupon.title,
+                "couponCode": selectedCoupon.code,
+                "percentage": selectedCoupon.percent,
+                "expireDate": selectedCoupon.expiry_date,
+            });
+        }
     }, [selectedCoupon])
 
-    const handleSubmit = () => {
-
+    const handleSubmit = async () => {
+        setLoader(true)
+        let postData = {};
+        postData.title = inputData.title;
+        postData.code = inputData.couponCode;
+        postData.percent = inputData.percentage;
+        postData.expiry_date = processDateForPost(inputData.expireDate);
+        let url = selectedCoupon !== undefined ? "/admin/coupons/" + selectedCoupon.id : "/admin/coupons";
+        await postMethod(url, postData).then(async (response) => {
+            await fetchCouponList();
+            setLoader(false);
+            triggerModal();
+        }).catch((error) => {
+            setLoader(false);
+            printApiErrors(error)
+        })
     };
 
     return (
@@ -33,7 +51,7 @@ const CouponForm = ({triggerModal, modalShow, selectedCoupon}) => {
             show={modalShow}
             onHide={triggerModal}
             size="lg"
-            title={Object.keys(selectedCoupon).length !== 0 ? "Update Selected Coupon" : "Add New Coupon"}
+            title={selectedCoupon ? "Update Selected Coupon" : "Add New Coupon"}
             scrollable={false}
             buttons={[
                 {
@@ -78,6 +96,7 @@ const CouponForm = ({triggerModal, modalShow, selectedCoupon}) => {
                         label="Select Expiry Date"
                         placeHolder="dd-mm-yyyy"
                         value={inputData.expireDate}
+                        name="expireDate"
                     />
                 </Col>
                 <Col>

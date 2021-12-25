@@ -16,20 +16,25 @@ const CategoryForm = ({fetchCategoryList, triggerModal, modalShow, selectedCateg
     const {setLoader, inputData, setInputData} = useContext(FormContext)
 
     useEffect(() => {
-        let status = optionForStatus.find(item => item.value === selectedCategory.status)
-        setInputData({
-            ...inputData,
-            "title": selectedCategory.title,
-            "status": status
-        });
+       if(selectedCategory){
+           let status = optionForStatus.find(item => item.value === selectedCategory.status)
+           setInputData({
+               ...inputData,
+               "title": selectedCategory.title,
+               "status": status
+           });
+       }
     }, [selectedCategory])
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setLoader(true)
+        let postData = {};
+        postData.title = inputData.title;
+        postData.status = inputData.status["value"];
         let url = selectedCategory !== undefined ? "/admin/categories/" + selectedCategory.id : "/admin/categories";
-        postMethod(url, inputData).then((response) => {
+        await postMethod(url, postData).then(async (response) => {
+            await fetchCategoryList();
             setLoader(false);
-            fetchCategoryList();
             triggerModal();
         }).catch((error) => {
             setLoader(false);

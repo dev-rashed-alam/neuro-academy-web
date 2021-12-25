@@ -34,7 +34,7 @@ const CategoryList = () => {
     const [modal, setModal] = useState(false);
     const [paginationUtil, setPaginationUtil] = useState({})
     const [tableData, setTableDta] = useState([]);
-    const {setLoader} = useContext(FormContext)
+    const {setLoader, resetContext} = useContext(FormContext)
     const [categoryListUrl, setCategoryListUrl] = useState("/admin/categories")
     const [selectedCategory, setSelectedCategory] = useState({})
 
@@ -87,14 +87,16 @@ const CategoryList = () => {
         />
     }
 
-    const toggleCategoryStatus = (status, id) => {
+    const toggleCategoryStatus = async (status, id) => {
         setLoader(true)
         let postData = {};
         postData.status = status === 0 ? 1 : 0;
-        postMethod("/admin/categories/status/" + id, postData).then((response) => {
+        await postMethod("/admin/categories/status/" + id, postData).then(async (response) => {
+            if (response.data.success === true) {
+                await fetchCategoryList();
+            }
             setLoader(false)
             toast.success("Status Update Successful!");
-            fetchCategoryList();
         }).catch((error) => {
             setLoader(false)
             printApiErrors(error)
@@ -103,6 +105,7 @@ const CategoryList = () => {
 
     const closeModal = () => {
         setSelectedCategory({});
+        resetContext();
         setModal(!modal)
     }
 
@@ -134,7 +137,7 @@ const CategoryList = () => {
             </Row>
             <CategoryForm
                 modalShow={modal}
-                selectedCategory={selectedCategory}
+                selectedCategory={Object.keys(selectedCategory).length > 0 ? selectedCategory : undefined}
                 fetchCategoryList={fetchCategoryList}
                 triggerModal={closeModal}
             />

@@ -43,10 +43,20 @@ const generateRandomNumber = () => {
     return Math.abs(Math.random() * 1000000 + 1);
 }
 
+const processDateForPost = (date) => {
+    let postDate = new Date(date);
+    let currentDate = postDate.getDate();
+    let currentMonth = postDate.getMonth() + 1;
+    let currentYear = postDate.getFullYear();
+    let currentTime = postDate.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+    return `${currentYear}-${currentMonth}-${currentDate} ${currentTime}`
+}
+
 export {
     generatePagination,
     removeDomainAddressFromPagination,
     printApiErrors,
     formatDate,
-    generateRandomNumber
+    generateRandomNumber,
+    processDateForPost
 }

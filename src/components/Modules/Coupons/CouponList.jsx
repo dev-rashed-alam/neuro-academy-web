@@ -45,7 +45,7 @@ const CouponList = () => {
     const [modal, setModal] = useState(false)
     const [paginationUtil, setPaginationUtil] = useState({})
     const [tableData, setTableDta] = useState([]);
-    const {setLoader} = useContext(FormContext)
+    const {setLoader, resetContext} = useContext(FormContext)
     const [couponListUtil, setCouponListUtil] = useState("/admin/coupons")
     const [selectedCoupon, setSelectedCoupon] = useState({})
 
@@ -54,9 +54,9 @@ const CouponList = () => {
         fetchCouponList()
     }, [couponListUtil])
 
-    const fetchCouponList = () => {
+    const fetchCouponList = async () => {
         setLoader(true)
-        getMethod(couponListUtil).then((response) => {
+        await getMethod(couponListUtil).then((response) => {
             let resultSet = [];
             let sl = 1;
             for (let item of response.data.data) {
@@ -95,6 +95,7 @@ const CouponList = () => {
 
     const closeModal = () => {
         setSelectedCoupon({});
+        resetContext();
         setModal(!modal)
     }
 
@@ -127,7 +128,7 @@ const CouponList = () => {
             </Row>
             <CouponForm
                 modalShow={modal}
-                selectedCoupon={selectedCoupon}
+                selectedCoupon={Object.keys(selectedCoupon).length > 0 ? selectedCoupon : undefined}
                 fetchCouponList={fetchCouponList}
                 triggerModal={closeModal}
             />

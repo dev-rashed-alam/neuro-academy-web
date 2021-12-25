@@ -43,7 +43,7 @@ const SelectComponent = ({
             }
             handleChange({target: {name: name, value: selectedValue}});
         } else if (val) {
-            handleChange({target: {name: name, value: val.value}});
+            handleChange({target: {name: name, value: val}});
         } else {
             handleChange({target: {name: name, value: ""}});
         }

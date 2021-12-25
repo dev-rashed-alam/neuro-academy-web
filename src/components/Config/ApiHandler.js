@@ -3,19 +3,19 @@ import {backendServerUrl, youtubeUrl, youtubeApiKey} from "./Constant";
 import {getToken} from "./SessionUtils";
 
 const getMethod = (urlSegment) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let url = backendServerUrl + urlSegment
-        axios.get(url, {
-            headers: {Authorization: getToken(), id: 1},
+        await axios.get(url, {
+            headers: {Authorization: getToken()},
         }).then(response => resolve(response)).catch(error => reject(error))
     })
 };
 
 const postMethod = (urlSegment, postData) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let url = backendServerUrl + urlSegment
-        axios.post(url, postData, {
-            headers: {Authorization: getToken(), id: 1},
+        await axios.post(url, postData, {
+            headers: {Authorization: getToken()},
         }).then(response => resolve(response)).catch(error => reject(error))
     })
 }

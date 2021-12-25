@@ -80,8 +80,6 @@ V
 &src/components/Modules/Login/Login.jsx,c\6\c66a72e110a82de9e229c359af382b6786c37da5
 N
 src/assets/styles/_Button.scss,4\7\476993e89e364b73c207dfea0f3522723104e07f
-S
-#src/components/Config/ApiHandler.js,e\3\e3f927642765c02228ca5c07d1e801e906513d80
 <
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 a
@@ -99,13 +97,3 @@ _
 /src/components/Modules/Articles/ArticleForm.jsx,2\8\288d7cb25fcf7641d8f15a5b18dda8f402cd13da
 9
 	.eslintrc,4\b\4be5f5e3cea171c304090be92469b2f2cb51039a
-f
-6src/components/CommonComponents/Form/TextComponent.jsx,5\b\5b9836b7bdac6490402a56be210547f14660cf6c
-T
-$src/components/Config/HelperUtils.js,8\1\81ffe4da5b9ddb1ca03f356332f57b9f26ad1e50
-V
-&src/components/Context/FormContext.jsx,a\2\a2a97dee53a65583dffd75dbd2774701ea2c92ca
-h
-8src/components/CommonComponents/Form/SelectComponent.jsx,0\2\022e443aaa79c9dcc9a7a36af6d78dd7c91aae1f
-`
-0src/components/Modules/Category/CategoryList.jsx,a\4\a4227d939b73f4820d7cd989bcfde6425c59499e
