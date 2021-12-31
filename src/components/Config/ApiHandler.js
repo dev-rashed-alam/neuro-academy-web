@@ -35,7 +35,6 @@ const uploadAttachment = (urlSegment, formData) => {
 }
 
 const fetchYoutubePlaylist = (playListId, urlSegment) => {
-    console.log(urlSegment)
     return new Promise((resolve, reject) => {
         let url;
         if (urlSegment !== undefined) {

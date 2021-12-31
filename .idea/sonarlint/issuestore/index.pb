@@ -97,3 +97,7 @@ _
 /src/components/Modules/Articles/ArticleForm.jsx,2\8\288d7cb25fcf7641d8f15a5b18dda8f402cd13da
 9
 	.eslintrc,4\b\4be5f5e3cea171c304090be92469b2f2cb51039a
+<
+package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
+f
+6src/components/CommonComponents/Form/TextComponent.jsx,5\b\5b9836b7bdac6490402a56be210547f14660cf6c
