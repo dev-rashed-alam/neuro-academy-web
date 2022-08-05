@@ -61,7 +61,7 @@ const CouponForm = ({triggerModal, modalShow, selectedCoupon, fetchCouponList}) 
                 },
                 {
                     name: "Close",
-                    action: handleSubmit,
+                    action: triggerModal,
                     className: "btn btn-danger",
                 },
             ]}
