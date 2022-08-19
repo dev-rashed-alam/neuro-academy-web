@@ -48,10 +48,16 @@ const fetchYoutubePlaylist = (playListId, urlSegment) => {
     })
 }
 
+const apiUrl = {
+    courseList: '/admin/courses',
+    courseStore: '/admin/courses',
+}
+
 
 export {
     getMethod,
     postMethod,
     uploadAttachment,
-    fetchYoutubePlaylist
+    fetchYoutubePlaylist,
+    apiUrl
 }

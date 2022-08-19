@@ -23,7 +23,7 @@ const FileComponent = ({identifier, addVideo, fileName}) => {
     return (
         <div className="fileUpload btn btn-orange" key={`attachment${identifier}`}>
             <img
-                src="https://image.flaticon.com/icons/svg/136/136549.svg"
+                src="/upload.png"
                 className="icon"
                 alt="img"
             />

@@ -7,7 +7,8 @@ import EditorComponent from "../../CommonComponents/Form/EditorComponent";
 import {Button} from "../../CommonComponents/Button";
 import UploadComponent from "../../CommonComponents/Form/UploadComponent";
 import {FormContext} from "../../Context/FormContext";
-import {fetchYoutubePlaylist} from "../../Config/ApiHandler";
+import {apiUrl, fetchYoutubePlaylist, postMethod} from "../../Config/ApiHandler";
+import {printApiErrors} from "../../Config/HelperUtils";
 
 const optionForModule = [
     {value: "Web Design", label: "Web Design"},
@@ -21,25 +22,42 @@ const optionForCourseUpload = [
 
 const CourseForm = (props) => {
 
-    const {videos, addDynamicVideos, inputData, addNewYoutubeVideos,youtubeVideos,tutorials} = useContext(FormContext);
+    const {
+        setLoader,
+        videos,
+        addDynamicVideos,
+        inputData,
+        addNewYoutubeVideos,
+        youtubeVideos,
+        tutorials
+    } = useContext(FormContext);
 
     const renderDynamicAttachmentForVideos = () => {
-        return videos.map(item =>
-            <div className="pt-1 pb-1">
-                <UploadComponent
-                    identifier={item}
-                />
-            </div>
-        )
+        if (inputData["type"]?.value === "custom") {
+            return videos.map(item =>
+                <div className="pt-1 pb-1">
+                    <UploadComponent
+                        identifier={item}
+                    />
+                </div>
+            )
+        }
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         let postData = {...inputData};
+        postData["type"] = inputData.type.value;
+        postData["shortTitle"] = inputData.title;
         postData["customVideos"] = [...tutorials];
         postData["youtubeVideos"] = [...youtubeVideos];
-
-        console.log(postData);
-
+        setLoader(true)
+        await postMethod(apiUrl.courseStore, postData).then(async () => {
+            setLoader(false);
+            handleClose()
+        }).catch((error) => {
+            setLoader(false);
+            printApiErrors(error)
+        })
     };
 
     const handleClose = () => {
@@ -47,13 +65,13 @@ const CourseForm = (props) => {
     };
 
     const handleYoutubePlaylist = (pageToken) => {
-        let youtubeVideos = [];
+        let tmpYoutubeVideos = [];
         fetchYoutubePlaylist(inputData["playlistId"], pageToken)
             .then((response) => {
                 response.items.map((item) => {
-                    youtubeVideos.push(item.snippet)
+                    tmpYoutubeVideos.push(item.snippet)
                 })
-                addNewYoutubeVideos(youtubeVideos)
+                addNewYoutubeVideos(tmpYoutubeVideos)
                 if ("nextPageToken" in response) {
                     handleYoutubePlaylist(response.nextPageToken)
                 }
@@ -62,7 +80,7 @@ const CourseForm = (props) => {
     }
 
     const renderCustomVideoUpload = () => {
-        if (inputData["courseUploadType"] !== undefined && inputData["courseUploadType"] === "custom") {
+        if (inputData["type"]?.value === "custom") {
             return (
                 <Row>
                     <Col>
@@ -74,7 +92,7 @@ const CourseForm = (props) => {
                     </Col>
                 </Row>
             )
-        } else if (inputData["courseUploadType"] !== undefined && inputData["courseUploadType"] === "youtube") {
+        } else if (inputData["type"]?.value === "youtube") {
             return (
                 <Row className="align-items-center">
                     <Col>
@@ -82,6 +100,7 @@ const CourseForm = (props) => {
                             label="Youtube Playlist ID"
                             placeHolder="Enter Playlist ID"
                             name="playlistId"
+                            value={inputData.playlistId}
                             required={false}
                             type="text"
                             controlId="play_list_id"
@@ -131,8 +150,9 @@ const CourseForm = (props) => {
                     <TextComponent
                         label="Course Title"
                         placeHolder="Enter Course Title"
-                        name="courseTitle"
+                        name="title"
                         required={false}
+                        value={inputData.title}
                         type="text"
                         controlId="course_title"
                     />
@@ -143,8 +163,33 @@ const CourseForm = (props) => {
                         placeHolder="Enter Instructor Name"
                         name="instructorName"
                         required={false}
+                        value={inputData.instructorName}
                         type="text"
                         controlId="instructor_name"
+                    />
+                </Col>
+            </Row>
+            <Row className="align-items-center">
+                <Col>
+                    <TextComponent
+                        label="Course Price"
+                        placeHolder="Enter Course Price"
+                        name="price"
+                        required={false}
+                        value={inputData.price}
+                        type="text"
+                        controlId="course_price"
+                    />
+                </Col>
+                <Col>
+                    <TextComponent
+                        label="Course Duration"
+                        placeHolder="Enter Course Duration"
+                        name="duration"
+                        required={false}
+                        value={inputData.duration}
+                        type="text"
+                        controlId="course_duration"
                     />
                 </Col>
             </Row>
@@ -155,6 +200,7 @@ const CourseForm = (props) => {
                         placeholder="Select Category"
                         multiple={true}
                         options={optionForModule}
+                        value={inputData.category}
                         name="category"
                     />
                 </Col>
@@ -164,7 +210,8 @@ const CourseForm = (props) => {
                         placeholder="Select Course Upload Type"
                         multiple={false}
                         options={optionForCourseUpload}
-                        name="courseUploadType"
+                        value={inputData.type}
+                        name="type"
                     />
                 </Col>
             </Row>
@@ -173,27 +220,27 @@ const CourseForm = (props) => {
             <Row>
                 <Col>
                     <EditorComponent
-                        name="courseFeature"
-                        controlId="course_feature"
-                        label="Add Course Feature"
+                        name="requirements"
+                        controlId="course_requirements"
+                        label="Add Course Requirements"
                     />
                 </Col>
             </Row>
             <Row>
                 <Col>
                     <EditorComponent
-                        name="shortDescription"
-                        controlId="short_description"
-                        label="Add Short Description"
+                        name="features"
+                        controlId="course_features"
+                        label="Add Course Features"
                     />
                 </Col>
             </Row>
             <Row>
                 <Col>
                     <EditorComponent
-                        name="longDescription"
-                        controlId="long_description"
-                        label="Add Long Description"
+                        name="description"
+                        controlId="course_description"
+                        label="Add Course Description"
                     />
                 </Col>
             </Row>

@@ -32,7 +32,7 @@ const CategoryForm = ({fetchCategoryList, triggerModal, modalShow, selectedCateg
         postData.title = inputData.title;
         postData.status = inputData.status["value"];
         let url = selectedCategory !== undefined ? "/admin/categories/" + selectedCategory.id : "/admin/categories";
-        await postMethod(url, postData).then(async (response) => {
+        await postMethod(url, postData).then(async () => {
             await fetchCategoryList();
             setLoader(false);
             triggerModal();

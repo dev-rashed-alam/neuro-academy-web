@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import TableComponent from "../../CommonComponents/Table/Table";
 import CourseForm from "./CourseForm";
 import {Button} from "../../CommonComponents/Button";
 import {MdAddCircle} from "react-icons/md";
+import {FormContext} from "../../Context/FormContext";
+import {apiUrl, getMethod} from "../../Config/ApiHandler";
+import {generatePagination, printApiErrors} from "../../Config/HelperUtils";
 
 const tableColumn = [
     {
@@ -62,7 +65,38 @@ const tableData = [
 const CourseList = () => {
 
     const [modal, setModal] = useState(false)
+    const [paginationUtil, setPaginationUtil] = useState({})
+    const [tableData, setTableDta] = useState([]);
+    const {setLoader, resetContext} = useContext(FormContext)
 
+
+    useEffect(() => {
+        fetchCourseList()
+    }, [])
+
+    const fetchCourseList = () => {
+        setLoader(true)
+        getMethod(apiUrl.courseList).then((response) => {
+            console.log(response.data)
+            // let resultSet = [];
+            // let sl = 1;
+            // for (let item of response.data.data) {
+            //     resultSet.push({
+            //         sl: sl++,
+            //         categoryName: item.title,
+            //         status: renderStatusButton(item.status, item.id),
+            //         action: renderUpdateButton(item)
+            //     })
+            // }
+            // setTableDta(resultSet);
+            // setPaginationUtil(generatePagination(response.data))
+            setLoader(false)
+        }).catch((error) => {
+            setTableDta([]);
+            setLoader(false)
+            printApiErrors(error)
+        })
+    }
 
     return (
         <>

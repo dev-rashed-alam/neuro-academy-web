@@ -15,7 +15,7 @@ const EditorComponent = ({name, controlId, label, value}) => {
     };
 
     return (
-        <Form.Group controlId={controlId} key={generateRandomNumber()}>
+        <Form.Group controlId={controlId} key={`editor_box_${name}`}>
             <Form.Label>{label}</Form.Label>
             <CKEditor
                 key={controlId}

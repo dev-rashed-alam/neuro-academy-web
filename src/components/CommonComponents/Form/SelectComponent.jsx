@@ -39,7 +39,7 @@ const SelectComponent = ({
         if (Array.isArray(val)) {
             let selectedValue = [];
             for (let item of val) {
-                selectedValue.push(item.value);
+                selectedValue.push(item);
             }
             handleChange({target: {name: name, value: selectedValue}});
         } else if (val) {
