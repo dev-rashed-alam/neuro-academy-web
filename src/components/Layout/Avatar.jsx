@@ -7,6 +7,7 @@ import styled from "styled-components";
 import {postMethod} from "../Config/ApiHandler";
 import {toast} from "react-toastify";
 import {removeUserSession} from "../Config/SessionUtils";
+import {useHistory} from "react-router-dom";
 
 const Styles = styled.div`
   .header-profile-user {
@@ -54,9 +55,12 @@ const Styles = styled.div`
 
 const Avatar = (props) => {
 
+    const history = useHistory();
+
     const logout = () => {
-        postMethod("/admin/logout", {}).then((res) => {
+        postMethod("/admin/logout", {}).then(() => {
             removeUserSession();
+            history.push('/');
             toast.success("Logout Successful!");
         }).catch((err) => {
             toast.error(err.response.data.message)

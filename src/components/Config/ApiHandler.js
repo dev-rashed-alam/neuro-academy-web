@@ -51,6 +51,7 @@ const fetchYoutubePlaylist = (playListId, urlSegment) => {
 const apiUrl = {
     courseList: '/admin/courses',
     courseStore: '/admin/courses',
+    categoryList: '/admin/categories'
 }
 
 

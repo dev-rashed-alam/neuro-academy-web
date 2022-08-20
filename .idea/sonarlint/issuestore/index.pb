@@ -40,8 +40,6 @@ j
 :src/components/CommonComponents/Form/CheckboxComponent.jsx,a\2\a222e46dd552c199f958235e14ee1d41a4c54243
 m
 =src/components/CommonComponents/Form/RadioButtonComponent.jsx,6\6\66dcf7288a9dbbb08c5c39a4fc3aeb0f1dc1de64
-S
-#src/assets/styles/Login.module.scss,5\d\5de7e1c259e119e3bb224194ca43f781cf5d4e75
 M
 src/assets/styles/Loader.scss,5\3\53063fdb0107ce69c689403abc0b34e9e23bb0d3
 `
@@ -54,8 +52,6 @@ _
 /src/components/Layout/DashboardNotification.jsx,e\f\efa520e683a306d4020a1f86c13fcf7b0b383006
 Z
 *src/components/CommonComponents/Button.jsx,b\c\bc4095271eef5ab21c2843373bef0714826ffcb8
-J
-src/assets/styles/App.scss,a\d\ad83c1982838870b54ca961efdfbaf87ea97f3e4
 _
 /src/components/CommonComponents/Table/Table.jsx,0\e\0ed37098125ef2a0693b9c67bc0c4d7d5f206ea1
 V
@@ -68,8 +64,6 @@ Q
 !src/components/Layout/Sidebar.jsx,2\a\2a1a56335d77c54643ae7f4f49ee9c01595bdc98
 Y
 )src/components/Layout/DashboardHeader.jsx,f\0\f078fafcce593795bcb6fee9e432d782cd11803a
-P
- src/components/Layout/Avatar.jsx,d\9\d9afd3d3483095c7b84b27a20df39312aa506fc3
 9
 	.eslintrc,4\b\4be5f5e3cea171c304090be92469b2f2cb51039a
 <
@@ -88,3 +82,22 @@ _
 /src/components/Modules/Articles/ArticleList.jsx,b\3\b339df1cede011c96c529aa30b0fbcb29681d7a8
 _
 /src/components/Modules/Articles/ArticleForm.jsx,2\8\288d7cb25fcf7641d8f15a5b18dda8f402cd13da
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+:
+
+src/App.js,1/e/1e43fa63aecd2127be034b3fb9d4caa172275714
+<
+src/index.js,f/9/f900edc44cb929c2267a16100a32851f6d5b477d
+h
+8src/components/CommonComponents/Form/EditorComponent.jsx,d/3/d3a258dbde8460f070292091f996f4a1340323da
+Q
+!src/components/Config/Constant.js,3/a/3a346dfa75fd2215079dfeb434616d5391e6ea4a
+]
+-src/components/Modules/Courses/CourseList.jsx,4/c/4c25209b02be01af01b6b21e1f8a403f3e2fa76b
+h
+8src/components/CommonComponents/Form/UploadComponent.jsx,4/8/48e191c90fa8cf0149fea1922ca7f0d077619fc5
+f
+6src/components/CommonComponents/Form/FileComponent.jsx,5/6/56618cfc8eee96f1d58fe4aceabd2586ee46770c
+h
+8src/components/CommonComponents/Form/SelectComponent.jsx,0/2/022e443aaa79c9dcc9a7a36af6d78dd7c91aae1f

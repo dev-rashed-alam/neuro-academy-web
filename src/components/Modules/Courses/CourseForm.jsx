@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ModalComponent} from "../../CommonComponents/ModalComponent";
 import {Col, Row} from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
@@ -7,14 +7,11 @@ import EditorComponent from "../../CommonComponents/Form/EditorComponent";
 import {Button} from "../../CommonComponents/Button";
 import UploadComponent from "../../CommonComponents/Form/UploadComponent";
 import {FormContext} from "../../Context/FormContext";
-import {apiUrl, fetchYoutubePlaylist, postMethod} from "../../Config/ApiHandler";
+import {apiUrl, fetchYoutubePlaylist, getMethod, postMethod} from "../../Config/ApiHandler";
 import {printApiErrors} from "../../Config/HelperUtils";
+import {toast} from "react-toastify";
+import "../../../assets/styles/Course.scss";
 
-const optionForModule = [
-    {value: "Web Design", label: "Web Design"},
-    {value: "Web Development", label: "Web Development"},
-    {value: "Graphics Design", label: "Graphics Design"},
-];
 const optionForCourseUpload = [
     {value: "youtube", label: "Youtube Link"},
     {value: "custom", label: "Custom Upload"}
@@ -22,6 +19,7 @@ const optionForCourseUpload = [
 
 const CourseForm = (props) => {
 
+    const [categories, setCategories] = useState([])
     const {
         setLoader,
         videos,
@@ -31,6 +29,25 @@ const CourseForm = (props) => {
         youtubeVideos,
         tutorials
     } = useContext(FormContext);
+
+    const fetchCategoryList = () => {
+        setLoader(true)
+        getMethod(apiUrl.categoryList).then((response) => {
+            let resultSet = [];
+            for (let item of response.data.data) {
+                resultSet.push({value: item.id, label: item.title})
+            }
+            setCategories(resultSet)
+            setLoader(false)
+        }).catch((error) => {
+            setLoader(false)
+            printApiErrors(error)
+        })
+    }
+
+    useEffect(() => {
+        fetchCategoryList()
+    }, [])
 
     const renderDynamicAttachmentForVideos = () => {
         if (inputData["type"]?.value === "custom") {
@@ -65,6 +82,7 @@ const CourseForm = (props) => {
     };
 
     const handleYoutubePlaylist = (pageToken) => {
+        setLoader(true)
         let tmpYoutubeVideos = [];
         fetchYoutubePlaylist(inputData["playlistId"], pageToken)
             .then((response) => {
@@ -74,9 +92,14 @@ const CourseForm = (props) => {
                 addNewYoutubeVideos(tmpYoutubeVideos)
                 if ("nextPageToken" in response) {
                     handleYoutubePlaylist(response.nextPageToken)
+                } else {
+                    setLoader(false)
                 }
             })
-            .catch(e => console.log(e))
+            .catch(error => {
+                if(error?.response?.data?.error) toast.error(error.response.data.error.message)
+                setLoader(false)
+            })
     }
 
     const renderCustomVideoUpload = () => {
@@ -86,7 +109,7 @@ const CourseForm = (props) => {
                     <Col>
                         <Button
                             name="Add Videos"
-                            className="btn btn-primary"
+                            className="btn btn-primary mb-3"
                             onClickEvent={addDynamicVideos}
                         />
                     </Col>
@@ -121,6 +144,28 @@ const CourseForm = (props) => {
                     </Col>
                 </Row>
             )
+        }
+    }
+
+    const renderYoutubeVideos = () => {
+        if (inputData['type']?.value === 'youtube' && youtubeVideos?.length > 0) {
+            return youtubeVideos?.map((item, index) => {
+                return (
+                    <Row className="align-items-center" key={`youtube_videos_${index + 1}`}>
+                        <Col>
+                            <div className='video-wrapper'>
+                                <div className='video-thumb'>
+                                    <img src={item.thumbnails.default.url} alt='course-thumb' className='img-thumbnail'/>
+                                </div>
+                                <div className='video-description'>
+                                    <p>Lecture Title: {item.title}</p>
+                                    <p>Published Date: {item.publishedAt}</p>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                )
+            })
         }
     }
 
@@ -199,7 +244,7 @@ const CourseForm = (props) => {
                         label="Select Category"
                         placeholder="Select Category"
                         multiple={true}
-                        options={optionForModule}
+                        options={categories}
                         value={inputData.category}
                         name="category"
                     />
@@ -217,6 +262,7 @@ const CourseForm = (props) => {
             </Row>
             {renderDynamicAttachmentForVideos()}
             {renderCustomVideoUpload()}
+            {renderYoutubeVideos()}
             <Row>
                 <Col>
                     <EditorComponent

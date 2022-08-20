@@ -1,0 +1,21 @@
+.video-wrapper{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 5px 0;
+  font-size: .8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #bfc8e2 !important;
+  background-color: #2e3548 !important;
+  background-clip: padding-box;
+  border: 1px solid #32394e !important;
+  border-radius: 0.25rem !important;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  padding: 10px;
+
+  .video-description{
+    margin-left: 30px;
+    margin-top: 20px;
+  }
+}
