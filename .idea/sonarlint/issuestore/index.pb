@@ -25,9 +25,6 @@ D
 public/manifest.json,4\2\42e89cd2213b9d5dfae4f63522702c623170d792
 A
 package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 _
 /src/components/Modules/Students/StudentList.jsx,a\2\a2592878ee29338379bc649fe05cbdf6460abeb4
 M
@@ -66,8 +63,6 @@ Y
 )src/components/Layout/DashboardHeader.jsx,f\0\f078fafcce593795bcb6fee9e432d782cd11803a
 9
 	.eslintrc,4\b\4be5f5e3cea171c304090be92469b2f2cb51039a
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 ]
 -src/components/Modules/Coupons/CouponList.jsx,8\9\89f49aa84f5fd55d82b343fabcfadb0fbd2f910b
 ]
