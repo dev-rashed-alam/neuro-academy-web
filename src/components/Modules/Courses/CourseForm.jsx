@@ -65,6 +65,7 @@ const CourseForm = (props) => {
         let postData = {...inputData};
         postData["type"] = inputData.type.value;
         postData["shortTitle"] = inputData.title;
+        postData["category"] = 1;
         postData["customVideos"] = [...tutorials];
         postData["youtubeVideos"] = [...youtubeVideos];
         setLoader(true)

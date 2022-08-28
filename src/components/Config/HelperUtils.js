@@ -1,5 +1,6 @@
 import {backendServerUrl} from "./Constant";
 import {toast} from "react-toastify";
+import moment from "moment";
 
 const generatePagination = (data) => {
     return {
@@ -33,7 +34,7 @@ const printApiErrors = (error) => {
 
 const formatDate = (date) => {
     if (date) {
-        return date.split("T")[0]
+        return convertDateToLocal(date.split("T")[0], 'MMM DD, YYYY')
     } else {
         return ""
     }
@@ -45,12 +46,13 @@ const generateRandomNumber = () => {
 
 const processDateForPost = (date) => {
     let postDate = new Date(date);
-    let currentDate = postDate.getDate();
-    let currentMonth = postDate.getMonth() + 1;
-    let currentYear = postDate.getFullYear();
-    let currentTime = postDate.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
-    return `${currentYear}-${currentMonth}-${currentDate} ${currentTime}`
+    return postDate.toISOString().substr(0, 19).replace('T', ' ');
 }
+
+const convertDateToLocal = (date, outputFormat = 'DD.MM.YYYY') => {
+    return moment.utc(date).local().format(outputFormat)
+}
+
 
 export {
     generatePagination,
@@ -58,5 +60,6 @@ export {
     printApiErrors,
     formatDate,
     generateRandomNumber,
-    processDateForPost
+    processDateForPost,
+    convertDateToLocal
 }

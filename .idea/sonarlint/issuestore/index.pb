@@ -31,8 +31,6 @@ M
 src/assets/styles/_Reset.scss,d\2\d230198d1915b2f30ee84d7c9a29ea9ee9aac825
 M
 src/assets/styles/Upload.scss,e\2\e21ec806e29e4448666af4d878c4944bc2155a03
-A
-public/index.html,f\4\f43ecdf8d666ee908aacce037b4cd72159e4741b
 j
 :src/components/CommonComponents/Form/CheckboxComponent.jsx,a\2\a222e46dd552c199f958235e14ee1d41a4c54243
 m
@@ -64,13 +62,9 @@ Y
 9
 	.eslintrc,4\b\4be5f5e3cea171c304090be92469b2f2cb51039a
 ]
--src/components/Modules/Coupons/CouponList.jsx,8\9\89f49aa84f5fd55d82b343fabcfadb0fbd2f910b
-]
 -src/components/Modules/Forms/FormElements.jsx,e\6\e6eb20e5a3d2694347e69ede02ee13e043dffcc7
 l
 <src/components/CommonComponents/Form/DatePickerComponent.jsx,d\6\d6789e40e36fe77b6bcbf859c1b5c3555fdb12c5
-]
--src/components/Modules/Coupons/CouponForm.jsx,b\5\b59627e8ee35aff79c5fea401574dba16d640a8e
 i
 9src/components/CommonComponents/Form/UploadAttachment.jsx,f\3\f3c5aab4bc0de2750eaeb2160861bcbcb9ad984b
 _
@@ -88,11 +82,25 @@ h
 8src/components/CommonComponents/Form/EditorComponent.jsx,d/3/d3a258dbde8460f070292091f996f4a1340323da
 Q
 !src/components/Config/Constant.js,3/a/3a346dfa75fd2215079dfeb434616d5391e6ea4a
-]
--src/components/Modules/Courses/CourseList.jsx,4/c/4c25209b02be01af01b6b21e1f8a403f3e2fa76b
 h
 8src/components/CommonComponents/Form/UploadComponent.jsx,4/8/48e191c90fa8cf0149fea1922ca7f0d077619fc5
 f
 6src/components/CommonComponents/Form/FileComponent.jsx,5/6/56618cfc8eee96f1d58fe4aceabd2586ee46770c
 h
 8src/components/CommonComponents/Form/SelectComponent.jsx,0/2/022e443aaa79c9dcc9a7a36af6d78dd7c91aae1f
+S
+#src/components/Config/ApiHandler.js,e/3/e3f927642765c02228ca5c07d1e801e906513d80
+V
+&src/components/Context/FormContext.jsx,a/2/a2a97dee53a65583dffd75dbd2774701ea2c92ca
+J
+src/assets/styles/App.scss,a/d/ad83c1982838870b54ca961efdfbaf87ea97f3e4
+`
+0src/components/Modules/Category/CategoryForm.jsx,8/9/89523f04dd0124d2d88920d43935918dd66632a9
+K
+src/assets/styles/Form.scss,e/b/eb800bb0edd307f1ba3296f3f7156c47030cce67
+S
+#src/assets/styles/Login.module.scss,5/d/5de7e1c259e119e3bb224194ca43f781cf5d4e75
+f
+6src/components/CommonComponents/Form/TextComponent.jsx,5/b/5b9836b7bdac6490402a56be210547f14660cf6c
+M
+src/assets/styles/Course.scss,a/d/add40102361b7a0a222a928ace577612b57ba670

@@ -6,7 +6,7 @@ import {Button} from "../../CommonComponents/Button";
 import {MdAddCircle} from "react-icons/md";
 import {FormContext} from "../../Context/FormContext";
 import {apiUrl, getMethod} from "../../Config/ApiHandler";
-import {generatePagination, printApiErrors} from "../../Config/HelperUtils";
+import {formatDate, generatePagination, printApiErrors} from "../../Config/HelperUtils";
 
 const tableColumn = [
     {
@@ -37,30 +37,15 @@ const tableColumn = [
         Header: "Number of Students",
         accessor: "numberOfStudents",
     },
-    {
-        Header: "View Details",
-        accessor: "viewDetails",
-    },
-    {
-        Header: "Status",
-        accessor: "status",
-    },
+    // {
+    //     Header: "View Details",
+    //     accessor: "viewDetails",
+    // },
+    // {
+    //     Header: "Status",
+    //     accessor: "status",
+    // },
 ];
-
-const tableData = [
-    {
-        sl: 1,
-        courseTitle: "Graphics Design",
-        instructorName: "Rashed Alam",
-        publishDate: "10/07/2021",
-        courseDuration: "120 Hours",
-        totalVideos: "30",
-        numberOfStudents: "123",
-        viewDetails: "View",
-        status: "Active"
-    },
-];
-
 
 const CourseList = () => {
 
@@ -77,19 +62,24 @@ const CourseList = () => {
     const fetchCourseList = () => {
         setLoader(true)
         getMethod(apiUrl.courseList).then((response) => {
-            console.log(response.data)
-            // let resultSet = [];
-            // let sl = 1;
-            // for (let item of response.data.data) {
-            //     resultSet.push({
-            //         sl: sl++,
-            //         categoryName: item.title,
-            //         status: renderStatusButton(item.status, item.id),
-            //         action: renderUpdateButton(item)
-            //     })
-            // }
-            // setTableDta(resultSet);
-            // setPaginationUtil(generatePagination(response.data))
+            let resultSet = [];
+            let sl = 1;
+            for (let item of response.data.data) {
+                resultSet.push({
+                    sl: sl++,
+                    courseTitle: item.title,
+                    instructorName: item.instructor_name,
+                    publishDate: formatDate(item.created_at),
+                    courseDuration: item.course_duration,
+                    totalVideos: item.videos.length,
+                    courseTile: item.title,
+                    numberOfStudents: item.numberOfStudents,
+                    // status: renderStatusButton(item.status, item.id),
+                    // action: renderUpdateButton(item)
+                })
+            }
+            setTableDta(resultSet);
+            setPaginationUtil(generatePagination(response.data))
             setLoader(false)
         }).catch((error) => {
             setTableDta([]);
