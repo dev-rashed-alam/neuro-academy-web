@@ -41,6 +41,8 @@ const CategoryList = () => {
 
     useEffect(() => {
         fetchCategoryList()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [categoryListUrl])
 
     const fetchCategoryList = () => {

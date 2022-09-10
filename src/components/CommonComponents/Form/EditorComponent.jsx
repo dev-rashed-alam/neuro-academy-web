@@ -4,7 +4,6 @@ import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {FormContext} from "../../Context/FormContext";
 import {Form} from "react-bootstrap";
-import {generateRandomNumber} from "../../Config/HelperUtils";
 
 const EditorComponent = ({name, controlId, label, value}) => {
     const {handleChange} = useContext(FormContext);

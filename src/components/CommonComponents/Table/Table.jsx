@@ -215,7 +215,6 @@ function Table({columns, data, selection, paginationUtil, triggerPagination}) {
         state,
         preGlobalFilteredRows,
         setGlobalFilter,
-        state: {selectedRowIds},
     } = useTable(
         {
             columns,

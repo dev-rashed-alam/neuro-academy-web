@@ -24,6 +24,8 @@ const CategoryForm = ({fetchCategoryList, triggerModal, modalShow, selectedCateg
                "status": status
            });
        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedCategory])
 
     const handleSubmit = async () => {

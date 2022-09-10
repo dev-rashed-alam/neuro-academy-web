@@ -52,6 +52,7 @@ const CouponList = () => {
 
     useEffect(() => {
         fetchCouponList()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [couponListUtil])
 
     const fetchCouponList = async () => {

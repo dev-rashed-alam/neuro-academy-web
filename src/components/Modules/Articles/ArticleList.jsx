@@ -53,6 +53,8 @@ const ArticleList = () => {
 
     useEffect(() => {
         fetchArticleList().then(r => fetchCategoryList())
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [couponListUtil])
 
     const fetchArticleList = async () => {

@@ -50,13 +50,14 @@ const tableColumn = [
 const CourseList = () => {
 
     const [modal, setModal] = useState(false)
-    const [paginationUtil, setPaginationUtil] = useState({})
+    const [, setPaginationUtil] = useState({})
     const [tableData, setTableDta] = useState([]);
-    const {setLoader, resetContext} = useContext(FormContext)
+    const {setLoader, } = useContext(FormContext)
 
 
     useEffect(() => {
         fetchCourseList()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const fetchCourseList = () => {
@@ -73,7 +74,7 @@ const CourseList = () => {
                     courseDuration: item.course_duration,
                     totalVideos: item.videos.length,
                     courseTile: item.title,
-                    numberOfStudents: item.numberOfStudents,
+                    numberOfStudents: item.purchase_count,
                     // status: renderStatusButton(item.status, item.id),
                     // action: renderUpdateButton(item)
                 })

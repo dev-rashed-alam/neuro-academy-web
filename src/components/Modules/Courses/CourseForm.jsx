@@ -47,6 +47,7 @@ const CourseForm = (props) => {
 
     useEffect(() => {
         fetchCategoryList()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const renderDynamicAttachmentForVideos = () => {
@@ -87,7 +88,7 @@ const CourseForm = (props) => {
         let tmpYoutubeVideos = [];
         fetchYoutubePlaylist(inputData["playlistId"], pageToken)
             .then((response) => {
-                response.items.map((item) => {
+                response.items.forEach((item) => {
                     tmpYoutubeVideos.push(item.snippet)
                 })
                 addNewYoutubeVideos(tmpYoutubeVideos)

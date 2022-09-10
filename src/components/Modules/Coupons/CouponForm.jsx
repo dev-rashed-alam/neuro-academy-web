@@ -2,16 +2,10 @@ import React, {useContext, useEffect} from "react";
 import {ModalComponent} from "../../CommonComponents/ModalComponent";
 import {Col, Row} from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
-import SelectComponent from "../../CommonComponents/Form/SelectComponent";
 import DatePickerComponent from "../../CommonComponents/Form/DatePickerComponent";
 import {FormContext} from "../../Context/FormContext";
 import {postMethod} from "../../Config/ApiHandler";
 import {printApiErrors, processDateForPost} from "../../Config/HelperUtils";
-
-const optionForStatus = [
-    {value: true, label: "Enable"},
-    {value: false, label: "Disable"},
-];
 
 const CouponForm = ({triggerModal, modalShow, selectedCoupon, fetchCouponList}) => {
     const {inputData, setInputData, setLoader} = useContext(FormContext)
@@ -26,6 +20,7 @@ const CouponForm = ({triggerModal, modalShow, selectedCoupon, fetchCouponList}) 
                 "expireDate": selectedCoupon.expiry_date,
             });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedCoupon])
 
     const handleSubmit = async () => {
@@ -36,7 +31,7 @@ const CouponForm = ({triggerModal, modalShow, selectedCoupon, fetchCouponList}) 
         postData.percent = inputData.percentage;
         postData.expiry_date = processDateForPost(inputData.expireDate);
         let url = selectedCoupon !== undefined ? "/admin/coupons/" + selectedCoupon.id : "/admin/coupons";
-        await postMethod(url, postData).then(async (response) => {
+        await postMethod(url, postData).then(async () => {
             await fetchCouponList();
             setLoader(false);
             triggerModal();

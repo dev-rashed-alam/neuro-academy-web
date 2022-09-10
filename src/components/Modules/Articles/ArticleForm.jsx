@@ -29,6 +29,8 @@ const ArticleForm = ({triggerModal, modalShow, selectedArticle, fetchArticleList
                 "status": optionForStatus.find(item => item.value === selectedArticle.status)
             });
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedArticle])
 
     const handleSubmit = async () => {
