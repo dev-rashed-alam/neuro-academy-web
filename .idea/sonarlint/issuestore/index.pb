@@ -25,8 +25,6 @@ D
 public/manifest.json,4\2\42e89cd2213b9d5dfae4f63522702c623170d792
 A
 package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
-_
-/src/components/Modules/Students/StudentList.jsx,a\2\a2592878ee29338379bc649fe05cbdf6460abeb4
 M
 src/assets/styles/_Reset.scss,d\2\d230198d1915b2f30ee84d7c9a29ea9ee9aac825
 M
@@ -35,12 +33,8 @@ j
 :src/components/CommonComponents/Form/CheckboxComponent.jsx,a\2\a222e46dd552c199f958235e14ee1d41a4c54243
 m
 =src/components/CommonComponents/Form/RadioButtonComponent.jsx,6\6\66dcf7288a9dbbb08c5c39a4fc3aeb0f1dc1de64
-M
-src/assets/styles/Loader.scss,5\3\53063fdb0107ce69c689403abc0b34e9e23bb0d3
 `
 0src/components/CommonComponents/Notification.jsx,5\2\52c4e0765faea4bcd619e718da0ae3519dbaeae4
-W
-'src/components/Route/ProtectedRoute.jsx,e\c\ec1597e5dd74a786a110ad6df4dbf7569543fef8
 S
 #src/components/Layout/Dashboard.jsx,9\2\92fbab651c496a956340bae08d09bad5574a4e51
 _
@@ -49,8 +43,6 @@ V
 &src/components/Modules/Login/Login.jsx,c\6\c66a72e110a82de9e229c359af382b6786c37da5
 N
 src/assets/styles/_Button.scss,4\7\476993e89e364b73c207dfea0f3522723104e07f
-a
-1src/components/CommonComponents/Loader/Loader.jsx,8\b\8bc68782153b60ca29cac0051bea0d003317834e
 Q
 !src/components/Layout/Sidebar.jsx,2\a\2a1a56335d77c54643ae7f4f49ee9c01595bdc98
 Y
@@ -65,13 +57,6 @@ i
 9src/components/CommonComponents/Form/UploadAttachment.jsx,f\3\f3c5aab4bc0de2750eaeb2160861bcbcb9ad984b
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-:
-
-src/App.js,1/e/1e43fa63aecd2127be034b3fb9d4caa172275714
-<
-src/index.js,f/9/f900edc44cb929c2267a16100a32851f6d5b477d
-Q
-!src/components/Config/Constant.js,3/a/3a346dfa75fd2215079dfeb434616d5391e6ea4a
 f
 6src/components/CommonComponents/Form/FileComponent.jsx,5/6/56618cfc8eee96f1d58fe4aceabd2586ee46770c
 h
@@ -97,3 +82,25 @@ U
 %src/components/Config/SessionUtils.js,c/7/c7d9f030fc48007f569c745b5cb005b3b3c63748
 A
 public/index.html,f/4/f43ecdf8d666ee908aacce037b4cd72159e4741b
+T
+$src/components/Config/HelperUtils.js,8/1/81ffe4da5b9ddb1ca03f356332f57b9f26ad1e50
+h
+8src/components/CommonComponents/Form/UploadComponent.jsx,4/8/48e191c90fa8cf0149fea1922ca7f0d077619fc5
+Z
+*src/components/CommonComponents/Button.jsx,b/c/bc4095271eef5ab21c2843373bef0714826ffcb8
+<
+package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
+h
+8src/components/CommonComponents/Form/EditorComponent.jsx,d/3/d3a258dbde8460f070292091f996f4a1340323da
+_
+/src/components/Modules/Articles/ArticleList.jsx,b/3/b339df1cede011c96c529aa30b0fbcb29681d7a8
+]
+-src/components/Modules/Coupons/CouponList.jsx,8/9/89f49aa84f5fd55d82b343fabcfadb0fbd2f910b
+]
+-src/components/Modules/Courses/CourseForm.jsx,c/2/c2675a822b379085d7154ad0dadc9d0c8021f072
+_
+/src/components/Modules/Articles/ArticleForm.jsx,2/8/288d7cb25fcf7641d8f15a5b18dda8f402cd13da
+]
+-src/components/Modules/Coupons/CouponForm.jsx,b/5/b59627e8ee35aff79c5fea401574dba16d640a8e
+]
+-src/components/Modules/Courses/CourseList.jsx,4/c/4c25209b02be01af01b6b21e1f8a403f3e2fa76b
