@@ -6,7 +6,7 @@ import AvatarImage from "../../assets/images/avatar.jpg";
 import styled from "styled-components";
 import { postMethod } from "../Config/ApiHandler";
 import { toast } from "react-toastify";
-import { removeUserSession } from "../Config/SessionUtils";
+import { getUser, removeUserSession } from "../Config/SessionUtils";
 import { useHistory } from "react-router-dom";
 import { FormContext } from "../Context/FormContext";
 
@@ -73,6 +73,8 @@ const Avatar = (props) => {
       });
   };
 
+  console.log(getUser());
+
   return (
     <Styles>
       <li
@@ -90,7 +92,7 @@ const Avatar = (props) => {
             alt="Header Avatar"
           />
           <span className="d-none d-xl-inline-block ml-2 mr-1 admin-name">
-            admin
+            {getUser()}
             <FiChevronDown />
           </span>
         </span>
