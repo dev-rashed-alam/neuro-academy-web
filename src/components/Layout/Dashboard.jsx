@@ -6,6 +6,7 @@ import { FormContext } from "../Context/FormContext";
 
 class Dashboard extends Component {
   static contextType = FormContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +21,6 @@ class Dashboard extends Component {
   };
 
   render() {
-    console.log(this.context);
     return (
       <div
         className={this.state.navigationDrawer ? "sidebar-icon-only" : "App"}
@@ -38,4 +38,5 @@ class Dashboard extends Component {
     );
   }
 }
+
 export default Dashboard;

@@ -22,7 +22,8 @@ const removeDomainAddressFromPagination = (data) => {
 };
 
 const printApiErrors = (error) => {
-  if (error && error.response.data.error_type === "ValidationFailed") {
+  console.log(error);
+  if (error && error.response?.data?.error_type === "ValidationFailed") {
     let data = [...error.response.data.data];
     for (let item of data) {
       toast.error(item);

@@ -24,7 +24,6 @@ const Login = (props) => {
     setLoader(true);
     postMethod("/api/login", inputData)
       .then((response) => {
-        console.log(response.data);
         if (response.data.data.is_admin === 1) {
           setUserSession(response.data.data);
           setLoader(false);
