@@ -73,8 +73,6 @@ const Avatar = (props) => {
       });
   };
 
-  console.log(getUser());
-
   return (
     <Styles>
       <li

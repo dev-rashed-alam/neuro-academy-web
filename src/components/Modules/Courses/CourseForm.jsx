@@ -13,7 +13,7 @@ import {
   getMethod,
   postMethod,
 } from "../../Config/ApiHandler";
-import { generateRandomNumber, printApiErrors } from "../../Config/HelperUtils";
+import { printApiErrors } from "../../Config/HelperUtils";
 import { toast } from "react-toastify";
 import "../../../assets/styles/Course.scss";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
