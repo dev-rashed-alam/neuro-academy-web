@@ -64,6 +64,16 @@ function FormContextProvider(props) {
     });
   };
 
+  const handleFiles = (evt) => {
+    const { name, files } = evt.target;
+    const formData = new FormData();
+    formData.append("myFile", files[0], files[0].name);
+    setValues({
+      ...values,
+      [name]: files[0],
+    });
+  };
+
   const handleBlur = (evt) => {
     evt.preventDefault();
   };
@@ -98,6 +108,7 @@ function FormContextProvider(props) {
         addNewYoutubeVideos,
         loader,
         setLoader,
+        handleFiles,
       }}
     >
       {props.children}

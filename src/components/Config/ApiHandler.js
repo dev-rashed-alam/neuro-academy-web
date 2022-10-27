@@ -26,6 +26,26 @@ const postMethod = (urlSegment, postData) => {
   });
 };
 
+const postWithFromData = (urlSegment, postData) => {
+  let formData = new FormData();
+  for (let item in postData) {
+    formData.append(item, postData[item]);
+  }
+
+  return new Promise(async (resolve, reject) => {
+    let url = backendServerUrl + urlSegment;
+    await axios
+      .post(url, formData, {
+        headers: {
+          Authorization: getToken(),
+          Accept: "application/json",
+        },
+      })
+      .then((response) => resolve(response))
+      .catch((error) => reject(error));
+  });
+};
+
 const uploadAttachment = (urlSegment, formData) => {
   let url = backendServerUrl + urlSegment;
   return new Promise((resolve, reject) => {
@@ -83,4 +103,5 @@ export {
   uploadAttachment,
   fetchYoutubePlaylist,
   apiUrl,
+  postWithFromData,
 };

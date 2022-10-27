@@ -17,6 +17,7 @@ import { printApiErrors } from "../../Config/HelperUtils";
 import { toast } from "react-toastify";
 import "../../../assets/styles/Course.scss";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
+import { addCourse } from "../../../services/Course";
 
 const optionForCourseUpload = [
   { value: "youtube", label: "Youtube Link" },
@@ -68,26 +69,24 @@ const CourseForm = (props) => {
   };
 
   const handleSubmit = async () => {
-    let postData = { ...inputData };
-    postData["type"] = inputData.type.value;
-    postData["shortTitle"] = inputData.title;
-    postData["category"] = 1;
-    postData["customVideos"] = [...tutorials];
-    postData["youtubeVideos"] = [...youtubeVideos];
-    setLoader(true);
-    await postMethod(apiUrl.courseStore, postData)
+    console.log(inputData.category);
+    // setLoader(true);
+    let response = await addCourse(inputData, tutorials, youtubeVideos);
+    response
       .then(async () => {
+        console.log("success");
         setLoader(false);
         handleClose();
       })
       .catch((error) => {
+        console.log(error);
         setLoader(false);
         printApiErrors(error);
       });
   };
 
   const handleClose = () => {
-    props.triggerModal();
+    // props.triggerModal();
   };
 
   const handleYoutubePlaylist = (pageToken) => {
@@ -269,7 +268,7 @@ const CourseForm = (props) => {
         <Col>
           <Form.Group controlId={"course_thumbnail"} key={`course_thumbnail`}>
             <Form.Label>Upload Course Thumbnail</Form.Label>
-            <UploadAttachment />
+            <UploadAttachment name="image" />
           </Form.Group>
         </Col>
         <Col>
