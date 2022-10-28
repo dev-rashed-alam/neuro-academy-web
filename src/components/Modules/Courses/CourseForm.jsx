@@ -11,13 +11,13 @@ import {
   apiUrl,
   fetchYoutubePlaylist,
   getMethod,
-  postMethod,
 } from "../../Config/ApiHandler";
-import { printApiErrors } from "../../Config/HelperUtils";
+import { getErrorMessages, printApiErrors } from "../../Config/HelperUtils";
 import { toast } from "react-toastify";
 import "../../../assets/styles/Course.scss";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
 import { addCourse } from "../../../services/Course";
+import { schema } from "../../../validations/ValidationSchema";
 
 const optionForCourseUpload = [
   { value: "youtube", label: "Youtube Link" },
@@ -26,6 +26,7 @@ const optionForCourseUpload = [
 
 const CourseForm = (props) => {
   const [categories, setCategories] = useState([]);
+  const [errors, setErrors] = useState({});
   const {
     setLoader,
     videos,
@@ -34,6 +35,7 @@ const CourseForm = (props) => {
     addNewYoutubeVideos,
     youtubeVideos,
     tutorials,
+    setInputData,
   } = useContext(FormContext);
 
   const fetchCategoryList = () => {
@@ -68,20 +70,24 @@ const CourseForm = (props) => {
     }
   };
 
-  const handleSubmit = async () => {
-    console.log(inputData.category);
-    // setLoader(true);
-    let response = await addCourse(inputData, tutorials, youtubeVideos);
-    response
+  const handleSubmit = () => {
+    schema
+      .validate(inputData, { abortEarly: false })
       .then(async () => {
-        console.log("success");
-        setLoader(false);
-        handleClose();
+        setLoader(true);
+        let response = await addCourse(inputData, tutorials, youtubeVideos);
+        response
+          .then(async () => {
+            setLoader(false);
+            handleClose();
+          })
+          .catch((error) => {
+            setLoader(false);
+            printApiErrors(error);
+          });
       })
-      .catch((error) => {
-        console.log(error);
-        setLoader(false);
-        printApiErrors(error);
+      .catch(function (err) {
+        setErrors(getErrorMessages(err));
       });
   };
 
@@ -136,6 +142,7 @@ const CourseForm = (props) => {
               required={false}
               type="text"
               controlId="play_list_id"
+              errors={errors}
               handleBlur={() => handleYoutubePlaylist(undefined)}
             />
           </Col>
@@ -185,6 +192,16 @@ const CourseForm = (props) => {
     }
   };
 
+  useEffect(() => {
+    if (inputData.type !== undefined) {
+      setInputData({
+        ...inputData,
+        courseType: inputData.type?.value,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputData.type]);
+
   return (
     <ModalComponent
       show={props.modalShow}
@@ -192,7 +209,6 @@ const CourseForm = (props) => {
       size="xl"
       title="Add New Course"
       scrollable={false}
-      showCloseButton={true}
       buttons={[
         {
           name: "Submit",
@@ -216,8 +232,23 @@ const CourseForm = (props) => {
             value={inputData.title}
             type="text"
             controlId="course_title"
+            errors={errors}
           />
         </Col>
+        <Col>
+          <TextComponent
+            label="Short Title"
+            placeHolder="Enter Course Short Title"
+            name="shortTitle"
+            required={false}
+            value={inputData.shortTitle}
+            type="text"
+            controlId="course_short_title"
+            errors={errors}
+          />
+        </Col>
+      </Row>
+      <Row className="align-items-center">
         <Col>
           <TextComponent
             label="Instructor Name"
@@ -227,19 +258,7 @@ const CourseForm = (props) => {
             value={inputData.instructorName}
             type="text"
             controlId="instructor_name"
-          />
-        </Col>
-      </Row>
-      <Row className="align-items-center">
-        <Col>
-          <TextComponent
-            label="Course Price"
-            placeHolder="Enter Course Price"
-            name="price"
-            required={false}
-            value={inputData.price}
-            type="text"
-            controlId="course_price"
+            errors={errors}
           />
         </Col>
         <Col>
@@ -251,7 +270,28 @@ const CourseForm = (props) => {
             value={inputData.duration}
             type="text"
             controlId="course_duration"
+            errors={errors}
           />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <TextComponent
+            label="Course Price"
+            placeHolder="Enter Course Price"
+            name="price"
+            required={false}
+            value={inputData.price}
+            type="text"
+            controlId="course_price"
+            errors={errors}
+          />
+        </Col>
+        <Col>
+          <Form.Group controlId={"course_thumbnail"} key={`course_thumbnail`}>
+            <Form.Label>Upload Course Thumbnail</Form.Label>
+            <UploadAttachment name="image" errors={errors} />
+          </Form.Group>
         </Col>
       </Row>
       <Row>
@@ -263,13 +303,8 @@ const CourseForm = (props) => {
             options={categories}
             value={inputData.category}
             name="category"
+            errors={errors}
           />
-        </Col>
-        <Col>
-          <Form.Group controlId={"course_thumbnail"} key={`course_thumbnail`}>
-            <Form.Label>Upload Course Thumbnail</Form.Label>
-            <UploadAttachment name="image" />
-          </Form.Group>
         </Col>
         <Col>
           <SelectComponent
@@ -279,6 +314,7 @@ const CourseForm = (props) => {
             options={optionForCourseUpload}
             value={inputData.type}
             name="type"
+            errors={errors}
           />
         </Col>
       </Row>
@@ -291,6 +327,7 @@ const CourseForm = (props) => {
             name="requirements"
             controlId="course_requirements"
             label="Add Course Requirements"
+            errors={errors}
           />
         </Col>
       </Row>
@@ -300,6 +337,7 @@ const CourseForm = (props) => {
             name="features"
             controlId="course_features"
             label="Add Course Features"
+            errors={errors}
           />
         </Col>
       </Row>
@@ -309,6 +347,7 @@ const CourseForm = (props) => {
             name="description"
             controlId="course_description"
             label="Add Course Description"
+            errors={errors}
           />
         </Col>
       </Row>

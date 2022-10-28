@@ -3,12 +3,10 @@ import loaderFile from "../../../assets/images/loaderFile.gif";
 import { Modal } from "react-bootstrap";
 import "../../../assets/styles/Loader.scss";
 
-const Loader = (props) => {
+const Loader = ({ showLoader }) => {
   return (
     <Modal
-      {...props}
-      show={props.showLoader}
-      size={props.size}
+      show={showLoader}
       aria-labelledby="contained-modal-title-vcenter"
       centered
       dialogClassName="customContent"

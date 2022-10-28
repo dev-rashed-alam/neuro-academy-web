@@ -3,7 +3,10 @@ import "../../../assets/styles/Form.scss";
 import { FormContext } from "../../Context/FormContext";
 import Select from "react-select";
 import { Form } from "react-bootstrap";
-import { generateRandomNumber } from "../../Config/HelperUtils";
+import {
+  capitalizeFirstLetter,
+  generateRandomNumber,
+} from "../../Config/HelperUtils";
 
 const customStyles = {
   menu: (base) => ({
@@ -32,6 +35,7 @@ const SelectComponent = ({
   options,
   disable,
   multiple,
+  errors,
 }) => {
   const { handleChange } = useContext(FormContext);
 
@@ -57,7 +61,11 @@ const SelectComponent = ({
         options={options}
         defaultValue={value}
         placeholder={placeHolder}
-        className="basic-single"
+        className={
+          errors && Object.keys(errors).length > 0 && errors[name]
+            ? "basic-single field-error"
+            : "basic-single"
+        }
         classNamePrefix="select"
         isDisabled={disable}
         isLoading={loading}
@@ -67,6 +75,11 @@ const SelectComponent = ({
         isSearchable={true}
         name={name}
       />
+      {errors && Object.keys(errors).length > 0 && errors[name] && (
+        <Form.Control.Feedback type="invalid">
+          {capitalizeFirstLetter(errors[name])}
+        </Form.Control.Feedback>
+      )}
     </Form.Group>
   );
 };

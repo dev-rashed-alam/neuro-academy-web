@@ -54,6 +54,18 @@ const convertDateToLocal = (date, outputFormat = "DD.MM.YYYY") => {
   return moment.utc(date).local().format(outputFormat);
 };
 
+const getErrorMessages = (err) => {
+  let errorObj = {};
+  for (let item of err.inner) {
+    errorObj[item.path] = item.message;
+  }
+  return errorObj;
+};
+
+const capitalizeFirstLetter = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 export {
   generatePagination,
   removeDomainAddressFromPagination,
@@ -62,4 +74,6 @@ export {
   generateRandomNumber,
   processDateForPost,
   convertDateToLocal,
+  getErrorMessages,
+  capitalizeFirstLetter,
 };
