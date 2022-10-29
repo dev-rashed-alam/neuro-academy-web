@@ -46,6 +46,7 @@ const generateRandomNumber = () => {
 };
 
 const processDateForPost = (date) => {
+  if (date === undefined) return;
   let postDate = new Date(date);
   return postDate.toISOString().substr(0, 19).replace("T", " ");
 };

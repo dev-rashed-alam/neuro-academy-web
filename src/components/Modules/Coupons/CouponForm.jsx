@@ -1,11 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ModalComponent } from "../../CommonComponents/ModalComponent";
 import { Col, Row } from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
 import DatePickerComponent from "../../CommonComponents/Form/DatePickerComponent";
 import { FormContext } from "../../Context/FormContext";
 import { postMethod } from "../../Config/ApiHandler";
-import { printApiErrors, processDateForPost } from "../../Config/HelperUtils";
+import {
+  getErrorMessages,
+  printApiErrors,
+  processDateForPost,
+} from "../../Config/HelperUtils";
+import { couponSchema } from "../../../validations/ValidationSchema";
 
 const CouponForm = ({
   triggerModal,
@@ -14,7 +19,7 @@ const CouponForm = ({
   fetchCouponList,
 }) => {
   const { inputData, setInputData, setLoader } = useContext(FormContext);
-
+  const [errors, setErrors] = useState({});
   useEffect(() => {
     if (selectedCoupon) {
       setInputData({
@@ -29,25 +34,34 @@ const CouponForm = ({
   }, [selectedCoupon]);
 
   const handleSubmit = async () => {
-    setLoader(true);
     let postData = {};
     postData.title = inputData.title;
     postData.code = inputData.couponCode;
     postData.percent = inputData.percentage;
+    postData.expireDate = inputData.expireDate;
     postData.expiry_date = processDateForPost(inputData.expireDate);
-    let url =
-      selectedCoupon !== undefined
-        ? "/admin/coupons/" + selectedCoupon.id
-        : "/admin/coupons";
-    await postMethod(url, postData)
+
+    couponSchema
+      .validate(postData, { abortEarly: false })
       .then(async () => {
-        await fetchCouponList();
-        setLoader(false);
-        triggerModal();
+        setLoader(true);
+        let url =
+          selectedCoupon !== undefined
+            ? "/admin/coupons/" + selectedCoupon.id
+            : "/admin/coupons";
+        await postMethod(url, postData)
+          .then(async () => {
+            await fetchCouponList();
+            setLoader(false);
+            triggerModal();
+          })
+          .catch((error) => {
+            setLoader(false);
+            printApiErrors(error);
+          });
       })
-      .catch((error) => {
-        setLoader(false);
-        printApiErrors(error);
+      .catch(function (err) {
+        setErrors(getErrorMessages(err));
       });
   };
 
@@ -81,6 +95,7 @@ const CouponForm = ({
             required={false}
             type="text"
             controlId="coupon_title"
+            errors={errors}
           />
         </Col>
         <Col>
@@ -92,6 +107,7 @@ const CouponForm = ({
             required={false}
             type="text"
             controlId="coupon_code"
+            errors={errors}
           />
         </Col>
       </Row>
@@ -102,6 +118,7 @@ const CouponForm = ({
             placeHolder="dd-mm-yyyy"
             value={inputData.expireDate}
             name="expireDate"
+            errors={errors}
           />
         </Col>
         <Col>
@@ -113,6 +130,7 @@ const CouponForm = ({
             required={false}
             type="text"
             controlId="discount_percentage"
+            errors={errors}
           />
         </Col>
       </Row>

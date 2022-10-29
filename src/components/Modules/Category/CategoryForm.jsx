@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ModalComponent } from "../../CommonComponents/ModalComponent";
 import { Col, Row } from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
 import SelectComponent from "../../CommonComponents/Form/SelectComponent";
 import { FormContext } from "../../Context/FormContext";
 import { postMethod } from "../../Config/ApiHandler";
-import { printApiErrors } from "../../Config/HelperUtils";
+import { getErrorMessages, printApiErrors } from "../../Config/HelperUtils";
+import { categorySchema } from "../../../validations/ValidationSchema";
 
 const optionForStatus = [
   { value: 1, label: "Enable" },
@@ -19,6 +20,7 @@ const CategoryForm = ({
   selectedCategory,
 }) => {
   const { setLoader, inputData, setInputData } = useContext(FormContext);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (selectedCategory) {
@@ -35,31 +37,43 @@ const CategoryForm = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
+  const closeModal = () => {
+    setErrors({});
+    triggerModal();
+  };
+
   const handleSubmit = async () => {
-    setLoader(true);
     let postData = {};
     postData.title = inputData.title;
-    postData.status = inputData.status["value"];
-    let url =
-      selectedCategory !== undefined
-        ? "/admin/categories/" + selectedCategory.id
-        : "/admin/categories";
-    await postMethod(url, postData)
+    postData.status = inputData.status?.value;
+    categorySchema
+      .validate(postData, { abortEarly: false })
       .then(async () => {
-        await fetchCategoryList();
-        setLoader(false);
-        triggerModal();
+        setLoader(true);
+        let url =
+          selectedCategory !== undefined
+            ? "/admin/categories/" + selectedCategory.id
+            : "/admin/categories";
+        await postMethod(url, postData)
+          .then(async () => {
+            await fetchCategoryList();
+            setLoader(false);
+            closeModal();
+          })
+          .catch((error) => {
+            setLoader(false);
+            printApiErrors(error);
+          });
       })
-      .catch((error) => {
-        setLoader(false);
-        printApiErrors(error);
+      .catch(function (err) {
+        setErrors(getErrorMessages(err));
       });
   };
 
   return (
     <ModalComponent
       show={modalShow}
-      onHide={triggerModal}
+      onHide={closeModal}
       size="lg"
       title={
         selectedCategory !== undefined
@@ -75,7 +89,7 @@ const CategoryForm = ({
         },
         {
           name: "Close",
-          action: triggerModal,
+          action: closeModal,
           className: "btn btn-danger",
         },
       ]}
@@ -90,6 +104,7 @@ const CategoryForm = ({
             required={false}
             type="text"
             controlId="category_name"
+            errors={errors}
           />
         </Col>
         <Col>
@@ -100,6 +115,7 @@ const CategoryForm = ({
             multiple={false}
             options={optionForStatus}
             name="status"
+            errors={errors}
           />
         </Col>
       </Row>

@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../../../assets/styles/Form.scss";
 import { Form } from "react-bootstrap";
 import { dateFormat } from "../../Config/Constant";
 import { FormContext } from "../../Context/FormContext";
+import { capitalizeFirstLetter } from "../../Config/HelperUtils";
 
 const DatePickerComponent = ({
   controlId,
@@ -14,6 +16,7 @@ const DatePickerComponent = ({
   maxDate,
   value,
   name,
+  errors,
 }) => {
   const { handleChange } = useContext(FormContext);
   const [startDate, setStartDate] = useState(null);
@@ -30,7 +33,14 @@ const DatePickerComponent = ({
   };
 
   return (
-    <Form.Group controlId={controlId}>
+    <Form.Group
+      controlId={controlId}
+      className={
+        errors && Object.keys(errors).length > 0 && errors[name]
+          ? "field-error"
+          : ""
+      }
+    >
       <Form.Label>{label}</Form.Label>
       <div style={{ display: "block", overflow: "hidden" }}>
         <DatePicker
@@ -43,6 +53,11 @@ const DatePickerComponent = ({
           dateFormat={dateFormat}
         />
       </div>
+      {errors && Object.keys(errors).length > 0 && errors[name] && (
+        <Form.Control.Feedback type="invalid">
+          {capitalizeFirstLetter(errors[name])}
+        </Form.Control.Feedback>
+      )}
     </Form.Group>
   );
 };

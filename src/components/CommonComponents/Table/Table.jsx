@@ -256,7 +256,7 @@ function Table({
       }
     }
   );
-  console.log(state.selectedRowIds);
+  // console.log(state.selectedRowIds);
   return (
     <>
       <div className="search">

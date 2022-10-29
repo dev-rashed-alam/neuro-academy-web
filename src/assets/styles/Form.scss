@@ -155,6 +155,6 @@ input[type="checkbox"]:checked:after{
   display: block;
   color: tomato;
 }
-.field-error, .field-error > .select__control{
+.field-error, .field-error > .select__control, .field-error .react-datepicker-wrapper .react-datepicker__input-container input{
   border-color: tomato !important;
 }

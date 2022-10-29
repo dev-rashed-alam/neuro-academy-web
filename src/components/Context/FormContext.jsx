@@ -56,7 +56,6 @@ function FormContextProvider(props) {
   };
 
   const handleChange = async (evt) => {
-    console.log("----------", evt);
     const { name, value: newValue, type } = evt.target;
     const value = type === "number" ? +newValue : newValue;
     await setValues({

@@ -1,13 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ModalComponent } from "../../CommonComponents/ModalComponent";
-import { Col, Row } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
 import SelectComponent from "../../CommonComponents/Form/SelectComponent";
 import { FormContext } from "../../Context/FormContext";
 import { postMethod } from "../../Config/ApiHandler";
-import { printApiErrors } from "../../Config/HelperUtils";
+import { getErrorMessages, printApiErrors } from "../../Config/HelperUtils";
 import EditorComponent from "../../CommonComponents/Form/EditorComponent";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
+import { articleSchema } from "../../../validations/ValidationSchema";
 
 const optionForStatus = [
   { value: 1, label: "Enable" },
@@ -22,6 +23,7 @@ const ArticleForm = ({
   categoryList,
 }) => {
   const { inputData, setInputData, setLoader } = useContext(FormContext);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (selectedArticle) {
@@ -42,33 +44,46 @@ const ArticleForm = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedArticle]);
 
+  const closeModal = () => {
+    setErrors({});
+    triggerModal();
+  };
+
   const handleSubmit = async () => {
-    setLoader(true);
     let postData = {};
     postData.title = inputData.title;
-    postData.category_id = inputData.category["value"];
-    postData.status = inputData.status["value"];
+    postData.category_id = inputData.category?.value;
+    postData.status = inputData.status?.value;
     postData.body = inputData.description;
-    let url =
-      selectedArticle !== undefined
-        ? "/admin/articles/" + selectedArticle.id
-        : "/admin/articles";
-    await postMethod(url, postData)
-      .then(async (response) => {
-        await fetchArticleList();
-        setLoader(false);
-        triggerModal();
+
+    articleSchema
+      .validate(postData, { abortEarly: false })
+      .then(async () => {
+        setLoader(true);
+        let url =
+          selectedArticle !== undefined
+            ? "/admin/articles/" + selectedArticle.id
+            : "/admin/articles";
+        await postMethod(url, postData)
+          .then(async (response) => {
+            await fetchArticleList();
+            setLoader(false);
+            closeModal();
+          })
+          .catch((error) => {
+            setLoader(false);
+            printApiErrors(error);
+          });
       })
-      .catch((error) => {
-        setLoader(false);
-        printApiErrors(error);
+      .catch(function (err) {
+        setErrors(getErrorMessages(err));
       });
   };
 
   return (
     <ModalComponent
       show={modalShow}
-      onHide={triggerModal}
+      onHide={closeModal}
       size="lg"
       title={selectedArticle ? "Update Selected Article" : "Add New Article"}
       scrollable={false}
@@ -80,7 +95,7 @@ const ArticleForm = ({
         },
         {
           name: "Close",
-          action: triggerModal,
+          action: closeModal,
           className: "btn btn-danger",
         },
       ]}
@@ -95,6 +110,7 @@ const ArticleForm = ({
             required={false}
             type="text"
             controlId="article_title"
+            errors={errors}
           />
         </Col>
         <Col>
@@ -105,6 +121,7 @@ const ArticleForm = ({
             multiple={false}
             options={categoryList}
             name="category"
+            errors={errors}
           />
         </Col>
       </Row>
@@ -117,10 +134,14 @@ const ArticleForm = ({
             multiple={false}
             options={optionForStatus}
             name="status"
+            errors={errors}
           />
         </Col>
         <Col>
-          <UploadAttachment />
+          <Form.Group controlId={"course_thumbnail"} key={`course_thumbnail`}>
+            <Form.Label>Upload Article Thumbnail</Form.Label>
+            <UploadAttachment name="image" errors={errors} />
+          </Form.Group>
         </Col>
       </Row>
       <Row>
@@ -130,6 +151,7 @@ const ArticleForm = ({
             controlId="description"
             label="Article Description"
             value={inputData.description || ""}
+            errors={errors}
           />
         </Col>
       </Row>

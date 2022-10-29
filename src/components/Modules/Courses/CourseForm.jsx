@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 import "../../../assets/styles/Course.scss";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
 import { addCourse } from "../../../services/Course";
-import { schema } from "../../../validations/ValidationSchema";
+import { courseSchema } from "../../../validations/ValidationSchema";
 
 const optionForCourseUpload = [
   { value: "youtube", label: "Youtube Link" },
@@ -71,7 +71,7 @@ const CourseForm = (props) => {
   };
 
   const handleSubmit = () => {
-    schema
+    courseSchema
       .validate(inputData, { abortEarly: false })
       .then(async () => {
         setLoader(true);
@@ -92,7 +92,8 @@ const CourseForm = (props) => {
   };
 
   const handleClose = () => {
-    // props.triggerModal();
+    setErrors({});
+    props.triggerModal();
   };
 
   const handleYoutubePlaylist = (pageToken) => {

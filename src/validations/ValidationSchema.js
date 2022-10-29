@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-let schema = yup.object().shape({
+let courseSchema = yup.object().shape({
   title: yup.string().required(),
   instructorName: yup.string().required(),
   shortTitle: yup.string().required(),
@@ -18,4 +18,24 @@ let schema = yup.object().shape({
   }),
 });
 
-export { schema };
+let categorySchema = yup.object().shape({
+  title: yup.string().required(),
+  status: yup.string().required(),
+});
+
+let articleSchema = yup.object().shape({
+  title: yup.string().required(),
+  category: yup.object().required(),
+  status: yup.string().required(),
+  description: yup.string().required(),
+  image: yup.mixed().required("Thumbnail is required"),
+});
+
+let couponSchema = yup.object().shape({
+  title: yup.string().required(),
+  couponCode: yup.string().required(),
+  percentage: yup.string().required(),
+  expireDate: yup.date().required(),
+});
+
+export { courseSchema, categorySchema, articleSchema, couponSchema };
