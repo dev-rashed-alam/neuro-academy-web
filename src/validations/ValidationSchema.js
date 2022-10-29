@@ -11,7 +11,10 @@ let courseSchema = yup.object().shape({
   requirements: yup.string().required(),
   features: yup.string().required(),
   description: yup.string().required(),
-  image: yup.mixed().required("Thumbnail is required"),
+  image: yup.mixed().when("isThumbnailExist", {
+    is: false,
+    then: yup.string().required("Thumbnail is required"),
+  }),
   playlistId: yup.string().when("courseType", {
     is: "youtube",
     then: yup.string().required("Playlist id is required."),

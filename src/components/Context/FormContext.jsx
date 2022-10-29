@@ -109,6 +109,7 @@ function FormContextProvider(props) {
         loader,
         setLoader,
         handleFiles,
+        setYoutubeVideos,
       }}
     >
       {props.children}

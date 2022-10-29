@@ -41,6 +41,7 @@ const CourseForm = ({
     youtubeVideos,
     tutorials,
     setInputData,
+    setYoutubeVideos,
   } = useContext(FormContext);
 
   useEffect(() => {
@@ -57,13 +58,18 @@ const CourseForm = ({
         features: selectedCourse.features,
         description: selectedCourse.description,
         playlistId: selectedCourse.playlist_id,
+        isThumbnailExist: !!selectedCourse.image,
         type: optionForCourseUpload.find(
           (item) => item.value === selectedCourse.type
         ),
       };
+      if (selectedCourse.type === "youtube") {
+        postData["totalVideos"] = selectedCourse.videos.length;
+      }
       setInputData(postData);
       setLoader(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCourse]);
 
   const fetchCategoryList = () => {
@@ -103,9 +109,10 @@ const CourseForm = ({
       .validate(inputData, { abortEarly: false })
       .then(async () => {
         setLoader(true);
-        addCourse(inputData, tutorials, youtubeVideos)
+        addCourse(inputData, tutorials, youtubeVideos, selectedCourse.id)
           .then(async () => {
             setLoader(false);
+            fetchCourseList();
             handleClose();
           })
           .catch((error) => {
@@ -114,15 +121,21 @@ const CourseForm = ({
           });
       })
       .catch(function (err) {
-        console.log(err);
         setErrors(getErrorMessages(err));
       });
   };
 
   const handleClose = () => {
     setErrors({});
+    setInputData({});
+    setYoutubeVideos([]);
     triggerModal();
   };
+
+  useEffect(() => {
+    setInputData((prev) => ({ ...prev, totalVideos: youtubeVideos.length }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [youtubeVideos]);
 
   const handleYoutubePlaylist = (pageToken) => {
     setLoader(true);
@@ -172,7 +185,10 @@ const CourseForm = ({
               type="text"
               controlId="play_list_id"
               errors={errors}
-              handleBlur={() => handleYoutubePlaylist(undefined)}
+              handleBlur={() => {
+                setYoutubeVideos([]);
+                handleYoutubePlaylist(undefined);
+              }}
             />
           </Col>
           <Col>
@@ -182,7 +198,7 @@ const CourseForm = ({
               name="totalVideos"
               required={false}
               readOnly={true}
-              value={youtubeVideos.length}
+              value={inputData.totalVideos}
               type="text"
               controlId="total_videos"
             />
@@ -234,7 +250,7 @@ const CourseForm = ({
   return (
     <ModalComponent
       show={modalShow}
-      onHide={triggerModal}
+      onHide={handleClose}
       size="xl"
       title="Add New Course"
       scrollable={false}
