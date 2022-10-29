@@ -41,10 +41,10 @@ const tableColumn = [
     Header: "Number of Students",
     accessor: "numberOfStudents",
   },
-  // {
-  //     Header: "View Details",
-  //     accessor: "viewDetails",
-  // },
+  {
+    Header: "Update",
+    accessor: "action",
+  },
   // {
   //     Header: "Status",
   //     accessor: "status",
@@ -52,15 +52,31 @@ const tableColumn = [
 ];
 
 const CourseList = () => {
+  const { setLoader } = useContext(FormContext);
   const [modal, setModal] = useState(false);
   const [, setPaginationUtil] = useState({});
   const [tableData, setTableDta] = useState([]);
-  const { setLoader } = useContext(FormContext);
+  const [selectedCourse, setSelectedCourse] = useState({});
 
   useEffect(() => {
     fetchCourseList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const openModalForUpdate = (item) => {
+    setSelectedCourse(item);
+    setModal(true);
+  };
+
+  const renderUpdateButton = (item) => {
+    return (
+      <Button
+        name="Update"
+        className="btn btn-danger btn-sm"
+        onClickEvent={() => openModalForUpdate(item)}
+      />
+    );
+  };
 
   const fetchCourseList = () => {
     setLoader(true);
@@ -79,7 +95,7 @@ const CourseList = () => {
             courseTile: item.title,
             numberOfStudents: item.purchase_count,
             // status: renderStatusButton(item.status, item.id),
-            // action: renderUpdateButton(item)
+            action: renderUpdateButton(item),
           });
         }
         setTableDta(resultSet);
@@ -91,6 +107,11 @@ const CourseList = () => {
         setLoader(false);
         printApiErrors(error);
       });
+  };
+
+  const closeModal = () => {
+    setSelectedCourse({});
+    setModal(!modal);
   };
 
   return (
@@ -118,7 +139,14 @@ const CourseList = () => {
           />
         </Col>
       </Row>
-      <CourseForm modalShow={modal} triggerModal={() => setModal(!modal)} />
+      <CourseForm
+        modalShow={modal}
+        triggerModal={closeModal}
+        fetchCourseList={fetchCourseList}
+        selectedCourse={
+          Object.keys(selectedCourse).length > 0 ? selectedCourse : undefined
+        }
+      />
     </>
   );
 };

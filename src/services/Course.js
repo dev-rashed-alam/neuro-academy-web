@@ -1,6 +1,6 @@
 import { apiUrl, postWithFromData } from "../components/Config/ApiHandler";
 
-export const addCourse = (inputData, tutorials, youtubeVideos) => {
+export const addCourse = async (inputData, tutorials, youtubeVideos) => {
   let postData = { ...inputData };
   postData["image"] = inputData.image;
   postData["type"] = inputData.type.value;
@@ -14,6 +14,5 @@ export const addCourse = (inputData, tutorials, youtubeVideos) => {
   } else {
     delete postData["customVideos"];
   }
-  console.log(postData);
-  return postWithFromData(apiUrl.courseStore, postData);
+  return await postWithFromData(apiUrl.courseStore, postData);
 };

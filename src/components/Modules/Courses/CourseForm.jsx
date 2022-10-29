@@ -24,7 +24,12 @@ const optionForCourseUpload = [
   { value: "custom", label: "Custom Upload" },
 ];
 
-const CourseForm = (props) => {
+const CourseForm = ({
+  triggerModal,
+  modalShow,
+  fetchCourseList,
+  selectedCourse,
+}) => {
   const [categories, setCategories] = useState([]);
   const [errors, setErrors] = useState({});
   const {
@@ -37,6 +42,29 @@ const CourseForm = (props) => {
     tutorials,
     setInputData,
   } = useContext(FormContext);
+
+  useEffect(() => {
+    if (selectedCourse) {
+      setLoader(true);
+      let postData = {
+        ...inputData,
+        title: selectedCourse.title,
+        shortTitle: selectedCourse.short_title,
+        instructorName: selectedCourse.instructor_name,
+        price: selectedCourse.price,
+        duration: selectedCourse.course_duration,
+        requirements: selectedCourse.requirements,
+        features: selectedCourse.features,
+        description: selectedCourse.description,
+        playlistId: selectedCourse.playlist_id,
+        type: optionForCourseUpload.find(
+          (item) => item.value === selectedCourse.type
+        ),
+      };
+      setInputData(postData);
+      setLoader(false);
+    }
+  }, [selectedCourse]);
 
   const fetchCategoryList = () => {
     setLoader(true);
@@ -75,8 +103,7 @@ const CourseForm = (props) => {
       .validate(inputData, { abortEarly: false })
       .then(async () => {
         setLoader(true);
-        let response = await addCourse(inputData, tutorials, youtubeVideos);
-        response
+        addCourse(inputData, tutorials, youtubeVideos)
           .then(async () => {
             setLoader(false);
             handleClose();
@@ -87,13 +114,14 @@ const CourseForm = (props) => {
           });
       })
       .catch(function (err) {
+        console.log(err);
         setErrors(getErrorMessages(err));
       });
   };
 
   const handleClose = () => {
     setErrors({});
-    props.triggerModal();
+    triggerModal();
   };
 
   const handleYoutubePlaylist = (pageToken) => {
@@ -205,8 +233,8 @@ const CourseForm = (props) => {
 
   return (
     <ModalComponent
-      show={props.modalShow}
-      onHide={props.triggerModal}
+      show={modalShow}
+      onHide={triggerModal}
       size="xl"
       title="Add New Course"
       scrollable={false}
@@ -326,6 +354,7 @@ const CourseForm = (props) => {
         <Col>
           <EditorComponent
             name="requirements"
+            value={inputData.requirements}
             controlId="course_requirements"
             label="Add Course Requirements"
             errors={errors}
@@ -336,6 +365,7 @@ const CourseForm = (props) => {
         <Col>
           <EditorComponent
             name="features"
+            value={inputData.features}
             controlId="course_features"
             label="Add Course Features"
             errors={errors}
@@ -348,6 +378,7 @@ const CourseForm = (props) => {
             name="description"
             controlId="course_description"
             label="Add Course Description"
+            value={inputData.description}
             errors={errors}
           />
         </Col>

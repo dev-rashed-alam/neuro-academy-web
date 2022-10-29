@@ -31,18 +31,12 @@ const postWithFromData = (urlSegment, postData) => {
   for (let item in postData) {
     formData.append(item, postData[item]);
   }
-
-  return new Promise(async (resolve, reject) => {
-    let url = backendServerUrl + urlSegment;
-    await axios
-      .post(url, formData, {
-        headers: {
-          Authorization: getToken(),
-          Accept: "application/json",
-        },
-      })
-      .then((response) => resolve(response))
-      .catch((error) => reject(error));
+  let url = backendServerUrl + urlSegment;
+  return axios.post(url, formData, {
+    headers: {
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
   });
 };
 
