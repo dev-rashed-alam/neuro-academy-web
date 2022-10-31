@@ -37,6 +37,7 @@ const FileComponent = ({ identifier, addVideo, fileName }) => {
         className="upload up"
         name={`attachment${identifier}`}
         id="up"
+        accept={"*"}
         onChange={handleFileName}
       />
     </div>

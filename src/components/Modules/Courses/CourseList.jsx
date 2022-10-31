@@ -134,7 +134,7 @@ const CourseList = () => {
           <TableComponent
             tableColumn={tableColumn}
             tableData={tableData}
-            selection={true}
+            selection={false}
             pagination={true}
           />
         </Col>

@@ -90,7 +90,7 @@ const StudentList = () => {
     setLoader(true);
     let postData = {};
     postData.status = status === 0 ? 1 : 0;
-    await postMethod("/admin/students/status/" + id, postData)
+    await postMethod("/admin/students/" + id + "/toggle-status", postData)
       .then(async (response) => {
         if (response.data.success === true) {
           await fetchStudentList();

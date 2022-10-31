@@ -96,8 +96,8 @@ const CourseForm = ({
 
   const renderDynamicAttachmentForVideos = () => {
     if (inputData["type"]?.value === "custom") {
-      return videos.map((item) => (
-        <div className="pt-1 pb-1">
+      return videos.map((item, i) => (
+        <div className="pt-1 pb-1" key={`custom_upload_${i}`}>
           <UploadComponent identifier={item} />
         </div>
       ));
@@ -109,7 +109,7 @@ const CourseForm = ({
       .validate(inputData, { abortEarly: false })
       .then(async () => {
         setLoader(true);
-        addCourse(inputData, tutorials, youtubeVideos, selectedCourse.id)
+        addCourse(inputData, tutorials, youtubeVideos, selectedCourse?.id)
           .then(async () => {
             setLoader(false);
             fetchCourseList();
@@ -121,6 +121,7 @@ const CourseForm = ({
           });
       })
       .catch(function (err) {
+        console.log(err);
         setErrors(getErrorMessages(err));
       });
   };
