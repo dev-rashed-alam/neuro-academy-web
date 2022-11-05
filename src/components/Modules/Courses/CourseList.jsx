@@ -5,12 +5,13 @@ import CourseForm from "./CourseForm";
 import { Button } from "../../CommonComponents/Button";
 import { MdAddCircle } from "react-icons/md";
 import { FormContext } from "../../Context/FormContext";
-import { apiUrl, getMethod } from "../../Config/ApiHandler";
+import { apiUrl, getMethod, postMethod } from "../../Config/ApiHandler";
 import {
   formatDate,
   generatePagination,
   printApiErrors,
 } from "../../Config/HelperUtils";
+import { toast } from "react-toastify";
 
 const tableColumn = [
   {
@@ -42,13 +43,13 @@ const tableColumn = [
     accessor: "numberOfStudents",
   },
   {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
     Header: "Update",
     accessor: "action",
   },
-  // {
-  //     Header: "Status",
-  //     accessor: "status",
-  // },
 ];
 
 const CourseList = () => {
@@ -78,6 +79,34 @@ const CourseList = () => {
     );
   };
 
+  const toggleCourseStatus = async (status, id) => {
+    setLoader(true);
+    let postData = {};
+    postData.status = status === 0 ? 1 : 0;
+    await postMethod("/admin/courses/" + id + "/toggle-status", postData)
+      .then(async (response) => {
+        if (response.data.success === true) {
+          await fetchCourseList();
+        }
+        setLoader(false);
+        toast.success("Status Update Successful!");
+      })
+      .catch((error) => {
+        setLoader(false);
+        printApiErrors(error);
+      });
+  };
+
+  const renderStatusButton = (statusFlag, id) => {
+    return (
+      <Button
+        name={statusFlag === 1 ? "Enable" : "Disable"}
+        className="btn btn-danger btn-sm"
+        onClickEvent={() => toggleCourseStatus(statusFlag, id)}
+      />
+    );
+  };
+
   const fetchCourseList = () => {
     setLoader(true);
     getMethod(apiUrl.courseList)
@@ -94,7 +123,7 @@ const CourseList = () => {
             totalVideos: item.videos.length,
             courseTile: item.title,
             numberOfStudents: item.purchase_count,
-            // status: renderStatusButton(item.status, item.id),
+            status: renderStatusButton(item.status, item.id),
             action: renderUpdateButton(item),
           });
         }

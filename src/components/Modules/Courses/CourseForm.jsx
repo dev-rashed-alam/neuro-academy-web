@@ -47,6 +47,10 @@ const CourseForm = ({
   useEffect(() => {
     if (selectedCourse) {
       setLoader(true);
+      let tmpCategories = selectedCourse.categories.map((item) => ({
+        value: item.id,
+        label: item.title,
+      }));
       let postData = {
         ...inputData,
         title: selectedCourse.title,
@@ -62,6 +66,7 @@ const CourseForm = ({
         type: optionForCourseUpload.find(
           (item) => item.value === selectedCourse.type
         ),
+        category: tmpCategories,
       };
       if (selectedCourse.type === "youtube") {
         postData["totalVideos"] = selectedCourse.videos.length;
