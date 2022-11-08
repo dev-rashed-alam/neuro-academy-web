@@ -16,6 +16,5 @@ export const addCourse = async (inputData, tutorials, youtubeVideos, id) => {
   }
 
   let url = id ? `${apiUrl.courseStore}/${id}` : apiUrl.courseStore;
-
   return await postWithFromData(url, postData);
 };

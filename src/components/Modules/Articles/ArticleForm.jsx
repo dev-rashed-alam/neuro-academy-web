@@ -4,8 +4,12 @@ import { Col, Form, Row } from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
 import SelectComponent from "../../CommonComponents/Form/SelectComponent";
 import { FormContext } from "../../Context/FormContext";
-import { postMethod } from "../../Config/ApiHandler";
-import { getErrorMessages, printApiErrors } from "../../Config/HelperUtils";
+import { postWithFromData } from "../../Config/ApiHandler";
+import {
+  filterPostData,
+  getErrorMessages,
+  printApiErrors,
+} from "../../Config/HelperUtils";
 import EditorComponent from "../../CommonComponents/Form/EditorComponent";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
 import { articleSchema } from "../../../validations/ValidationSchema";
@@ -45,26 +49,25 @@ const ArticleForm = ({
   }, [selectedArticle]);
 
   const closeModal = () => {
+    setInputData({});
     setErrors({});
     triggerModal();
   };
 
   const handleSubmit = async () => {
-    let postData = {};
-    postData.title = inputData.title;
+    let postData = { ...inputData };
     postData.category_id = inputData.category?.value;
     postData.status = inputData.status?.value;
     postData.body = inputData.description;
-
     articleSchema
-      .validate(postData, { abortEarly: false })
+      .validate(filterPostData(postData), { abortEarly: false })
       .then(async () => {
         setLoader(true);
         let url =
           selectedArticle !== undefined
             ? "/admin/articles/" + selectedArticle.id
             : "/admin/articles";
-        await postMethod(url, postData)
+        await postWithFromData(url, postData)
           .then(async (response) => {
             await fetchArticleList();
             setLoader(false);

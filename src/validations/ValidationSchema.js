@@ -6,7 +6,7 @@ let courseSchema = yup.object().shape({
   shortTitle: yup.string().required(),
   duration: yup.string().required(),
   price: yup.string().required(),
-  category: yup.array().required(),
+  category: yup.array().required("Category is required"),
   type: yup.object().required(),
   requirements: yup.string().required(),
   features: yup.string().required(),
@@ -28,17 +28,16 @@ let categorySchema = yup.object().shape({
 
 let articleSchema = yup.object().shape({
   title: yup.string().required(),
-  category: yup.object().required(),
+  category: yup.object().required("Category is required."),
   status: yup.string().required(),
   description: yup.string().required(),
-  image: yup.mixed().required("Thumbnail is required"),
 });
 
 let couponSchema = yup.object().shape({
-  title: yup.string().required(),
-  couponCode: yup.string().required(),
-  percentage: yup.string().required(),
-  expireDate: yup.date().required(),
+  title: yup.string().required("Coupon code is required"),
+  code: yup.string().required(),
+  percent: yup.string().required("Percentage is required"),
+  expiry_date: yup.date().required("Expire date required"),
 });
 
 export { courseSchema, categorySchema, articleSchema, couponSchema };

@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import {
-  FaAngleDown,
   FaUserGraduate,
   FaCodepen,
   FaUsers,
-  FaDatabase,
   FaBookReader,
   FaBlog,
 } from "react-icons/fa";
@@ -45,19 +43,6 @@ class Sidebar extends Component {
     window.removeEventListener("resize", this.updateDimensions);
   }
 
-  collapseAbleItem = (itemName) => {
-    if (this.props.toggle === false || this.state.windowWidth < 992) {
-      let initState = this.initialState;
-      delete initState[itemName];
-      this.setState(initState);
-      this.setState((prevState) => ({
-        [itemName]: !prevState[itemName],
-      }));
-    } else {
-      return false;
-    }
-  };
-
   navItemHover = (itemName) => {
     if (this.props.toggle === true && this.state.windowWidth > 992) {
       let initState = this.initialState;
@@ -84,48 +69,6 @@ class Sidebar extends Component {
           <span className="menu-icon">{icon}</span>
           <span className="menu-title">{menuName}</span>
         </NavLink>
-      </li>
-    );
-  };
-
-  renderCollapseAbleMenu = (
-    icon,
-    menuName,
-    hoverState,
-    navState,
-    childMenu
-  ) => {
-    return (
-      <li
-        className={this.state[hoverState] ? "nav-item hover-open" : "nav-item"}
-        onMouseEnter={() => this.navItemHover(hoverState)}
-        onMouseLeave={() => this.navItemHover(hoverState)}
-      >
-        <p
-          className="nav-link"
-          onClick={() => this.collapseAbleItem(navState)}
-          aria-expanded={this.state[navState]}
-          style={{ userSelect: "none" }}
-        >
-          <span className="menu-icon">{icon}</span>
-          <span className="menu-title">{menuName}</span>
-          <span className="menu-arrow">
-            <FaAngleDown />
-          </span>
-        </p>
-        <div className={this.state[navState] ? "collapse show" : "collapse"}>
-          <ul className="nav flex-column sub-menu">
-            <li className="nav-item">
-              {childMenu.map((menu) => {
-                return (
-                  <NavLink className="nav-link" exact to={menu.link}>
-                    {menu.name}
-                  </NavLink>
-                );
-              })}
-            </li>
-          </ul>
-        </div>
       </li>
     );
   };
@@ -175,12 +118,6 @@ class Sidebar extends Component {
           <FaCodepen />,
           "Coupon Management",
           "isHoverItemSeven"
-        )}
-        {this.renderSingleMenu(
-          "/",
-          <FaDatabase />,
-          "Report Generate",
-          "isHoverItemEight"
         )}
       </>
     );

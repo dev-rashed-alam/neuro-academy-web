@@ -25,21 +25,23 @@ const CouponForm = ({
       setInputData({
         ...inputData,
         title: selectedCoupon.title,
-        couponCode: selectedCoupon.code,
-        percentage: selectedCoupon.percent,
-        expireDate: selectedCoupon.expiry_date,
+        code: selectedCoupon.code,
+        percent: selectedCoupon.percent,
+        expiry_date: selectedCoupon.expiry_date,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCoupon]);
 
+  const closeModal = () => {
+    setInputData({});
+    setErrors({});
+    triggerModal();
+  };
+
   const handleSubmit = async () => {
-    let postData = {};
-    postData.title = inputData.title;
-    postData.code = inputData.couponCode;
-    postData.percent = inputData.percentage;
-    postData.expireDate = inputData.expireDate;
-    postData.expiry_date = processDateForPost(inputData.expireDate);
+    let postData = { ...inputData };
+    postData.expiry_date = processDateForPost(inputData.expiry_date);
 
     couponSchema
       .validate(postData, { abortEarly: false })
@@ -53,7 +55,7 @@ const CouponForm = ({
           .then(async () => {
             await fetchCouponList();
             setLoader(false);
-            triggerModal();
+            closeModal();
           })
           .catch((error) => {
             setLoader(false);
@@ -68,7 +70,7 @@ const CouponForm = ({
   return (
     <ModalComponent
       show={modalShow}
-      onHide={triggerModal}
+      onHide={closeModal}
       size="lg"
       title={selectedCoupon ? "Update Selected Coupon" : "Add New Coupon"}
       scrollable={false}
@@ -80,7 +82,7 @@ const CouponForm = ({
         },
         {
           name: "Close",
-          action: triggerModal,
+          action: closeModal,
           className: "btn btn-danger",
         },
       ]}
@@ -102,8 +104,8 @@ const CouponForm = ({
           <TextComponent
             label="Coupon Code"
             placeHolder="Enter Coupon Code"
-            name="couponCode"
-            value={inputData.couponCode}
+            name="code"
+            value={inputData.code}
             required={false}
             type="text"
             controlId="coupon_code"
@@ -116,8 +118,8 @@ const CouponForm = ({
           <DatePickerComponent
             label="Select Expiry Date"
             placeHolder="dd-mm-yyyy"
-            value={inputData.expireDate}
-            name="expireDate"
+            value={inputData.expiry_date}
+            name="expiry_date"
             errors={errors}
           />
         </Col>
@@ -125,8 +127,8 @@ const CouponForm = ({
           <TextComponent
             label="Percentage"
             placeHolder="Enter Discount Percentage"
-            value={inputData.percentage}
-            name="percentage"
+            value={inputData.percent}
+            name="percent"
             required={false}
             type="text"
             controlId="discount_percentage"

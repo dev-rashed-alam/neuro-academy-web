@@ -67,6 +67,12 @@ const capitalizeFirstLetter = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
+const filterPostData = (obj) => {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_, v]) => v != null && v !== "")
+  );
+};
+
 export {
   generatePagination,
   removeDomainAddressFromPagination,
@@ -77,4 +83,5 @@ export {
   convertDateToLocal,
   getErrorMessages,
   capitalizeFirstLetter,
+  filterPostData,
 };
