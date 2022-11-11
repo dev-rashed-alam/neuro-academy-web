@@ -40,4 +40,20 @@ let couponSchema = yup.object().shape({
   expiry_date: yup.date().required("Expire date required"),
 });
 
-export { courseSchema, categorySchema, articleSchema, couponSchema };
+let adminProfile = yup.object().shape({
+  first_name: yup.string().required("First name is required"),
+  last_name: yup.string().required("Last name is required"),
+  phone_no: yup.string().required("Mobile number is required"),
+  password: yup.string().required("Password is required"),
+  confirm_password: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
+});
+
+export {
+  courseSchema,
+  categorySchema,
+  articleSchema,
+  couponSchema,
+  adminProfile,
+};

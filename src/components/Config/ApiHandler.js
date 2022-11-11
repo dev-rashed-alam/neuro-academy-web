@@ -89,6 +89,7 @@ const apiUrl = {
   courseList: "/admin/courses",
   courseStore: "/admin/courses",
   categoryList: "/admin/categories",
+  getUserInfo: "/admin/users/",
 };
 
 export {

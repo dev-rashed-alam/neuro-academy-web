@@ -2,13 +2,12 @@ import React, { useContext } from "react";
 import { IoIosRedo } from "react-icons/io";
 import { FiChevronDown } from "react-icons/fi";
 import { FaUserCircle, FaRegEnvelopeOpen } from "react-icons/fa";
-import AvatarImage from "../../assets/images/avatar.jpg";
+import ProfileImage from "../../assets/images/profile.jpeg";
 import styled from "styled-components";
-import { postMethod } from "../Config/ApiHandler";
-import { toast } from "react-toastify";
-import { getUser, removeUserSession } from "../Config/SessionUtils";
+import { getUser, getUserImage } from "../Config/SessionUtils";
 import { useHistory } from "react-router-dom";
 import { FormContext } from "../Context/FormContext";
+import { signOut } from "../../services/Profile";
 
 const Styles = styled.div`
   .header-profile-user {
@@ -58,19 +57,9 @@ const Avatar = (props) => {
   const history = useHistory();
   const { setLoader } = useContext(FormContext);
 
-  const logout = () => {
+  const logout = async () => {
     setLoader(true);
-    postMethod("/admin/logout", {})
-      .then(() => {
-        setLoader(false);
-        removeUserSession();
-        history.push("/");
-        toast.success("Logout Successful!");
-      })
-      .catch((err) => {
-        setLoader(false);
-        toast.error(err.response.data.message);
-      });
+    await signOut(setLoader, history);
   };
 
   return (
@@ -86,7 +75,7 @@ const Avatar = (props) => {
         <span className="menu-icon">
           <img
             className="rounded-circle header-profile-user"
-            src={AvatarImage}
+            src={getUserImage() === "undefined" ? ProfileImage : getUserImage()}
             alt="Header Avatar"
           />
           <span className="d-none d-xl-inline-block ml-2 mr-1 admin-name">
@@ -100,7 +89,7 @@ const Avatar = (props) => {
         >
           <div className="nav-dropdown-body">
             <div className="wrapper">
-              <div className="media">
+              <div className="media" onClick={() => history.push("/settings")}>
                 <div className="avatar">
                   <div className="avatar-title">
                     <FaUserCircle />

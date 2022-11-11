@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import { GiPaintBucket } from "react-icons/gi";
+import { FiSettings } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 
 class Sidebar extends Component {
@@ -96,7 +97,7 @@ class Sidebar extends Component {
           "isHoverItemThree"
         )}
         {this.renderSingleMenu(
-          "/sales",
+          "/orders",
           <GiPaintBucket />,
           "Order Management",
           "isHoverItemFour"
@@ -118,6 +119,12 @@ class Sidebar extends Component {
           <FaCodepen />,
           "Coupon Management",
           "isHoverItemSeven"
+        )}
+        {this.renderSingleMenu(
+          "/settings",
+          <FiSettings />,
+          "Admin Profile Settings",
+          "isHoverItemEight"
         )}
       </>
     );

@@ -1,61 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import { Card as CustomCard } from "../../CommonComponents/Card";
-import TableComponent from "../../CommonComponents/Table/Table";
 import LineChart from "../../CommonComponents/Chart/LineChart";
 import BarChart from "../../CommonComponents/Chart/BarChart";
-
-const tableColumn = [
-  {
-    Header: "Order Id",
-    accessor: "orderId",
-  },
-  {
-    Header: "Billing Name",
-    accessor: "billingName",
-  },
-  {
-    Header: "Date",
-    accessor: "date",
-  },
-  {
-    Header: "Total",
-    accessor: "total",
-  },
-  {
-    Header: "Payment Status",
-    accessor: "paymentStatus",
-  },
-  {
-    Header: "Payment Method",
-    accessor: "paymentMethod",
-  },
-  {
-    Header: "Action",
-    accessor: "action",
-  },
-];
-
-const tableData = [
-  {
-    orderId: "#SK225",
-    billingName: "Rashed Alam",
-    date: "07 Oct, 2019",
-    total: "$500",
-    paymentStatus: "Paid",
-    paymentMethod: "COD",
-    action: "View",
-  },
-  {
-    orderId: "#SK224",
-    billingName: "Rashed Alam",
-    date: "07 Oct, 2019",
-    total: "$500",
-    paymentStatus: "Paid",
-    paymentMethod: "COD",
-    action: "View",
-  },
-];
+import OrderList from "../Orders/OrderList";
 
 export default class DashboardBody extends Component {
   render() {
@@ -98,16 +46,7 @@ export default class DashboardBody extends Component {
           </Col>
         </Row>
 
-        <Row>
-          <Col>
-            <TableComponent
-              tableColumn={tableColumn}
-              tableData={tableData}
-              selection={true}
-              pagination={true}
-            />
-          </Col>
-        </Row>
+        <OrderList />
       </>
     );
   }

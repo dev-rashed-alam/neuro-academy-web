@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { RiSearchEyeLine } from "react-icons/ri";
 import { FaFreeCodeCamp } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -50,24 +49,6 @@ class DashboardHeader extends Component {
           <div onClick={this.props.toggleBar} className="sidebar-toggle">
             <GiHamburgerMenu />
           </div>
-          <ul className="navbar-nav ml-3">
-            <li className="nav-item nav-search d-none d-lg-block">
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="search">
-                    <RiSearchEyeLine />
-                  </span>
-                </div>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="search"
-                  aria-label="search"
-                  aria-describedby="search"
-                />
-              </div>
-            </li>
-          </ul>
           <ul className="navbar-nav right-nav-style ml-auto pr-4">
             <DashboardNotification
               hoverOpen={this.hoverOpen}

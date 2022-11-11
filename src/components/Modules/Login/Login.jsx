@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import styles from "../../../assets/styles/Login.module.scss";
 import { postMethod } from "../../Config/ApiHandler";
 import { FormContext } from "../../Context/FormContext";
@@ -65,9 +65,6 @@ const Login = (props) => {
             onChange={handleChange}
           />
           <button onClick={handleSubmit}>login</button>
-          <p className={styles.message}>
-            Forgot Password? <Link to="/dashboard">Reset</Link>
-          </p>
         </form>
       </div>
     </section>

@@ -66,8 +66,6 @@ function FormContextProvider(props) {
 
   const handleFiles = (evt) => {
     const { name, files } = evt.target;
-    const formData = new FormData();
-    formData.append("myFile", files[0], files[0].name);
     setValues({
       ...values,
       [name]: files[0],
