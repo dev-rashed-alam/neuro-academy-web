@@ -74,6 +74,9 @@ const OrderList = () => {
             gateway: item.gateway,
             purchaseDate: item.purchase_date,
             purchaseAmount: item.total_price,
+            name: `${item?.user?.first_name} ${item?.user?.last_name}`,
+            email: item.user?.email,
+            courseTitle: item.course?.title,
             action: renderViewButton(item),
           });
         }

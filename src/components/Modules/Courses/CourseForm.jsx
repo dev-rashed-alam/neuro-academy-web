@@ -18,6 +18,7 @@ import "../../../assets/styles/Course.scss";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
 import { addCourse } from "../../../services/Course";
 import { courseSchema } from "../../../validations/ValidationSchema";
+import CustomVideoList from "./CustomVideoList";
 
 const optionForCourseUpload = [
   { value: "youtube", label: "Youtube Link" },
@@ -362,6 +363,7 @@ const CourseForm = ({
             label="Select Course Upload Type"
             placeholder="Select Course Upload Type"
             multiple={false}
+            readOnly={!!selectedCourse?.id}
             options={optionForCourseUpload}
             value={inputData.type}
             name="type"
@@ -372,6 +374,7 @@ const CourseForm = ({
       {renderDynamicAttachmentForVideos()}
       {renderCustomVideoUpload()}
       {renderYoutubeVideos()}
+      <CustomVideoList courseInfo={selectedCourse} />
       <Row>
         <Col>
           <EditorComponent

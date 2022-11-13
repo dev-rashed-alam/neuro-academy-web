@@ -66,6 +66,7 @@ const SelectComponent = ({
             ? "basic-single field-error"
             : "basic-single"
         }
+        menuIsOpen={readOnly ? false : undefined}
         classNamePrefix="select"
         isDisabled={disable}
         isLoading={loading}
