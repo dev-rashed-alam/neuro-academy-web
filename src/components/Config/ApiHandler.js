@@ -31,6 +31,24 @@ const postWithFromData = (urlSegment, postData) => {
   for (let item in postData) {
     formData.append(item, postData[item]);
   }
+
+  if (postData.customVideos) {
+    for (let i = 0; i < postData.customVideos.length; i++) {
+      formData.append(
+        `customVideos[${i}][title]`,
+        postData.customVideos[i].title
+      );
+      formData.append(
+        `customVideos[${i}][video]`,
+        postData.customVideos[i].video
+      );
+      formData.append(
+        `customVideos[${i}][serial]`,
+        postData.customVideos[i].serial
+      );
+    }
+  }
+
   let url = backendServerUrl + urlSegment;
   return axios.post(url, formData, {
     headers: {

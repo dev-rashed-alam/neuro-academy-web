@@ -29,7 +29,7 @@ function FormContextProvider(props) {
     let newTutorial = {};
     newTutorial["identifier"] = identifier;
     newTutorial["video"] = video;
-    newTutorial["serial"] = serial;
+    newTutorial["serial"] = serial ? serial : identifier;
     newTutorial["title"] = title;
     allVideos.push(newTutorial);
     setTutorials(allVideos);
