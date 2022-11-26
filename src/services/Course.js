@@ -1,4 +1,8 @@
-import { apiUrl, postWithFromData } from "../components/Config/ApiHandler";
+import {
+  apiUrl,
+  deleteMethod,
+  postWithFromData,
+} from "../components/Config/ApiHandler";
 
 export const addCourse = (inputData, tutorials, youtubeVideos, id) => {
   let postData = { ...inputData };
@@ -16,4 +20,8 @@ export const addCourse = (inputData, tutorials, youtubeVideos, id) => {
   }
   let url = id ? `${apiUrl.courseStore}/${id}` : apiUrl.courseStore;
   return postWithFromData(url, postData);
+};
+
+export const removeCustomVideoById = (id) => {
+  return deleteMethod(apiUrl.removeCustomVideo, { ids: [id] });
 };

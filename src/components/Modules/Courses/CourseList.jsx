@@ -101,7 +101,9 @@ const CourseList = () => {
     return (
       <Button
         name={statusFlag === 1 ? "Enable" : "Disable"}
-        className="btn btn-danger btn-sm"
+        className={`btn ${
+          statusFlag === 1 ? "btn-primary" : "btn-danger"
+        } btn-sm`}
         onClickEvent={() => toggleCourseStatus(statusFlag, id)}
       />
     );

@@ -42,6 +42,7 @@ const CourseForm = ({
     youtubeVideos,
     tutorials,
     setInputData,
+    setVideos,
     setYoutubeVideos,
   } = useContext(FormContext);
 
@@ -62,7 +63,7 @@ const CourseForm = ({
         requirements: selectedCourse.requirements,
         features: selectedCourse.features,
         description: selectedCourse.description,
-        playlistId: selectedCourse.playlist_id,
+        playlistId: selectedCourse.playlist_id || "",
         isThumbnailExist: !!selectedCourse.image,
         type: optionForCourseUpload.find(
           (item) => item.value === selectedCourse.type
@@ -136,6 +137,7 @@ const CourseForm = ({
     setErrors({});
     setInputData({});
     setYoutubeVideos([]);
+    setVideos([]);
     triggerModal();
   };
 
@@ -173,7 +175,7 @@ const CourseForm = ({
           <Col>
             <Button
               name="Add Videos"
-              className="btn btn-primary mb-3"
+              className="btn btn-primary"
               onClickEvent={addDynamicVideos}
             />
           </Col>
@@ -259,7 +261,7 @@ const CourseForm = ({
       show={modalShow}
       onHide={handleClose}
       size="xl"
-      title="Add New Course"
+      title={selectedCourse?.id ? "Update Course" : "Add New Course"}
       scrollable={false}
       buttons={[
         {
@@ -374,7 +376,7 @@ const CourseForm = ({
       {renderDynamicAttachmentForVideos()}
       {renderCustomVideoUpload()}
       {renderYoutubeVideos()}
-      <CustomVideoList courseInfo={selectedCourse} />
+      <CustomVideoList selectedCourse={selectedCourse} />
       <Row>
         <Col>
           <EditorComponent

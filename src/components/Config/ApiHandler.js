@@ -26,6 +26,19 @@ const postMethod = (urlSegment, postData) => {
   });
 };
 
+const deleteMethod = (urlSegment, postData) => {
+  return new Promise(async (resolve, reject) => {
+    let url = backendServerUrl + urlSegment;
+    await axios
+      .delete(url, {
+        headers: { Authorization: getToken() },
+        data: postData,
+      })
+      .then((response) => resolve(response))
+      .catch((error) => reject(error));
+  });
+};
+
 const postWithFromData = (urlSegment, postData) => {
   let formData = new FormData();
   for (let item in postData) {
@@ -55,22 +68,6 @@ const postWithFromData = (urlSegment, postData) => {
       Authorization: getToken(),
       Accept: "application/json",
     },
-  });
-};
-
-const uploadAttachment = (urlSegment, formData) => {
-  let url = backendServerUrl + urlSegment;
-  return new Promise((resolve, reject) => {
-    axios({
-      method: "post",
-      url: url,
-      data: formData,
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    })
-      .then((response) => resolve(response))
-      .catch((error) => reject(error));
   });
 };
 
@@ -106,6 +103,7 @@ const fetchYoutubePlaylist = (playListId, urlSegment) => {
 const apiUrl = {
   courseList: "/admin/courses",
   courseStore: "/admin/courses",
+  removeCustomVideo: "/admin/courses/videos/delete",
   categoryList: "/admin/categories",
   getUserInfo: "/admin/users/",
 };
@@ -113,7 +111,7 @@ const apiUrl = {
 export {
   getMethod,
   postMethod,
-  uploadAttachment,
+  deleteMethod,
   fetchYoutubePlaylist,
   apiUrl,
   postWithFromData,
