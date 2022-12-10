@@ -11,6 +11,7 @@ import CouponList from "../Modules/Coupons/CouponList";
 import ArticleList from "../Modules/Articles/ArticleList";
 import { getToken } from "../Config/SessionUtils";
 import Profile from "../Modules/Profile/Profile";
+import NotificationPage from "../Modules/Notification/NotificationPage";
 
 const ProtectedRoute = () => {
   if (getToken() !== null) {
@@ -26,6 +27,11 @@ const ProtectedRoute = () => {
           <Route exact={true} path="/coupons" component={CouponList} />
           <Route exact={true} path="/articles" component={ArticleList} />
           <Route exact={true} path="/settings" component={Profile} />
+          <Route
+            exact={true}
+            path="/notifications"
+            component={NotificationPage}
+          />
         </Switch>
       </Dashboard>
     );

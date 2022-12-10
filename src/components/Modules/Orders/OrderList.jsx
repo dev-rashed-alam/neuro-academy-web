@@ -58,7 +58,7 @@ const OrderList = () => {
   }, [purchaseListUrl]);
 
   const renderViewButton = (item) => {
-    return <Button name="View" className="btn btn-danger btn-sm" />;
+    return <Button name="View" className="btn btn-primary btn-sm" />;
   };
 
   const fetchPurchaseList = () => {

@@ -1,0 +1,51 @@
+.notification-page {
+  margin: 0;
+  overflow: hidden scroll;
+  width: inherit;
+  height: inherit;
+  max-width: inherit;
+  max-height: inherit;
+
+  .media {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    background-color: #32394e;
+
+    //&:hover {
+    //  background-color: #32394e;
+    //}
+
+    .avatar {
+      height: 2rem;
+      width: 2rem;
+      margin-right: 1rem !important;
+
+      .avatar-title {
+        align-items: center;
+        background-color: #556ee6;
+        color: #fff;
+        display: flex;
+        font-weight: 500;
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+        font-size: 16px !important;
+        border-radius: 50% !important;
+      }
+    }
+
+    .media-body {
+      flex: 1 1;
+      color: #8c909a;
+
+      h6 {
+        font-size: 0.8rem;
+      }
+
+      p {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}

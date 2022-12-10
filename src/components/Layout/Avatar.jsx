@@ -99,7 +99,10 @@ const Avatar = (props) => {
                   <button className="mt-0 mb-1">Profile</button>
                 </div>
               </div>
-              <div className="media">
+              <div
+                className="media"
+                onClick={() => history.push("/notifications")}
+              >
                 <div className="avatar">
                   <div className="avatar-title">
                     <FaRegEnvelopeOpen />

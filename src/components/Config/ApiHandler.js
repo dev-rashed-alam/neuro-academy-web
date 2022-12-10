@@ -106,6 +106,8 @@ const apiUrl = {
   removeCustomVideo: "/admin/courses/videos/delete",
   categoryList: "/admin/categories",
   getUserInfo: "/admin/users/",
+  getDashboardReportCounts: "/admin/dashboard",
+  getNotifications: "/admin/notifications",
 };
 
 export {

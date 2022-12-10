@@ -73,6 +73,21 @@ const filterPostData = (obj) => {
   );
 };
 
+const convertNumberToUSFormat = (value, removeFloating = true) => {
+  if (!value) return 0;
+  let formatter;
+  if (removeFloating) {
+    formatter = new Intl.NumberFormat("en-us");
+    return formatter.format(Math.floor(value));
+  } else {
+    formatter = new Intl.NumberFormat("en-us", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+    return formatter.format(value);
+  }
+};
+
 export {
   generatePagination,
   removeDomainAddressFromPagination,
@@ -84,4 +99,5 @@ export {
   getErrorMessages,
   capitalizeFirstLetter,
   filterPostData,
+  convertNumberToUSFormat,
 };
