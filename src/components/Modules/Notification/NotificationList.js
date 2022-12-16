@@ -26,9 +26,11 @@ const NotificationList = () => {
 
   const renderNotifications = () => {
     return notifications?.map((item) => {
-      console.log(item);
       return (
-        <Link to="/" key={`notification_${item.item_id}`}>
+        <Link
+          to={`/order/details/${item.data.item_id}`}
+          key={`notification_${item.data.item_id}`}
+        >
           <div className="media">
             <div className="avatar">
               <div className="avatar-title">

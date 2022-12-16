@@ -12,6 +12,7 @@ import ArticleList from "../Modules/Articles/ArticleList";
 import { getToken } from "../Config/SessionUtils";
 import Profile from "../Modules/Profile/Profile";
 import NotificationPage from "../Modules/Notification/NotificationPage";
+import OrderDetails from "../Modules/Orders/OrderDetails";
 
 const ProtectedRoute = () => {
   if (getToken() !== null) {
@@ -22,6 +23,11 @@ const ProtectedRoute = () => {
           <Route exact={true} path="/form-elements" component={FormElements} />
           <Route exact={true} path="/students" component={StudentList} />
           <Route exact={true} path="/orders" component={OrderList} />
+          <Route
+            exact={true}
+            path="/order/details/:id"
+            component={OrderDetails}
+          />
           <Route exact={true} path="/courses" component={CourseList} />
           <Route exact={true} path="/categories" component={CategoryList} />
           <Route exact={true} path="/coupons" component={CouponList} />

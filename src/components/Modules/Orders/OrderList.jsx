@@ -5,6 +5,7 @@ import { FormContext } from "../../Context/FormContext";
 import { getMethod } from "../../Config/ApiHandler";
 import { generatePagination, printApiErrors } from "../../Config/HelperUtils";
 import { Button } from "../../CommonComponents/Button";
+import { useHistory } from "react-router-dom";
 
 const tableColumn = [
   {
@@ -50,6 +51,7 @@ const OrderList = () => {
   const [tableData, setTableDta] = useState([]);
   const { setLoader } = useContext(FormContext);
   const [purchaseListUrl, setPurchaseListUrl] = useState("/admin/purchases");
+  const history = useHistory();
 
   useEffect(() => {
     fetchPurchaseList();
@@ -58,7 +60,13 @@ const OrderList = () => {
   }, [purchaseListUrl]);
 
   const renderViewButton = (item) => {
-    return <Button name="View" className="btn btn-primary btn-sm" />;
+    return (
+      <Button
+        onClickEvent={() => history.push(`/order/details/${item.id}`)}
+        name="View"
+        className="btn btn-primary btn-sm"
+      />
+    );
   };
 
   const fetchPurchaseList = () => {
