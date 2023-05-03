@@ -1,24 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import { Card as CustomCard } from "../../CommonComponents/Card";
 import LineChart from "../../CommonComponents/Chart/LineChart";
 import BarChart from "../../CommonComponents/Chart/BarChart";
-import OrderList from "../Orders/OrderList";
-import { fetchDashboardCount } from "../../../services/Dashboard";
 import {
-  convertNumberToUSFormat,
-  printApiErrors,
+  convertNumberToUSFormat
 } from "../../Config/HelperUtils";
-import { FormContext } from "../../Context/FormContext";
 
 const DashboardBody = () => {
-  const [dashboardCounts, setDashboardCounts] = useState({
+  const [dashboardCounts,] = useState({
     totalSales: 0,
     totalPurchase: 0,
     totalStudent: 0,
     totalCourse: 0,
   });
-  const { setLoader } = useContext(FormContext);
 
   useEffect(() => {
     // fetchDashboardCount()

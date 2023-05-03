@@ -5,11 +5,8 @@ import ArticleForm from "./ArticleForm";
 import { Button } from "../../CommonComponents/Button";
 import { MdAddCircle } from "react-icons/md";
 import { FormContext } from "../../Context/FormContext";
-import { getMethod } from "../../Config/ApiHandler";
 import {
-  formatDate,
-  generatePagination,
-  printApiErrors,
+  formatDate
 } from "../../Config/HelperUtils";
 import {findAllArticles} from "../../../services/Article";
 import {findAllCategories} from "../../../services/Category";

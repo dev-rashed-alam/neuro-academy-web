@@ -4,8 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
 import SelectComponent from "../../CommonComponents/Form/SelectComponent";
 import { FormContext } from "../../Context/FormContext";
-import { postMethod } from "../../Config/ApiHandler";
-import { getErrorMessages, printApiErrors } from "../../Config/HelperUtils";
+import { getErrorMessages } from "../../Config/HelperUtils";
 import { categorySchema } from "../../../validations/ValidationSchema";
 import {addCategory, updateCategoryById} from "../../../services/Category";
 

@@ -5,11 +5,8 @@ import CouponForm from "./CouponForm";
 import { Button } from "../../CommonComponents/Button";
 import { MdAddCircle } from "react-icons/md";
 import { FormContext } from "../../Context/FormContext";
-import { getMethod } from "../../Config/ApiHandler";
 import {
   formatDate,
-  generatePagination,
-  printApiErrors,
 } from "../../Config/HelperUtils";
 import {findAllCoupons} from "../../../services/Coupon";
 
@@ -46,7 +43,7 @@ const tableColumn = [
 
 const CouponList = () => {
   const [modal, setModal] = useState(false);
-  const [paginationUtil, setPaginationUtil] = useState({});
+  const [paginationUtil, ] = useState({});
   const [tableData, setTableDta] = useState([]);
   const { setLoader, resetContext } = useContext(FormContext);
   const [couponListUtil, setCouponListUtil] = useState("/admin/coupons");

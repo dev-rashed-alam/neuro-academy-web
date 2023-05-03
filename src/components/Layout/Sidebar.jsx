@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import {
   FaUserGraduate,
   FaCodepen,
-  FaUsers,
   FaBookReader,
   FaBlog,
 } from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
-import { GiPaintBucket } from "react-icons/gi";
 import { FiSettings } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 

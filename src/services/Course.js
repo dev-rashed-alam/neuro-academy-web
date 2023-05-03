@@ -1,7 +1,5 @@
 import {
   apiHandler,
-  apiUrl,
-  deleteMethod,
 } from "../components/Config/ApiHandler";
 import {printApiErrors} from "../components/Config/HelperUtils";
 
