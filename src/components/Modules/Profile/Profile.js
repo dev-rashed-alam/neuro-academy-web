@@ -3,33 +3,29 @@ import { Col, Row } from "react-bootstrap";
 import "../../../assets/styles/Profile.scss";
 import {
   fetchUserInfoById,
-  signOut,
   updateProfileById,
 } from "../../../services/Profile";
-import { getUserId } from "../../Config/SessionUtils";
+import {getUserId, removeUserSession} from "../../Config/SessionUtils";
 import {
   capitalizeFirstLetter,
   filterPostData,
-  getErrorMessages,
-  printApiErrors,
+  getErrorMessages
 } from "../../Config/HelperUtils";
 import { FormContext } from "../../Context/FormContext";
 import { Button } from "../../CommonComponents/Button";
 import ProfileImage from "../../../assets/images/profile.jpeg";
-import { useHistory } from "react-router-dom";
 import { adminProfile } from "../../../validations/ValidationSchema";
 
 const Profile = () => {
   const { setLoader } = useContext(FormContext);
-  const history = useHistory();
   const [errors, setErrors] = useState({});
   const [profileImg, setProfileImg] = useState(null);
   const [inputData, setInputData] = useState({
-    first_name: "",
-    last_name: "",
-    phone_no: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
     password: "",
-    confirm_password: "",
+    confirmPassword: "",
   });
 
   const uploadProfilePic = (evt) => {
@@ -51,43 +47,39 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
+  const fetchUserInfo = async () => {
     setLoader(true);
-    fetchUserInfoById(getUserId())
-      .then(({ data }) => {
-        setInputData((prev) => ({ ...prev, ...data.data }));
-        setLoader(false);
-      })
-      .catch((error) => {
-        setLoader(false);
-        printApiErrors(error);
-      });
+    const data = await fetchUserInfoById(getUserId())
+    setInputData((prev) => ({ ...prev, ...data }));
+    setLoader(false);
+  }
+
+  useEffect(() => {
+    fetchUserInfo()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleProfileUpdate = async () => {
     let postData = { ...inputData };
-    postData["image"] = profileImg;
+    if(profileImg){
+      postData["avatar"] = profileImg;
+    }
     adminProfile
       .validate(filterPostData(postData), { abortEarly: false })
       .then(async () => {
         setLoader(true);
         await updateProfileById(getUserId(), postData)
-          .then(async (response) => {
-            await signOut(setLoader, history);
-          })
-          .catch((error) => {
-            setLoader(false);
-            printApiErrors(error);
-          });
+        await removeUserSession();
+        setLoader(false)
       })
       .catch(function (err) {
         setErrors(getErrorMessages(err));
       });
   };
+
   const getProfilePic = () => {
     if (profileImg !== null) return URL.createObjectURL(profileImg);
-    if (inputData.image) return inputData.image;
+    if (inputData.avatar) return inputData.avatar;
     return ProfileImage;
   };
 
@@ -128,10 +120,10 @@ const Profile = () => {
             <input
               type="text"
               id="firstName"
-              name="first_name"
-              value={inputData.first_name}
+              name="firstName"
+              value={inputData.firstName || ""}
               className={
-                errors && Object.keys(errors).length > 0 && errors["first_name"]
+                errors && Object.keys(errors).length > 0 && errors["firstName"]
                   ? "form-control field-error"
                   : "form-control"
               }
@@ -139,9 +131,9 @@ const Profile = () => {
             />
             {errors &&
               Object.keys(errors).length > 0 &&
-              errors["first_name"] && (
+              errors["firstName"] && (
                 <div className="invalid-feedback">
-                  {capitalizeFirstLetter(errors["first_name"])}
+                  {capitalizeFirstLetter(errors["firstName"])}
                 </div>
               )}
           </div>
@@ -153,11 +145,11 @@ const Profile = () => {
           <div className="input">
             <input
               type="text"
-              name="last_name"
-              value={inputData.last_name}
+              name="lastName"
+              value={inputData.lastName || ""}
               id="lastName"
               className={
-                errors && Object.keys(errors).length > 0 && errors["last_name"]
+                errors && Object.keys(errors).length > 0 && errors["lastName"]
                   ? "form-control field-error"
                   : "form-control"
               }
@@ -165,9 +157,9 @@ const Profile = () => {
             />
             {errors &&
               Object.keys(errors).length > 0 &&
-              errors["last_name"] && (
+              errors["lastName"] && (
                 <div className="invalid-feedback">
-                  {capitalizeFirstLetter(errors["last_name"])}
+                  {capitalizeFirstLetter(errors["lastName"])}
                 </div>
               )}
           </div>
@@ -180,18 +172,18 @@ const Profile = () => {
             <input
               type="text"
               id="mobileNumber"
-              name="phone_no"
-              value={inputData.phone_no}
+              name="phoneNumber"
+              value={inputData.phoneNumber || ""}
               className={
-                errors && Object.keys(errors).length > 0 && errors["phone_no"]
+                errors && Object.keys(errors).length > 0 && errors["phoneNumber"]
                   ? "form-control field-error"
                   : "form-control"
               }
               onChange={handleChange}
             />
-            {errors && Object.keys(errors).length > 0 && errors["phone_no"] && (
+            {errors && Object.keys(errors).length > 0 && errors["phoneNumber"] && (
               <div className="invalid-feedback">
-                {capitalizeFirstLetter(errors["phone_no"])}
+                {capitalizeFirstLetter(errors["phoneNumber"])}
               </div>
             )}
           </div>
@@ -210,7 +202,7 @@ const Profile = () => {
                   ? "form-control field-error"
                   : "form-control"
               }
-              value={inputData.password}
+              value={inputData.password || ""}
               onChange={handleChange}
               autoComplete="new-password"
             />
@@ -229,22 +221,22 @@ const Profile = () => {
             <input
               type="password"
               id="confirmPassword"
-              name="confirm_password"
-              value={inputData.confirm_password}
+              name="confirmPassword"
+              value={inputData.confirmPassword || ""}
               onChange={handleChange}
               className={
                 errors &&
                 Object.keys(errors).length > 0 &&
-                errors["confirm_password"]
+                errors["confirmPassword"]
                   ? "form-control field-error"
                   : "form-control"
               }
             />
             {errors &&
               Object.keys(errors).length > 0 &&
-              errors["confirm_password"] && (
+              errors["confirmPassword"] && (
                 <div className="invalid-feedback">
-                  {capitalizeFirstLetter(errors["confirm_password"])}
+                  {capitalizeFirstLetter(errors["confirmPassword"])}
                 </div>
               )}
           </div>

@@ -21,7 +21,7 @@ function FormContextProvider(props) {
     return tutorials.find((item) => item.identifier === identifier);
   };
 
-  const addNewTutorial = (identifier, video, serial, title) => {
+  const addNewTutorial = (identifier, video, description, title) => {
     let existingVideos = tutorials.filter(
       (item) => item.identifier !== identifier
     );
@@ -29,7 +29,7 @@ function FormContextProvider(props) {
     let newTutorial = {};
     newTutorial["identifier"] = identifier;
     newTutorial["video"] = video;
-    newTutorial["serial"] = serial ? serial : identifier;
+    newTutorial["description"] = description;
     newTutorial["title"] = title;
     allVideos.push(newTutorial);
     setTutorials(allVideos);

@@ -21,20 +21,20 @@ const DashboardBody = () => {
   const { setLoader } = useContext(FormContext);
 
   useEffect(() => {
-    fetchDashboardCount()
-      .then(({ data }) => {
-        setDashboardCounts({
-          totalSales: data.data.total_sales,
-          totalPurchase: data.data.total_purchase,
-          totalStudent: data.data.total_student,
-          totalCourse: data.data.total_course,
-        });
-        setLoader(false);
-      })
-      .catch((error) => {
-        setLoader(false);
-        printApiErrors(error);
-      });
+    // fetchDashboardCount()
+    //   .then(({ data }) => {
+    //     setDashboardCounts({
+    //       totalSales: data.data.total_sales,
+    //       totalPurchase: data.data.total_purchase,
+    //       totalStudent: data.data.total_student,
+    //       totalCourse: data.data.total_course,
+    //     });
+    //     setLoader(false);
+    //   })
+    //   .catch((error) => {
+    //     setLoader(false);
+    //     printApiErrors(error);
+    //   });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -89,7 +89,7 @@ const DashboardBody = () => {
         </Col>
       </Row>
 
-      <OrderList />
+      {/*<OrderList />*/}
     </>
   );
 };

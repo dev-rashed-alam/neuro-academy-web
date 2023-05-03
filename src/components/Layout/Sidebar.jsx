@@ -77,31 +77,31 @@ class Sidebar extends Component {
   renderMenuList = () => {
     return (
       <>
-        {this.renderSingleMenu(
-          "/dashboard",
-          <MdDashboard />,
-          "Dashboard",
-          "isHoverItemOne",
-          "active"
-        )}
+        {/*{this.renderSingleMenu(*/}
+        {/*  "/dashboard",*/}
+        {/*  <MdDashboard />,*/}
+        {/*  "Dashboard",*/}
+        {/*  "isHoverItemOne",*/}
+        {/*  "active"*/}
+        {/*)}*/}
         {this.renderSingleMenu(
           "/courses",
           <FaUserGraduate />,
           "Course Management",
           "isHoverItemTwo"
         )}
-        {this.renderSingleMenu(
-          "/students",
-          <FaUsers />,
-          "Student Management",
-          "isHoverItemThree"
-        )}
-        {this.renderSingleMenu(
-          "/orders",
-          <GiPaintBucket />,
-          "Order Management",
-          "isHoverItemFour"
-        )}
+        {/*{this.renderSingleMenu(*/}
+        {/*  "/students",*/}
+        {/*  <FaUsers />,*/}
+        {/*  "Student Management",*/}
+        {/*  "isHoverItemThree"*/}
+        {/*)}*/}
+        {/*{this.renderSingleMenu(*/}
+        {/*  "/orders",*/}
+        {/*  <GiPaintBucket />,*/}
+        {/*  "Order Management",*/}
+        {/*  "isHoverItemFour"*/}
+        {/*)}*/}
         {this.renderSingleMenu(
           "/categories",
           <FaBookReader />,

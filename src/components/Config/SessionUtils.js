@@ -1,16 +1,17 @@
 const setUserSession = (loggedInInfo) => {
-  localStorage.setItem("token", loggedInInfo.token);
-  localStorage.setItem("userName", loggedInInfo.name);
-  localStorage.setItem("userId", loggedInInfo.id);
-  localStorage.setItem("userEmail", loggedInInfo.email);
-  localStorage.setItem("image", loggedInInfo.image);
+  localStorage.setItem("token", loggedInInfo.access_token);
+  localStorage.setItem("userName", `${loggedInInfo.data.firstName} ${loggedInInfo.data.lastName}`);
+  localStorage.setItem("userId", loggedInInfo.data.id);
+  localStorage.setItem("userEmail", loggedInInfo.data.email);
+  localStorage.setItem("avatar", loggedInInfo.data.avatar);
 };
 
 const removeUserSession = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("userName");
   localStorage.removeItem("userEmail");
-  localStorage.removeItem("image");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("avatar");
 };
 
 const getToken = () => {
@@ -26,7 +27,7 @@ const getUserId = () => {
 };
 
 const getUserImage = () => {
-  return localStorage.getItem("image") || null;
+  return localStorage.getItem("avatar") || null;
 };
 
 export {

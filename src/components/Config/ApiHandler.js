@@ -1,5 +1,5 @@
 import axios from "axios";
-import { backendServerUrl, youtubeUrl, youtubeApiKey } from "./Constant";
+import {backendServerUrl, youtubeUrl, youtubeApiKey, apiEndPoints} from "./Constant";
 import { getToken } from "./SessionUtils";
 
 const getMethod = (urlSegment) => {
@@ -110,6 +110,37 @@ const apiUrl = {
   getNotifications: "/admin/notifications",
 };
 
+const headers = {
+  'Content-Type': 'application/json',
+  Accept: 'application/json',
+  Authorization: `Bearer ${getToken()}`
+};
+
+
+const apiHandler = {
+  GET: (endPointKey, queryParams = '') => {
+    return axios.get(apiEndPoints[endPointKey] + queryParams, {
+      headers
+    });
+  },
+  POST: (endPointKey, requestBody, id) => {
+    let url = id ? apiEndPoints[endPointKey] + `/${id}` : apiEndPoints[endPointKey]
+    return axios.post(url, requestBody, {
+      headers
+    });
+  },
+  PUT: (endPointKey, id, requestBody) => {
+    return axios.put(apiEndPoints[endPointKey] + `/${id}`, requestBody, {
+      headers
+    });
+  },
+  DELETE: (endPointKey, id) => {
+    return axios.delete(apiEndPoints[endPointKey] + `/${id}`, {
+      headers
+    });
+  }
+}
+
 export {
   getMethod,
   postMethod,
@@ -117,4 +148,5 @@ export {
   fetchYoutubePlaylist,
   apiUrl,
   postWithFromData,
+  apiHandler
 };

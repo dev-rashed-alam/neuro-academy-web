@@ -7,10 +7,11 @@ import { FormContext } from "../../Context/FormContext";
 import { postMethod } from "../../Config/ApiHandler";
 import { getErrorMessages, printApiErrors } from "../../Config/HelperUtils";
 import { categorySchema } from "../../../validations/ValidationSchema";
+import {addCategory, updateCategoryById} from "../../../services/Category";
 
 const optionForStatus = [
-  { value: 1, label: "Enable" },
-  { value: 0, label: "Disable" },
+  { value: "enable", label: "Enable" },
+  { value: "disable", label: "Disable" },
 ];
 
 const CategoryForm = ({
@@ -29,7 +30,7 @@ const CategoryForm = ({
       );
       setInputData({
         ...inputData,
-        title: selectedCategory.title,
+        name: selectedCategory.name,
         status: status,
       });
     }
@@ -44,26 +45,17 @@ const CategoryForm = ({
 
   const handleSubmit = async () => {
     let postData = {};
-    postData.title = inputData.title;
+    postData.name = inputData.name;
     postData.status = inputData.status?.value;
     categorySchema
       .validate(postData, { abortEarly: false })
       .then(async () => {
         setLoader(true);
-        let url =
-          selectedCategory !== undefined
-            ? "/admin/categories/" + selectedCategory.id
-            : "/admin/categories";
-        await postMethod(url, postData)
-          .then(async () => {
-            await fetchCategoryList();
-            setLoader(false);
-            closeModal();
-          })
-          .catch((error) => {
-            setLoader(false);
-            printApiErrors(error);
-          });
+        if(!selectedCategory) await addCategory(postData)
+        if(selectedCategory) await updateCategoryById(postData, selectedCategory.id)
+        await fetchCategoryList();
+        setLoader(false);
+        closeModal();
       })
       .catch(function (err) {
         setErrors(getErrorMessages(err));
@@ -99,11 +91,11 @@ const CategoryForm = ({
           <TextComponent
             label="Category Name"
             placeHolder="Enter Category Name"
-            name="title"
-            value={inputData.title}
+            name="name"
+            value={inputData.name}
             required={false}
             type="text"
-            controlId="category_name"
+            controlId="name"
             errors={errors}
           />
         </Col>

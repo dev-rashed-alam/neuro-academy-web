@@ -4,10 +4,9 @@ import { FiChevronDown } from "react-icons/fi";
 import { FaUserCircle, FaRegEnvelopeOpen } from "react-icons/fa";
 import ProfileImage from "../../assets/images/profile.jpeg";
 import styled from "styled-components";
-import { getUser, getUserImage } from "../Config/SessionUtils";
+import {getUser, getUserImage, removeUserSession} from "../Config/SessionUtils";
 import { useHistory } from "react-router-dom";
 import { FormContext } from "../Context/FormContext";
-import { signOut } from "../../services/Profile";
 
 const Styles = styled.div`
   .header-profile-user {
@@ -59,7 +58,7 @@ const Avatar = (props) => {
 
   const logout = async () => {
     setLoader(true);
-    await signOut(setLoader, history);
+    await removeUserSession();
   };
 
   return (

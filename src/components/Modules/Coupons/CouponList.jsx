@@ -11,6 +11,7 @@ import {
   generatePagination,
   printApiErrors,
 } from "../../Config/HelperUtils";
+import {findAllCoupons} from "../../../services/Coupon";
 
 const tableColumn = [
   {
@@ -58,30 +59,22 @@ const CouponList = () => {
 
   const fetchCouponList = async () => {
     setLoader(true);
-    await getMethod(couponListUtil)
-      .then((response) => {
-        let resultSet = [];
-        let sl = 1;
-        for (let item of response.data.data) {
-          resultSet.push({
-            sl: sl++,
-            title: item.title,
-            couponCode: item.code,
-            discountPercent: item.percent,
-            createdDate: formatDate(item.created_at),
-            expiryDate: formatDate(item.expiry_date),
-            action: renderUpdateButton(item),
-          });
-        }
-        setTableDta(resultSet);
-        setPaginationUtil(generatePagination(response.data));
-        setLoader(false);
-      })
-      .catch((error) => {
-        setTableDta([]);
-        setLoader(false);
-        printApiErrors(error);
+    const data = await findAllCoupons()
+    let resultSet = [];
+    let sl = 1;
+    for (let item of data) {
+      resultSet.push({
+        sl: sl++,
+        title: item.title,
+        couponCode: item.couponCode,
+        discountPercent: item.percentage,
+        createdDate: formatDate(item.createdAt),
+        expiryDate: formatDate(item.expiryDate),
+        action: renderUpdateButton(item),
       });
+    }
+    setTableDta(resultSet);
+    setLoader(false);
   };
 
   const renderUpdateButton = (item) => {

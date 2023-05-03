@@ -22,14 +22,19 @@ const removeDomainAddressFromPagination = (data) => {
 };
 
 const printApiErrors = (error) => {
-  console.log(error);
-  if (error && error.response?.data?.error_type === "ValidationFailed") {
-    let data = [...error.response.data.data];
+  if (error && error?.response?.data?.errors) {
+    let data = [];
+    if(error.response.data.errors?.common){
+      data.push(error.response.data.errors.common)
+    }
+    if(error.response.data.errors?.thumbnail){
+      data.push(error.response.data.errors.thumbnail)
+    }
     for (let item of data) {
-      toast.error(item);
+      toast.error(item.msg);
     }
   } else if (error) {
-    toast.error(error.response.data.message);
+    toast.error(error.message);
   }
 };
 

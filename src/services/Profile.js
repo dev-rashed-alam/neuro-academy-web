@@ -1,30 +1,27 @@
 import {
-  apiUrl,
-  getMethod,
-  postMethod,
-  postWithFromData,
+    apiHandler,
 } from "../components/Config/ApiHandler";
-import { removeUserSession } from "../components/Config/SessionUtils";
-import { toast } from "react-toastify";
+import {printApiErrors} from "../components/Config/HelperUtils";
 
-export const fetchUserInfoById = (id) => {
-  return getMethod(apiUrl.getUserInfo + id);
+export const fetchUserInfoById = async (id) => {
+    try {
+        const {data} = await apiHandler.GET('userById', `/${id}`);
+        return data.data
+    } catch (error) {
+        printApiErrors(error)
+    }
 };
 
-export const updateProfileById = (id, postData) => {
-  return postWithFromData(apiUrl.getUserInfo + id, postData);
+export const updateProfileById = async (id, postData) => {
+    try {
+        const formData = new FormData();
+        for (let item in postData) {
+            formData.append(item, postData[item])
+        }
+        const {data} = await apiHandler.PUT('userById', `/${id}`, formData);
+        return data.data
+    } catch (error) {
+        printApiErrors(error)
+    }
 };
 
-export const signOut = async (setLoader, history) => {
-  await postMethod("/admin/logout", {})
-    .then(() => {
-      setLoader(false);
-      removeUserSession();
-      history.push("/");
-      toast.success("Logout Successful!");
-    })
-    .catch((err) => {
-      setLoader(false);
-      toast.error(err.response.data.message);
-    });
-};

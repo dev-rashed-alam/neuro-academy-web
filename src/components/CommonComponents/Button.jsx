@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const Button = ({ name, icon, className, onClickEvent }) => {
+export const Button = ({ name, icon, className, onClickEvent, type = "button" }) => {
   return (
-    <button type="button" className={className || ""} onClick={onClickEvent}>
+    <button type={type} className={className || ""} onClick={onClickEvent}>
       {icon}
       {name}
     </button>

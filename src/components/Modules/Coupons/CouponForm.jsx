@@ -4,13 +4,12 @@ import { Col, Row } from "react-bootstrap";
 import TextComponent from "../../CommonComponents/Form/TextComponent";
 import DatePickerComponent from "../../CommonComponents/Form/DatePickerComponent";
 import { FormContext } from "../../Context/FormContext";
-import { postMethod } from "../../Config/ApiHandler";
 import {
   getErrorMessages,
-  printApiErrors,
   processDateForPost,
 } from "../../Config/HelperUtils";
 import { couponSchema } from "../../../validations/ValidationSchema";
+import {addCoupon, updateCouponById} from "../../../services/Coupon";
 
 const CouponForm = ({
   triggerModal,
@@ -25,9 +24,9 @@ const CouponForm = ({
       setInputData({
         ...inputData,
         title: selectedCoupon.title,
-        code: selectedCoupon.code,
-        percent: selectedCoupon.percent,
-        expiry_date: selectedCoupon.expiry_date,
+        couponCode: selectedCoupon.couponCode,
+        percentage: selectedCoupon.percentage,
+        expiryDate: selectedCoupon.expiryDate,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,26 +40,20 @@ const CouponForm = ({
 
   const handleSubmit = async () => {
     let postData = { ...inputData };
-    postData.expiry_date = processDateForPost(inputData.expiry_date);
+    postData.expiryDate = processDateForPost(inputData.expiryDate)?.split(" ")[0];
 
     couponSchema
       .validate(postData, { abortEarly: false })
       .then(async () => {
         setLoader(true);
-        let url =
-          selectedCoupon !== undefined
-            ? "/admin/coupons/" + selectedCoupon.id
-            : "/admin/coupons";
-        await postMethod(url, postData)
-          .then(async () => {
-            await fetchCouponList();
-            setLoader(false);
-            closeModal();
-          })
-          .catch((error) => {
-            setLoader(false);
-            printApiErrors(error);
-          });
+        if(selectedCoupon){
+          await updateCouponById(postData, selectedCoupon.id)
+        }else{
+          await addCoupon(postData)
+        }
+        await fetchCouponList();
+        setLoader(false)
+        closeModal();
       })
       .catch(function (err) {
         setErrors(getErrorMessages(err));
@@ -96,7 +89,7 @@ const CouponForm = ({
             value={inputData.title}
             required={false}
             type="text"
-            controlId="coupon_title"
+            controlId="title"
             errors={errors}
           />
         </Col>
@@ -104,11 +97,11 @@ const CouponForm = ({
           <TextComponent
             label="Coupon Code"
             placeHolder="Enter Coupon Code"
-            name="code"
-            value={inputData.code}
+            name="couponCode"
+            value={inputData.couponCode}
             required={false}
             type="text"
-            controlId="coupon_code"
+            controlId="couponCode"
             errors={errors}
           />
         </Col>
@@ -118,8 +111,8 @@ const CouponForm = ({
           <DatePickerComponent
             label="Select Expiry Date"
             placeHolder="dd-mm-yyyy"
-            value={inputData.expiry_date}
-            name="expiry_date"
+            value={inputData.expiryDate}
+            name="expiryDate"
             errors={errors}
           />
         </Col>
@@ -127,11 +120,11 @@ const CouponForm = ({
           <TextComponent
             label="Percentage"
             placeHolder="Enter Discount Percentage"
-            value={inputData.percent}
-            name="percent"
+            value={inputData.percentage}
+            name="percentage"
             required={false}
             type="text"
-            controlId="discount_percentage"
+            controlId="percentage"
             errors={errors}
           />
         </Col>

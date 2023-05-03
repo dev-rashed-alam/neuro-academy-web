@@ -7,7 +7,7 @@ import { FormContext } from "../../Context/FormContext";
 
 const UploadComponent = ({ identifier }) => {
   const [videoTitle, setVideoTitle] = useState(null);
-  const [videoSerial, setVideoSerial] = useState("null");
+  const [videoDescription, setVideoDescription] = useState(null);
 
   const { addNewTutorial, findTutorialById, removeTutorial } =
     useContext(FormContext);
@@ -21,31 +21,22 @@ const UploadComponent = ({ identifier }) => {
     }
   };
 
-  const addVideoSerial = (e) => {
-    setVideoSerial(e.target.value);
-    let attachment = findTutorialById(identifier);
-    if (attachment !== undefined) {
-      addNewTutorial(
-        identifier,
-        attachment.video,
-        e.target.value,
-        attachment.title
-      );
-    }
-  };
-
   const handleVideoTitle = (e) => {
     setVideoTitle(e.target.value);
   };
 
-  const addTitle = (event) => {
+  const handleVideoDescription = (e) => {
+    setVideoDescription(e.target.value);
+  };
+
+  const addTitleOrDescription = (event) => {
     event.preventDefault();
     let attachment = findTutorialById(identifier);
     if (attachment !== undefined) {
       addNewTutorial(
         identifier,
         attachment.video,
-        attachment.serial,
+        videoDescription,
         videoTitle
       );
     }
@@ -65,20 +56,20 @@ const UploadComponent = ({ identifier }) => {
           <Form.Control
             className="form-style"
             type="text"
-            value={videoSerial === "null" ? identifier : videoSerial}
-            placeholder="Enter Serial"
-            name={`serial${identifier}`}
-            onChange={addVideoSerial}
+            placeholder="Enter Title"
+            name={`name${identifier}`}
+            onChange={handleVideoTitle}
+            onBlur={addTitleOrDescription}
           />
         </Col>
         <Col md={4}>
           <Form.Control
             className="form-style"
             type="text"
-            placeholder="Enter Title"
-            name={`name${identifier}`}
-            onChange={handleVideoTitle}
-            onBlur={addTitle}
+            placeholder="Enter Description"
+            name={`description${identifier}`}
+            onChange={handleVideoDescription}
+            onBlur={addTitleOrDescription}
           />
         </Col>
         <Col md={1}>

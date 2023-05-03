@@ -39,13 +39,13 @@ const CustomVideoList = ({ selectedCourse }) => {
     setCourseInfo(selectedCourse);
   }, [selectedCourse]);
 
-  const handleRemove = (id) => {
+  const handleRemove = (fileName) => {
     setLoader(true);
-    removeCustomVideoById(id)
+    removeCustomVideoById(courseInfo.id, fileName)
       .then((response) => {
         let tmpCourseInfo = JSON.parse(JSON.stringify(courseInfo));
         tmpCourseInfo.videos = courseInfo.videos.filter(
-          (item) => item.id !== id
+          (item) => item.filename !== fileName
         );
         setCourseInfo(tmpCourseInfo);
         toast.success("Video Removed!");
@@ -57,12 +57,12 @@ const CustomVideoList = ({ selectedCourse }) => {
       });
   };
 
-  const renderRemoveButton = (id) => {
+  const renderRemoveButton = (fileName) => {
     return (
       <Button
         name="Remove"
         className="btn btn-danger btn-sm"
-        onClickEvent={() => handleRemove(id)}
+        onClickEvent={() => handleRemove(fileName)}
       />
     );
   };
@@ -70,13 +70,14 @@ const CustomVideoList = ({ selectedCourse }) => {
   useEffect(() => {
     if (courseInfo?.videos?.length > 0) {
       let resultSet = [];
+      let sl = 1;
       for (let item of courseInfo.videos) {
         resultSet.push({
-          sl: item.serial,
+          sl: sl++,
           videoTitle: item.title,
-          url: item.video,
-          uploadedDate: formatDate(item.created_at),
-          action: renderRemoveButton(item.id),
+          url: item.url,
+          uploadedDate: formatDate(item.uploadDate),
+          action: renderRemoveButton(item.filename),
         });
       }
       setTableData(resultSet);
@@ -87,7 +88,7 @@ const CustomVideoList = ({ selectedCourse }) => {
   return (
     <Row>
       <Col className={"custom-video-list"}>
-        {courseInfo?.type === "custom" &&
+        {courseInfo?.courseType === "custom" &&
           courseInfo?.id !== null &&
           courseInfo?.videos?.length > 0 && (
             <TableComponent

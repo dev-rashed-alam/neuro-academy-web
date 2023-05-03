@@ -1,9 +1,23 @@
 let dateFormat = "dd-MM-yyyy";
 // let dateFormat = "MM/dd/yyyy";
 // let dateFormat = "yyyy/MM/dd";
-// let backendServerUrl = "http://192.168.0.109/Envato_market/academy_api/public/api";
+let API_BASE_URL = "http://academy.neuro-soft.net";
+// let API_BASE_URL = "http://localhost:5000";
 let backendServerUrl = "https://www.api.neuro-soft.net";
 let youtubeUrl = "https://www.googleapis.com/youtube/v3";
 let youtubeApiKey = "AIzaSyDf60k7A9Jg54hGwLgw1Hx5wKiEuiGu1Ko";
 
-export { dateFormat, backendServerUrl, youtubeUrl, youtubeApiKey };
+const apiEndPoints = {
+    login: `${API_BASE_URL}/login`,
+    userById: `${API_BASE_URL}/users`,
+    coupon: `${API_BASE_URL}/coupons`,
+    findAllCategories: `${API_BASE_URL}/category/all`,
+    category: `${API_BASE_URL}/category`,
+    findAllArticles: `${API_BASE_URL}/article/all`,
+    article: `${API_BASE_URL}/article`,
+    courses: `${API_BASE_URL}/courses`,
+    removeCustomVideo: `${API_BASE_URL}/courses/videos/remove`,
+};
+
+
+export { dateFormat, backendServerUrl, youtubeUrl, youtubeApiKey, apiEndPoints };

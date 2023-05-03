@@ -41,7 +41,7 @@ const DashboardNotification = (props) => {
             </div>
           </div>
           <div className="nav-dropdown-body">
-            <NotificationList />
+            {/*<NotificationList />*/}
           </div>
         </div>
       </li>

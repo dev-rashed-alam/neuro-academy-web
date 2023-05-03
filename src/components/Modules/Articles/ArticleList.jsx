@@ -11,6 +11,8 @@ import {
   generatePagination,
   printApiErrors,
 } from "../../Config/HelperUtils";
+import {findAllArticles} from "../../../services/Article";
+import {findAllCategories} from "../../../services/Category";
 
 const tableColumn = [
   {
@@ -20,6 +22,10 @@ const tableColumn = [
   {
     Header: "Title",
     accessor: "title",
+  },
+  {
+    Header: "Category",
+    accessor: "category",
   },
   {
     Header: "Created Date",
@@ -37,66 +43,50 @@ const tableColumn = [
 
 const ArticleList = () => {
   const [modal, setModal] = useState(false);
-  const [paginationUtil, setPaginationUtil] = useState({});
   const [tableData, setTableDta] = useState([]);
   const { setLoader, resetContext } = useContext(FormContext);
-  const [couponListUtil, setCouponListUtil] = useState("/admin/articles");
   const [selectedArticle, setSelectedArticle] = useState({});
-  const [categoryListUrl] = useState("/admin/categories?limit=500");
   const [categoryList, setCategoryList] = useState([]);
 
   const fetchCategoryList = async () => {
     setLoader(true);
     let resultSet = [];
-    await getMethod(categoryListUrl)
-      .then((response) => {
-        let sl = 1;
-        for (let item of response.data.data) {
-          resultSet.push({
-            sl: sl++,
-            label: item.title,
-            value: item.id,
-          });
-        }
-        setCategoryList(resultSet);
-        setLoader(false);
-      })
-      .catch((error) => {
-        setLoader(false);
-        printApiErrors(error);
+    const data = await findAllCategories()
+    let sl = 1;
+    for (let item of data) {
+      resultSet.push({
+        sl: sl++,
+        label: item.name,
+        value: item.id,
       });
+    }
+    setCategoryList(resultSet);
+    setLoader(false);
   };
 
   useEffect(() => {
-    fetchArticleList().then((r) => fetchCategoryList());
-
+    fetchArticleList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [couponListUtil]);
+  }, []);
 
   const fetchArticleList = async () => {
     setLoader(true);
-    await getMethod(couponListUtil)
-      .then((response) => {
-        let resultSet = [];
-        let sl = 1;
-        for (let item of response.data.data) {
-          resultSet.push({
-            sl: sl++,
-            title: item.title,
-            createdDate: formatDate(item.created_at),
-            totalViews: item.total_views,
-            action: renderUpdateButton(item),
-          });
-        }
-        setTableDta(resultSet);
-        setPaginationUtil(generatePagination(response.data));
-        setLoader(false);
-      })
-      .catch((error) => {
-        setTableDta([]);
-        setLoader(false);
-        printApiErrors(error);
+    const data = await findAllArticles()
+    await fetchCategoryList()
+    let resultSet = [];
+    let sl = 1;
+    for (let item of data) {
+      resultSet.push({
+        sl: sl++,
+        title: item.title,
+        category: item.category.name,
+        createdDate: formatDate(item.createdAt),
+        totalViews: item.totalViews,
+        action: renderUpdateButton(item),
       });
+    }
+    setTableDta(resultSet);
+    setLoader(false);
   };
 
   const renderUpdateButton = (item) => {
@@ -140,9 +130,7 @@ const ArticleList = () => {
           <TableComponent
             tableColumn={tableColumn}
             tableData={tableData}
-            pagination={true}
-            triggerPagination={setCouponListUtil}
-            paginationUtil={paginationUtil}
+            pagination={false}
           />
         </Col>
       </Row>

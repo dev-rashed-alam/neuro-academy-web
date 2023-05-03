@@ -8,17 +8,16 @@ import { Button } from "../../CommonComponents/Button";
 import UploadComponent from "../../CommonComponents/Form/UploadComponent";
 import { FormContext } from "../../Context/FormContext";
 import {
-  apiUrl,
   fetchYoutubePlaylist,
-  getMethod,
 } from "../../Config/ApiHandler";
-import { getErrorMessages, printApiErrors } from "../../Config/HelperUtils";
+import { getErrorMessages } from "../../Config/HelperUtils";
 import { toast } from "react-toastify";
 import "../../../assets/styles/Course.scss";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
-import { addCourse } from "../../../services/Course";
+import {addCourse, updateCourseById} from "../../../services/Course";
 import { courseSchema } from "../../../validations/ValidationSchema";
 import CustomVideoList from "./CustomVideoList";
+import {findAllCategories} from "../../../services/Category";
 
 const optionForCourseUpload = [
   { value: "youtube", label: "Youtube Link" },
@@ -51,27 +50,28 @@ const CourseForm = ({
       setLoader(true);
       let tmpCategories = selectedCourse.categories.map((item) => ({
         value: item.id,
-        label: item.title,
+        label: item.name,
       }));
       let postData = {
         ...inputData,
         title: selectedCourse.title,
-        shortTitle: selectedCourse.short_title,
-        instructorName: selectedCourse.instructor_name,
-        price: selectedCourse.price,
-        duration: selectedCourse.course_duration,
-        requirements: selectedCourse.requirements,
-        features: selectedCourse.features,
-        description: selectedCourse.description,
-        playlistId: selectedCourse.playlist_id || "",
-        isThumbnailExist: !!selectedCourse.image,
+        shortTitle: selectedCourse.shortTitle,
+        instructorName: selectedCourse.instructorName,
+        coursePrice: selectedCourse.coursePrice,
+        courseDuration: selectedCourse.courseDuration,
+        courseRequirements: selectedCourse.courseRequirements,
+        courseFeatures: selectedCourse.courseFeatures,
+        courseDescription: selectedCourse.courseDescription,
+        playlistId: selectedCourse.playlistId || "",
+        isThumbnailExist: !!selectedCourse.thumbnail,
         type: optionForCourseUpload.find(
-          (item) => item.value === selectedCourse.type
+          (item) => item.value === selectedCourse.courseType
         ),
         category: tmpCategories,
       };
-      if (selectedCourse.type === "youtube") {
-        postData["totalVideos"] = selectedCourse.videos.length;
+      if (selectedCourse.courseType === "youtube") {
+        postData["totalVideos"] = selectedCourse.youtubeVideos.length;
+        addNewYoutubeVideos(selectedCourse.youtubeVideos)
       }
       setInputData(postData);
       setLoader(false);
@@ -79,21 +79,15 @@ const CourseForm = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCourse]);
 
-  const fetchCategoryList = () => {
+  const fetchCategoryList = async () => {
     setLoader(true);
-    getMethod(apiUrl.categoryList)
-      .then((response) => {
-        let resultSet = [];
-        for (let item of response.data.data) {
-          resultSet.push({ value: item.id, label: item.title });
-        }
-        setCategories(resultSet);
-        setLoader(false);
-      })
-      .catch((error) => {
-        setLoader(false);
-        printApiErrors(error);
-      });
+    const data = await findAllCategories()
+    let resultSet = [];
+    for (let item of data) {
+      resultSet.push({ value: item.id, label: item.name });
+    }
+    setCategories(resultSet);
+    setLoader(false);
   };
 
   useEffect(() => {
@@ -112,23 +106,22 @@ const CourseForm = ({
   };
 
   const handleSubmit = () => {
+    let objForValidate = {...inputData, isThumbnailExist: !!inputData.thumbnail}
     courseSchema
-      .validate(inputData, { abortEarly: false })
+      .validate(objForValidate, { abortEarly: false })
       .then(async () => {
         setLoader(true);
-        addCourse(inputData, tutorials, youtubeVideos, selectedCourse?.id)
-          .then(async () => {
-            setLoader(false);
-            fetchCourseList();
-            handleClose();
-          })
-          .catch((error) => {
-            setLoader(false);
-            printApiErrors(error);
-          });
+        let postData = {...inputData, categoryId: inputData.category?.map(item => item.value)}
+        delete postData.category
+        delete postData.type
+        if(selectedCourse?.id) await updateCourseById(postData, selectedCourse.id, youtubeVideos, tutorials)
+        if(!selectedCourse?.id) await addCourse(postData, youtubeVideos, tutorials)
+        setLoader(false);
+        await fetchCourseList();
+        handleClose();
       })
       .catch(function (err) {
-        console.log(err);
+        setLoader(false)
         setErrors(getErrorMessages(err));
       });
   };
@@ -152,7 +145,14 @@ const CourseForm = ({
     fetchYoutubePlaylist(inputData["playlistId"], pageToken)
       .then((response) => {
         response.items.forEach((item) => {
-          tmpYoutubeVideos.push(item.snippet);
+          tmpYoutubeVideos.push({
+            thumbnail: item.snippet.thumbnails.default.url,
+            videoId: item.snippet.resourceId.videoId,
+            title: item.snippet.title,
+            description: item.snippet.description,
+            publishedAt: item.snippet.publishedAt,
+            length: 0,
+          });
         });
         addNewYoutubeVideos(tmpYoutubeVideos);
         if ("nextPageToken" in response) {
@@ -229,7 +229,7 @@ const CourseForm = ({
               <div className="video-wrapper">
                 <div className="video-thumb">
                   <img
-                    src={item.thumbnails.default.url}
+                    src={item.thumbnail}
                     alt="course-thumb"
                     className="img-thumbnail"
                   />
@@ -319,9 +319,9 @@ const CourseForm = ({
           <TextComponent
             label="Course Duration"
             placeHolder="Enter Course Duration"
-            name="duration"
+            name="courseDuration"
             required={false}
-            value={inputData.duration}
+            value={inputData.courseDuration}
             type="text"
             controlId="course_duration"
             errors={errors}
@@ -333,9 +333,9 @@ const CourseForm = ({
           <TextComponent
             label="Course Price"
             placeHolder="Enter Course Price"
-            name="price"
+            name="coursePrice"
             required={false}
-            value={inputData.price}
+            value={inputData.coursePrice}
             type="text"
             controlId="course_price"
             errors={errors}
@@ -344,7 +344,7 @@ const CourseForm = ({
         <Col>
           <Form.Group controlId={"course_thumbnail"} key={`course_thumbnail`}>
             <Form.Label>Upload Course Thumbnail</Form.Label>
-            <UploadAttachment name="image" errors={errors} />
+            <UploadAttachment name="thumbnail" errors={errors} />
           </Form.Group>
         </Col>
       </Row>
@@ -380,8 +380,8 @@ const CourseForm = ({
       <Row>
         <Col>
           <EditorComponent
-            name="requirements"
-            value={inputData.requirements}
+            name="courseRequirements"
+            value={inputData.courseRequirements}
             controlId="course_requirements"
             label="Add Course Requirements"
             errors={errors}
@@ -391,8 +391,8 @@ const CourseForm = ({
       <Row>
         <Col>
           <EditorComponent
-            name="features"
-            value={inputData.features}
+            name="courseFeatures"
+            value={inputData.courseFeatures}
             controlId="course_features"
             label="Add Course Features"
             errors={errors}
@@ -402,10 +402,10 @@ const CourseForm = ({
       <Row>
         <Col>
           <EditorComponent
-            name="description"
+            name="courseDescription"
             controlId="course_description"
             label="Add Course Description"
-            value={inputData.description}
+            value={inputData.courseDescription}
             errors={errors}
           />
         </Col>
