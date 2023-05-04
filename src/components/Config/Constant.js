@@ -1,7 +1,7 @@
 let dateFormat = "dd-MM-yyyy";
 // let dateFormat = "MM/dd/yyyy";
 // let dateFormat = "yyyy/MM/dd";
-let API_BASE_URL = "http://academy.neuro-soft.net";
+let API_BASE_URL = "https://academy.neuro-soft.net";
 // let API_BASE_URL = "http://localhost:5000";
 let backendServerUrl = "https://www.api.neuro-soft.net";
 let youtubeUrl = "https://www.googleapis.com/youtube/v3";
