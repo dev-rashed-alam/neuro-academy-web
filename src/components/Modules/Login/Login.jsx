@@ -27,7 +27,7 @@ const Login = (props) => {
         try {
             setLoader(true);
             const {data} = await doLogin(inputData)
-            setUserSession(data)
+            await setUserSession(data)
             toast.success("Login Successful!");
             setLoader(false)
             props.history.push("dashboard")

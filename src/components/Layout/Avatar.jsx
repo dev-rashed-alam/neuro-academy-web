@@ -59,6 +59,7 @@ const Avatar = (props) => {
   const logout = async () => {
     setLoader(true);
     await removeUserSession();
+    setLoader(false)
   };
 
   return (
