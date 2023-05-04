@@ -54,6 +54,7 @@ const CourseForm = ({
       }));
       let postData = {
         ...inputData,
+        courseRootPath: selectedCourse?.courseRootPath?.toString(),
         title: selectedCourse.title,
         shortTitle: selectedCourse.shortTitle,
         instructorName: selectedCourse.instructorName,

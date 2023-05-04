@@ -33,7 +33,7 @@ const ArticleForm = ({
             setInputData({
                 ...inputData,
                 title: selectedArticle.title,
-                description: selectedArticle.body,
+                description: selectedArticle.description,
                 category: categoryList.find(
                     (item) => item.value === selectedArticle.category.id
                 ),
@@ -57,9 +57,11 @@ const ArticleForm = ({
             title: inputData.title,
             description: inputData.description,
             categoryId: inputData.category?.value,
-            status: inputData.status?.value,
-            thumbnail: inputData.thumbnail
+            status: inputData.status?.value
         };
+        if(inputData.thumbnail){
+            postData['thumbnail'] = inputData.thumbnail
+        }
         articleSchema
             .validate(filterPostData(postData), {abortEarly: false})
             .then(async () => {
