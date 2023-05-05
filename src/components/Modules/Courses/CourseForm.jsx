@@ -41,8 +41,8 @@ const CourseForm = ({
     youtubeVideos,
     tutorials,
     setInputData,
-    setVideos,
     setYoutubeVideos,
+    resetContext
   } = useContext(FormContext);
 
   useEffect(() => {
@@ -64,7 +64,6 @@ const CourseForm = ({
         courseFeatures: selectedCourse.courseFeatures,
         courseDescription: selectedCourse.courseDescription,
         playlistId: selectedCourse.playlistId || "",
-        isThumbnailExist: !!selectedCourse.thumbnail,
         type: optionForCourseUpload.find(
           (item) => item.value === selectedCourse.courseType
         ),
@@ -107,7 +106,7 @@ const CourseForm = ({
   };
 
   const handleSubmit = () => {
-    let objForValidate = {...inputData, isThumbnailExist: !!inputData.thumbnail}
+    let objForValidate = {...inputData, isThumbnailExist: selectedCourse?.id ? !!selectedCourse.thumbnail : !!inputData.thumbnail}
     courseSchema
       .validate(objForValidate, { abortEarly: false })
       .then(async () => {
@@ -117,9 +116,9 @@ const CourseForm = ({
         delete postData.type
         if(selectedCourse?.id) await updateCourseById(postData, selectedCourse.id, youtubeVideos, tutorials)
         if(!selectedCourse?.id) await addCourse(postData, youtubeVideos, tutorials)
-        setLoader(false);
         await fetchCourseList();
         handleClose();
+        setLoader(false);
       })
       .catch(function (err) {
         setLoader(false)
@@ -129,9 +128,8 @@ const CourseForm = ({
 
   const handleClose = () => {
     setErrors({});
-    setInputData({});
+    resetContext();
     setYoutubeVideos([]);
-    setVideos([]);
     triggerModal();
   };
 
@@ -220,30 +218,34 @@ const CourseForm = ({
 
   const renderYoutubeVideos = () => {
     if (inputData["type"]?.value === "youtube" && youtubeVideos?.length > 0) {
-      return youtubeVideos?.map((item, index) => {
-        return (
-          <Row
-            className="align-items-center"
-            key={`youtube_videos_${index + 1}`}
-          >
-            <Col>
-              <div className="video-wrapper">
-                <div className="video-thumb">
-                  <img
-                    src={item.thumbnail}
-                    alt="course-thumb"
-                    className="img-thumbnail"
-                  />
-                </div>
-                <div className="video-description">
-                  <p>Lecture Title: {item.title}</p>
-                  <p>Published Date: {item.publishedAt}</p>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        );
-      });
+      return (
+          <div className={`youtube-video-wrapper`}>
+            {youtubeVideos?.map((item, index) => {
+              return (
+                  <Row
+                      key={`youtube_videos_${index + 1}`}
+                      className="align-items-center"
+                  >
+                    <Col>
+                      <div className="video-wrapper">
+                        <div className="video-thumb">
+                          <img
+                              src={item.thumbnail}
+                              alt="course-thumb"
+                              className="img-thumbnail"
+                          />
+                        </div>
+                        <div className="video-description">
+                          <p>Lecture Title: {item.title}</p>
+                          <p>Published Date: {item.publishedAt}</p>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+              );
+            })}
+          </div>
+      )
     }
   };
 
@@ -256,6 +258,13 @@ const CourseForm = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputData.type]);
+
+  useEffect(() => {
+    return () => {
+      resetContext()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <ModalComponent

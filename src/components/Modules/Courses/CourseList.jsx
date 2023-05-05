@@ -51,7 +51,7 @@ const tableColumn = [
 ];
 
 const CourseList = () => {
-  const { setLoader } = useContext(FormContext);
+  const { setLoader, resetContext } = useContext(FormContext);
   const [modal, setModal] = useState(false);
   const [tableData, setTableDta] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState({});
@@ -120,6 +120,7 @@ const CourseList = () => {
   };
 
   const closeModal = () => {
+    resetContext()
     setSelectedCourse({});
     setModal(!modal);
   };
@@ -149,14 +150,14 @@ const CourseList = () => {
           />
         </Col>
       </Row>
-      <CourseForm
+      {modal && <CourseForm
         modalShow={modal}
         triggerModal={closeModal}
         fetchCourseList={fetchCourseList}
         selectedCourse={
           Object.keys(selectedCourse).length > 0 ? selectedCourse : undefined
         }
-      />
+      />}
     </>
   );
 };
