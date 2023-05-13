@@ -13,6 +13,15 @@ export const fetchCourses = async () => {
   }
 }
 
+export const fetchCourseById = async (courseId) => {
+  try {
+    const {data} = await apiHandler.GET("courses", `/${courseId}`)
+    return data.data
+  }catch (error){
+    printApiErrors(error)
+  }
+}
+
 const processCourseData = (postData, youtubeVideos, customVideos) => {
   const formData = new FormData();
   for(let item in postData){

@@ -33,10 +33,6 @@ const tableColumn = [
     accessor: "courseDuration",
   },
   {
-    Header: "Total Videos",
-    accessor: "totalVideos",
-  },
-  {
     Header: "Number of Students",
     accessor: "numberOfStudents",
   },
@@ -108,9 +104,8 @@ const CourseList = () => {
         instructorName: item.instructorName,
         publishDate: formatDate(item.createdAt),
         courseDuration: item.courseDuration,
-        totalVideos: item.videos.length,
         courseTile: item.title,
-        numberOfStudents: 0,
+        numberOfStudents: item.students?.length,
         status: renderStatusButton(item, item.id),
         action: renderUpdateButton(item),
       });

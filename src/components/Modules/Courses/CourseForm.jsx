@@ -14,7 +14,7 @@ import { getErrorMessages } from "../../Config/HelperUtils";
 import { toast } from "react-toastify";
 import "../../../assets/styles/Course.scss";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
-import {addCourse, updateCourseById} from "../../../services/Course";
+import {addCourse, fetchCourseById, updateCourseById} from "../../../services/Course";
 import { courseSchema } from "../../../validations/ValidationSchema";
 import CustomVideoList from "./CustomVideoList";
 import {findAllCategories} from "../../../services/Category";
@@ -52,29 +52,35 @@ const CourseForm = ({
         value: item.id,
         label: item.name,
       }));
-      let postData = {
-        ...inputData,
-        courseRootPath: selectedCourse?.courseRootPath?.toString(),
-        title: selectedCourse.title,
-        shortTitle: selectedCourse.shortTitle,
-        instructorName: selectedCourse.instructorName,
-        coursePrice: selectedCourse.coursePrice,
-        courseDuration: selectedCourse.courseDuration,
-        courseRequirements: selectedCourse.courseRequirements,
-        courseFeatures: selectedCourse.courseFeatures,
-        courseDescription: selectedCourse.courseDescription,
-        playlistId: selectedCourse.playlistId || "",
-        type: optionForCourseUpload.find(
-          (item) => item.value === selectedCourse.courseType
-        ),
-        category: tmpCategories,
-      };
-      if (selectedCourse.courseType === "youtube") {
-        postData["totalVideos"] = selectedCourse.youtubeVideos.length;
-        addNewYoutubeVideos(selectedCourse.youtubeVideos)
-      }
-      setInputData(postData);
-      setLoader(false);
+
+      fetchCourseById(selectedCourse.id).then((data) => {
+        let postData = {
+          ...inputData,
+          courseRootPath: data?.courseRootPath?.toString(),
+          title: data.title,
+          shortTitle: data.shortTitle,
+          instructorName: data.instructorName,
+          coursePrice: data.coursePrice,
+          courseDuration: data.courseDuration,
+          courseRequirements: data.courseRequirements,
+          courseFeatures: data.courseFeatures,
+          courseDescription: data.courseDescription,
+          playlistId: data.playlistId || "",
+          type: optionForCourseUpload.find(
+              (item) => item.value === data.courseType
+          ),
+          category: tmpCategories,
+        };
+        if (data.courseType === "youtube") {
+          postData["totalVideos"] = data.youtubeVideos.length;
+          addNewYoutubeVideos(data.youtubeVideos)
+        }
+        setInputData(postData);
+        setLoader(false);
+      }).catch((error) => {
+        setInputData({});
+        setLoader(false);
+      })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCourse]);
