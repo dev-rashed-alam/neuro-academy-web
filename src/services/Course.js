@@ -54,7 +54,7 @@ const processCourseData = (postData, youtubeVideos, customVideos) => {
       );
       formData.append(
           `youtubeVideos[${i}][url]`,
-          youtubeVideos[i].videoId
+          youtubeVideos[i].videoId || youtubeVideos[i].url
       );
       formData.append(
           `youtubeVideos[${i}][description]`,
