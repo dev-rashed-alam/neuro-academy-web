@@ -4,7 +4,7 @@ import TableComponent from "../../CommonComponents/Table/Table";
 import {formatDate, printApiErrors} from "../../Config/HelperUtils";
 import {Button} from "../../CommonComponents/Button";
 import {FormContext} from "../../Context/FormContext";
-import {removeCustomVideoById, removeMaterialById} from "../../../services/Course";
+import {removeMaterialById} from "../../../services/Course";
 import {toast} from "react-toastify";
 
 const tableColumn = [
