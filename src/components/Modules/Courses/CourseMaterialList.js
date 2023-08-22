@@ -4,7 +4,7 @@ import TableComponent from "../../CommonComponents/Table/Table";
 import {formatDate, printApiErrors} from "../../Config/HelperUtils";
 import {Button} from "../../CommonComponents/Button";
 import {FormContext} from "../../Context/FormContext";
-import {removeCustomVideoById} from "../../../services/Course";
+import {removeCustomVideoById, removeMaterialById} from "../../../services/Course";
 import {toast} from "react-toastify";
 
 const tableColumn = [
@@ -13,11 +13,11 @@ const tableColumn = [
         accessor: "sl",
     },
     {
-        Header: "Video Title",
-        accessor: "videoTitle",
+        Header: "Material Title",
+        accessor: "materialTitle",
     },
     {
-        Header: "Video Url",
+        Header: "Material Url",
         accessor: "url",
     },
     {
@@ -30,7 +30,7 @@ const tableColumn = [
     },
 ];
 
-const CustomVideoList = ({selectedCourse}) => {
+const CourseMaterialList = ({selectedCourse}) => {
     const [tableData, setTableData] = useState([]);
     const [courseInfo, setCourseInfo] = useState({});
     const {setLoader} = useContext(FormContext);
@@ -39,16 +39,16 @@ const CustomVideoList = ({selectedCourse}) => {
         setCourseInfo(selectedCourse);
     }, [selectedCourse]);
 
-    const handleRemove = (fileName) => {
+    const handleRemove = (filename, materialType) => {
         setLoader(true);
-        removeCustomVideoById(courseInfo.id, fileName)
+        removeMaterialById(courseInfo.id, {filename, materialType})
             .then((response) => {
                 let tmpCourseInfo = JSON.parse(JSON.stringify(courseInfo));
-                tmpCourseInfo.videos = courseInfo.videos.filter(
-                    (item) => item.filename !== fileName
+                tmpCourseInfo.materials[materialType] = courseInfo.materials[materialType].filter(
+                    (item) => item.filename !== filename
                 );
                 setCourseInfo(tmpCourseInfo);
-                toast.success("Video Removed!");
+                toast.success("Material Removed!");
                 setLoader(false);
             })
             .catch((error) => {
@@ -57,40 +57,53 @@ const CustomVideoList = ({selectedCourse}) => {
             });
     };
 
-    const renderRemoveButton = (fileName) => {
+    const renderRemoveButton = (fileName, materialType) => {
         return (
             <Button
                 name="Remove"
                 className="btn btn-danger btn-sm"
-                onClickEvent={() => handleRemove(fileName)}
+                onClickEvent={() => handleRemove(fileName, materialType)}
             />
         );
     };
 
     useEffect(() => {
-        if (courseInfo?.videos?.length > 0) {
-            let resultSet = [];
+        let resultSet = [];
+        if (courseInfo?.materials?.images?.length > 0) {
             let sl = 1;
-            for (let item of courseInfo.videos) {
+            for (let item of courseInfo.materials.images) {
                 resultSet.push({
                     sl: sl++,
-                    videoTitle: item.title,
+                    materialTitle: item.title,
                     url: item.url,
                     uploadedDate: formatDate(item.uploadDate),
-                    action: renderRemoveButton(item.filename),
+                    action: renderRemoveButton(item.filename, 'images'),
+                    materialType: 'images'
                 });
             }
-            setTableData(resultSet);
         }
+        if (courseInfo?.materials?.attachments?.length > 0) {
+            let sl = 1;
+            for (let item of courseInfo.materials.attachments) {
+                resultSet.push({
+                    sl: sl++,
+                    materialTitle: item.title,
+                    url: item.url,
+                    uploadedDate: formatDate(item.uploadDate),
+                    action: renderRemoveButton(item.filename, 'attachments'),
+                    materialType: 'attachments'
+                });
+            }
+        }
+        setTableData(resultSet);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [courseInfo]);
 
     return (
         <Row>
             <Col className={"custom-video-list"}>
-                {courseInfo?.courseType === "custom" &&
-                    courseInfo?.id !== null &&
-                    courseInfo?.videos?.length > 0 && (
+                {courseInfo?.id !== null &&
+                    tableData?.length > 0 && (
                         <TableComponent
                             tableColumn={tableColumn}
                             tableData={tableData}
@@ -103,4 +116,4 @@ const CustomVideoList = ({selectedCourse}) => {
     );
 };
 
-export default CustomVideoList;
+export default CourseMaterialList;

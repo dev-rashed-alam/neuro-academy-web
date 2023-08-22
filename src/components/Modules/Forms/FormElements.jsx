@@ -7,7 +7,7 @@ import CheckboxComponent from "../../CommonComponents/Form/CheckboxComponent";
 import RadioButtonComponent from "../../CommonComponents/Form/RadioButtonComponent";
 import DatePickerComponent from "../../CommonComponents/Form/DatePickerComponent";
 import EditorComponent from "../../CommonComponents/Form/EditorComponent";
-import UploadComponent from "../../CommonComponents/Form/UploadComponent";
+import CourseCustomVideoUploadComponent from "../../CommonComponents/Form/CourseCustomVideoUploadComponent";
 
 const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -88,7 +88,7 @@ export default class FormElements extends Component {
             </Row>
             <Row>
               <Col md={12}>
-                <UploadComponent />
+                <CourseCustomVideoUploadComponent />
               </Col>
             </Row>
           </Card.Body>

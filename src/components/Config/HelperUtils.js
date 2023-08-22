@@ -47,7 +47,7 @@ const formatDate = (date) => {
 };
 
 const generateRandomNumber = () => {
-  return Math.abs(Math.random() * 1000000 + 1);
+  return Math.ceil(Math.abs(Math.random() * 10000000 + 1));
 };
 
 const processDateForPost = (date) => {
