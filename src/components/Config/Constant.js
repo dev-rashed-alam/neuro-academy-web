@@ -1,8 +1,8 @@
 let dateFormat = "dd-MM-yyyy";
 // let dateFormat = "MM/dd/yyyy";
 // let dateFormat = "yyyy/MM/dd";
-let API_BASE_URL = "https://academy.neuro-soft.net";
-// let API_BASE_URL = "http://localhost:5000";
+// let API_BASE_URL = "https://academy.neuro-soft.net";
+let API_BASE_URL = "http://localhost:5000";
 let backendServerUrl = "https://www.api.neuro-soft.net";
 let youtubeUrl = "https://www.googleapis.com/youtube/v3";
 let youtubeApiKey = "AIzaSyDf60k7A9Jg54hGwLgw1Hx5wKiEuiGu1Ko";
@@ -18,6 +18,8 @@ const apiEndPoints = {
     courses: `${API_BASE_URL}/courses`,
     removeCustomVideo: `${API_BASE_URL}/courses/videos/remove`,
     removeCourseMaterial: `${API_BASE_URL}/courses/materials/remove`,
+    purchases: `${API_BASE_URL}/purchase/all`,
+    purchase: `${API_BASE_URL}/purchase/`,
 };
 
 

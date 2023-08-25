@@ -22,6 +22,10 @@ const getUser = () => {
   return localStorage.getItem("userName") || null;
 };
 
+const getUserEmail = () => {
+  return localStorage.getItem("userEmail") || '';
+};
+
 const getUserId = () => {
   return localStorage.getItem("userId") || null;
 };
@@ -37,4 +41,5 @@ export {
   getUser,
   getUserId,
   getUserImage,
+  getUserEmail
 };

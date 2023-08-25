@@ -4,7 +4,7 @@ import Dashboard from "../Layout/Dashboard";
 import DashboardBody from "../Modules/Dashboard/DashboardBody";
 import FormElements from "../Modules/Forms/FormElements";
 import StudentList from "../Modules/Students/StudentList";
-import OrderList from "../Modules/Orders/OrderList";
+import PurchaseList from "../Modules/Purchases/PurchaseList";
 import CourseList from "../Modules/Courses/CourseList";
 import CategoryList from "../Modules/Category/CategoryList";
 import CouponList from "../Modules/Coupons/CouponList";
@@ -12,7 +12,7 @@ import ArticleList from "../Modules/Articles/ArticleList";
 import { getToken } from "../Config/SessionUtils";
 import Profile from "../Modules/Profile/Profile";
 import NotificationPage from "../Modules/Notification/NotificationPage";
-import OrderDetails from "../Modules/Orders/OrderDetails";
+import PurchaseDetails from "../Modules/Purchases/PurchaseDetails";
 
 const ProtectedRoute = () => {
   if (getToken() !== null) {
@@ -22,11 +22,11 @@ const ProtectedRoute = () => {
           <Route exact={true} path="/dashboard" component={DashboardBody} />
           <Route exact={true} path="/form-elements" component={FormElements} />
           <Route exact={true} path="/students" component={StudentList} />
-          <Route exact={true} path="/orders" component={OrderList} />
+          <Route exact={true} path="/orders" component={PurchaseList} />
           <Route
             exact={true}
             path="/order/details/:id"
-            component={OrderDetails}
+            component={PurchaseDetails}
           />
           <Route exact={true} path="/courses" component={CourseList} />
           <Route exact={true} path="/categories" component={CategoryList} />
