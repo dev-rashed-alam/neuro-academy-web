@@ -74,11 +74,13 @@ const PurchaseList = () => {
         let resultSet = [];
         let sl = 1;
         for (let item of data) {
+            let userName = item?.student?.firstName ? `${item?.student?.firstName} ` : ''
+            userName += item?.student?.lastName || ''
             resultSet.push({
                 sl: sl++,
                 invoiceNumber: item.invoiceNumber,
                 paymentMethod: item.paymentMethod,
-                userName: item.student.firstName + " " + item.student.lastName,
+                userName: userName === undefined ? '' : userName,
                 courseTitle: renderCourseTitle(item.courses),
                 purchaseAmount: item.purchasePrice,
                 purchaseDate: formatDate(item.createdAt),
