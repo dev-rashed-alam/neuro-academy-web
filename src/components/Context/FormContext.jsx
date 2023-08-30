@@ -157,7 +157,7 @@ function FormContextProvider(props) {
         attachments,
         setFiles
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }), [loader]);
+    }), [values, loader, videos, tutorials, youtubeVideos, files, attachments]);
 
     return (
         <FormContext.Provider
