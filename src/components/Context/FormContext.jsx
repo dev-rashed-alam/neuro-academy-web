@@ -1,4 +1,4 @@
-import React, {createContext, useState} from "react";
+import React, {createContext, useMemo, useState} from "react";
 
 export const FormContext = createContext();
 
@@ -128,37 +128,40 @@ function FormContextProvider(props) {
         setTutorials([]);
     };
 
+    const storeValues = useMemo(() => ({
+        inputData: values,
+        setInputData: setValues,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        resetContext,
+        videos,
+        addDynamicVideos,
+        removeDynamicVideos,
+        tutorials,
+        addNewTutorial,
+        removeTutorial,
+        findTutorialById,
+        youtubeVideos,
+        addNewYoutubeVideos,
+        loader,
+        setLoader,
+        handleFiles,
+        setYoutubeVideos,
+        setVideos,
+        findAttachmentById,
+        removeAttachment,
+        addNewAttachment,
+        addDynamicFiles,
+        files,
+        attachments,
+        setFiles
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }), [loader]);
+
     return (
         <FormContext.Provider
-            value={{
-                inputData: values,
-                setInputData: setValues,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                resetContext,
-                videos,
-                addDynamicVideos,
-                removeDynamicVideos,
-                tutorials,
-                addNewTutorial,
-                removeTutorial,
-                findTutorialById,
-                youtubeVideos,
-                addNewYoutubeVideos,
-                loader,
-                setLoader,
-                handleFiles,
-                setYoutubeVideos,
-                setVideos,
-                findAttachmentById,
-                removeAttachment,
-                addNewAttachment,
-                addDynamicFiles,
-                files,
-                attachments,
-                setFiles
-            }}
+            value={storeValues}
         >
             {props.children}
         </FormContext.Provider>

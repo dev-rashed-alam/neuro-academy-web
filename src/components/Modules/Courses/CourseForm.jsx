@@ -7,14 +7,11 @@ import EditorComponent from "../../CommonComponents/Form/EditorComponent";
 import {Button} from "../../CommonComponents/Button";
 import CourseCustomVideoUploadComponent from "../../CommonComponents/Form/CourseCustomVideoUploadComponent";
 import {FormContext} from "../../Context/FormContext";
-import {
-    fetchYoutubePlaylist,
-} from "../../Config/ApiHandler";
 import {getErrorMessages} from "../../Config/HelperUtils";
 import {toast} from "react-toastify";
 import "../../../assets/styles/Course.scss";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
-import {addCourse, fetchCourseById, updateCourseById} from "../../../services/Course";
+import {addCourse, fetchCourseById, fetchYoutubePlaylist, updateCourseById} from "../../../services/Course";
 import {courseSchema} from "../../../validations/ValidationSchema";
 import CustomVideoList from "./CustomVideoList";
 import {findAllCategories} from "../../../services/Category";
@@ -22,8 +19,7 @@ import CourseAttachmentUploadComponent from "../../CommonComponents/Form/CourseA
 import CourseMaterialList from "./CourseMaterialList";
 
 const optionForCourseUpload = [
-    {value: "youtube", label: "Youtube Link"},
-    {value: "custom", label: "Custom Upload"},
+    {value: "youtube", label: "Youtube Link"}
 ];
 
 const CourseForm = ({
@@ -110,8 +106,8 @@ const CourseForm = ({
 
     const renderCustomVideos = () => {
         if (inputData["type"]?.value === "custom") {
-            return videos.map((item, i) => (
-                <div className="pt-1 pb-1" key={`custom_upload_${i}`}>
+            return videos.map(item => (
+                <div className="pt-1 pb-1" key={`custom_upload_${item}`}>
                     <CourseCustomVideoUploadComponent identifier={item}/>
                 </div>
             ));
@@ -120,8 +116,8 @@ const CourseForm = ({
 
     const renderUploadedAttachments = () => {
         if (inputData["type"]?.value) {
-            return files.map((item, i) => (
-                <div className="pt-1 pb-1" key={`custom_upload_attachment_${i}`}>
+            return files.map(item => (
+                <div className="pt-1 pb-1" key={`custom_upload_attachment_${item}`}>
                     <CourseAttachmentUploadComponent identifier={item}/>
                 </div>
             ));

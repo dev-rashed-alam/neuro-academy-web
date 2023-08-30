@@ -2,6 +2,8 @@ import {
     apiHandler,
 } from "../components/Config/ApiHandler";
 import {generateRandomNumber, printApiErrors} from "../components/Config/HelperUtils";
+import {youtubeApiKey, youtubeUrl} from "../components/Config/Constant";
+import axios from "axios";
 
 
 export const fetchCourses = async () => {
@@ -122,4 +124,33 @@ export const removeMaterialById = async (id, postData) => {
     } catch (error) {
         printApiErrors(error)
     }
+};
+
+export const fetchYoutubePlaylist = (playListId, urlSegment) => {
+    return new Promise((resolve, reject) => {
+        let url;
+        if (urlSegment !== undefined) {
+            url =
+                youtubeUrl +
+                "/playlistItems?part=snippet&playlistId=" +
+                playListId +
+                "&maxResults=50&key=" +
+                youtubeApiKey +
+                "&pageToken=" +
+                urlSegment;
+        } else {
+            url =
+                youtubeUrl +
+                "/playlistItems?part=snippet&playlistId=" +
+                playListId +
+                "&maxResults=50&key=" +
+                youtubeApiKey;
+        }
+        axios
+            .get(url)
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => reject(error));
+    });
 };

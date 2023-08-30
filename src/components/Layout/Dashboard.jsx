@@ -6,7 +6,6 @@ import { FormContext } from "../Context/FormContext";
 
 class Dashboard extends Component {
   static contextType = FormContext;
-
   constructor(props) {
     super(props);
     this.state = {

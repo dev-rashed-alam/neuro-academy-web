@@ -14,7 +14,7 @@ const EditorComponent = ({ name, controlId, label, value, errors }) => {
     });
   };
 
-  let dataValue = value ? value : "";
+  let dataValue = value || "";
   return (
     <Form.Group controlId={controlId} key={`editor_box_${name}`}>
       <Form.Label>{label}</Form.Label>

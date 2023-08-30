@@ -50,7 +50,7 @@ function BarChart({yearlyData}) {
                     dataSet.push(yearlyData[item].length)
                 }
             }
-            const cloneDataSet = Object.assign({}, data)
+            const cloneDataSet = {...data}
             cloneDataSet.datasets[0].data = dataSet
             setData(cloneDataSet)
         }
