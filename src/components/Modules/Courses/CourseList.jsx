@@ -6,7 +6,7 @@ import {Button} from "../../CommonComponents/Button";
 import {MdAddCircle} from "react-icons/md";
 import {FormContext} from "../../Context/FormContext";
 import {
-    formatDate,
+    formatDate, formatSecondsToDuration,
 } from "../../Config/HelperUtils";
 import {toast} from "react-toastify";
 import {fetchCourses, updateCourseById} from "../../../services/Course";
@@ -103,7 +103,7 @@ const CourseList = () => {
                 courseTitle: item.title,
                 instructorName: item.instructorName,
                 publishDate: formatDate(item.createdAt),
-                courseDuration: item.courseDuration,
+                courseDuration: formatSecondsToDuration(item.courseDuration),
                 courseTile: item.title,
                 numberOfStudents: item.students?.length,
                 status: renderStatusButton(item, item.id),

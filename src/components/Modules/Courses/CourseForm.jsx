@@ -7,11 +7,17 @@ import EditorComponent from "../../CommonComponents/Form/EditorComponent";
 import {Button} from "../../CommonComponents/Button";
 import CourseCustomVideoUploadComponent from "../../CommonComponents/Form/CourseCustomVideoUploadComponent";
 import {FormContext} from "../../Context/FormContext";
-import {getErrorMessages} from "../../Config/HelperUtils";
+import {formatSecondsToDuration, getErrorMessages} from "../../Config/HelperUtils";
 import {toast} from "react-toastify";
 import "../../../assets/styles/Course.scss";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
-import {addCourse, fetchCourseById, fetchYoutubePlaylist, updateCourseById} from "../../../services/Course";
+import {
+    addCourse,
+    fetchCourseById,
+    fetchYoutubePlaylist,
+    fetchYoutubeVideoDuration,
+    updateCourseById
+} from "../../../services/Course";
 import {courseSchema} from "../../../validations/ValidationSchema";
 import CustomVideoList from "./CustomVideoList";
 import {findAllCategories} from "../../../services/Category";
@@ -166,7 +172,7 @@ const CourseForm = ({
         setLoader(true);
         let tmpYoutubeVideos = [];
         fetchYoutubePlaylist(inputData["playlistId"], pageToken)
-            .then((response) => {
+            .then(async (response) => {
                 response.items.forEach((item) => {
                     tmpYoutubeVideos.push({
                         thumbnail: item.snippet.thumbnails.default.url,
@@ -178,6 +184,9 @@ const CourseForm = ({
                     });
                 });
                 addNewYoutubeVideos(tmpYoutubeVideos);
+                let videoIds = tmpYoutubeVideos.map(item => item.videoId)
+                const duration = await fetchYoutubeVideoDuration(videoIds)
+                setInputData(prev => ({...prev, courseDuration : parseInt(prev.courseDuration || 0) + duration}))
                 if ("nextPageToken" in response) {
                     handleYoutubePlaylist(response.nextPageToken);
                 } else {
@@ -239,6 +248,7 @@ const CourseForm = ({
                             controlId="play_list_id"
                             errors={errors}
                             handleBlur={() => {
+                                setInputData(prev => ({...prev, courseDuration: 0}))
                                 setYoutubeVideos([]);
                                 handleYoutubePlaylist(undefined);
                             }}
@@ -372,20 +382,6 @@ const CourseForm = ({
                 </Col>
                 <Col>
                     <TextComponent
-                        label="Course Duration"
-                        placeHolder="Enter Course Duration"
-                        name="courseDuration"
-                        required={false}
-                        value={inputData.courseDuration}
-                        type="text"
-                        controlId="course_duration"
-                        errors={errors}
-                    />
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <TextComponent
                         label="Course Price"
                         placeHolder="Enter Course Price"
                         name="coursePrice"
@@ -395,12 +391,6 @@ const CourseForm = ({
                         controlId="course_price"
                         errors={errors}
                     />
-                </Col>
-                <Col>
-                    <Form.Group controlId={"course_thumbnail"} key={`course_thumbnail`}>
-                        <Form.Label>Upload Course Thumbnail</Form.Label>
-                        <UploadAttachment name="thumbnail" errors={errors}/>
-                    </Form.Group>
                 </Col>
             </Row>
             <Row>
@@ -413,6 +403,27 @@ const CourseForm = ({
                         value={inputData.category}
                         name="category"
                         errors={errors}
+                    />
+                </Col>
+                <Col>
+                    <Form.Group controlId={"course_thumbnail"} key={`course_thumbnail`}>
+                        <Form.Label>Upload Course Thumbnail</Form.Label>
+                        <UploadAttachment name="thumbnail" errors={errors}/>
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <TextComponent
+                        label="Course Duration"
+                        placeHolder="Enter Course Duration"
+                        name="courseDuration"
+                        required={false}
+                        value={formatSecondsToDuration(inputData.courseDuration)}
+                        type="text"
+                        controlId="course_duration"
+                        errors={errors}
+                        readOnly={true}
                     />
                 </Col>
                 <Col>

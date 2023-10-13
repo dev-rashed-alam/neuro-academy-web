@@ -1,7 +1,7 @@
 import {
     apiHandler,
 } from "../components/Config/ApiHandler";
-import {generateRandomNumber, printApiErrors} from "../components/Config/HelperUtils";
+import {generateRandomNumber, parseYoutubeVideoDuration, printApiErrors} from "../components/Config/HelperUtils";
 import {youtubeApiKey, youtubeUrl} from "../components/Config/Constant";
 import axios from "axios";
 
@@ -125,6 +125,25 @@ export const removeMaterialById = async (id, postData) => {
         printApiErrors(error)
     }
 };
+
+export const fetchYoutubeVideoDuration = async (videoIds) => {
+    try {
+        const {data} = await axios.get(youtubeUrl + `/videos?part=contentDetails&key=${youtubeApiKey}&id=${encodeURI(videoIds.join(','))}`)
+
+        const videoDurations = data.items.map(
+            (item) => item.contentDetails.duration
+        );
+
+        let totalDurationSeconds = 0;
+        videoDurations.forEach((duration) => {
+            totalDurationSeconds += parseYoutubeVideoDuration(duration);
+        });
+        return totalDurationSeconds
+    } catch (error) {
+        printApiErrors(error)
+    }
+}
+
 
 export const fetchYoutubePlaylist = (playListId, urlSegment) => {
     return new Promise((resolve, reject) => {
