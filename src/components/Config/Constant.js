@@ -1,5 +1,5 @@
 const dateFormat = "dd-MM-yyyy";
-const API_BASE_URL = "http://185.177.57.148/academy";
+const API_BASE_URL = "https://academy.algomatrixs.com";
 const youtubeUrl = "https://www.googleapis.com/youtube/v3";
 const youtubeApiKey = "AIzaSyDf60k7A9Jg54hGwLgw1Hx5wKiEuiGu1Ko";
 
