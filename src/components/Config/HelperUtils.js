@@ -43,8 +43,10 @@ const convertDateToLocal = (date, outputFormat = "DD.MM.YYYY") => {
 
 const getErrorMessages = (err) => {
     let errorObj = {};
-    for (let item of err.inner) {
-        errorObj[item.path] = item.message;
+    if(err?.inner){
+        for (let item of err.inner) {
+            errorObj[item.path] = item.message;
+        }
     }
     return errorObj;
 };
@@ -90,6 +92,25 @@ const formatSecondsToDuration = (totalSeconds) => {
     return `${hours} h, ${minutes} m, ${seconds} s`;
 }
 
+const isValidFileType = (allowedFileTypes, fileType) => {
+    return allowedFileTypes.includes(fileType)
+}
+
+const mapFileTypes = (acceptTypes) => {
+    let types = {
+        'image/*': 'jpg, jpeg, png',
+        'text/*': 'text',
+        'application/pdf': 'pdf'
+    }
+    let acceptedTypeArray = acceptTypes.split(",")
+    let invalidTypes = [];
+    for(let item of acceptedTypeArray){
+        console.log(types[item], item)
+        invalidTypes.push(types[item.trimStart()])
+    }
+    return invalidTypes.join(", ")
+}
+
 export {
     printApiErrors,
     formatDate,
@@ -101,5 +122,7 @@ export {
     filterPostData,
     convertNumberToUSFormat,
     parseYoutubeVideoDuration,
-    formatSecondsToDuration
+    formatSecondsToDuration,
+    isValidFileType,
+    mapFileTypes
 };

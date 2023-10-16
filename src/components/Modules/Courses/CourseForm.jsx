@@ -7,7 +7,7 @@ import EditorComponent from "../../CommonComponents/Form/EditorComponent";
 import {Button} from "../../CommonComponents/Button";
 import CourseCustomVideoUploadComponent from "../../CommonComponents/Form/CourseCustomVideoUploadComponent";
 import {FormContext} from "../../Context/FormContext";
-import {formatSecondsToDuration, getErrorMessages} from "../../Config/HelperUtils";
+import {formatSecondsToDuration, getErrorMessages, isValidFileType} from "../../Config/HelperUtils";
 import {toast} from "react-toastify";
 import "../../../assets/styles/Course.scss";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
@@ -131,6 +131,10 @@ const CourseForm = ({
     };
 
     const handleSubmit = () => {
+        if (inputData?.thumbnail && !isValidFileType(['image/jpeg', 'image/png'], inputData?.thumbnail?.type)) {
+            toast.warning('Only .jpg, .png, .jpeg allowed for thumbnail!')
+            return;
+        }
         let objForValidate = {
             ...inputData,
             isThumbnailExist: selectedCourse?.id ? !!selectedCourse.thumbnail : !!inputData.thumbnail
@@ -408,7 +412,7 @@ const CourseForm = ({
                 <Col>
                     <Form.Group controlId={"course_thumbnail"} key={`course_thumbnail`}>
                         <Form.Label>Upload Course Thumbnail</Form.Label>
-                        <UploadAttachment name="thumbnail" errors={errors}/>
+                        <UploadAttachment name="thumbnail" errors={errors} accept="image/*"/>
                     </Form.Group>
                 </Col>
             </Row>

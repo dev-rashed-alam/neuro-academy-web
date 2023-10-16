@@ -6,12 +6,13 @@ import SelectComponent from "../../CommonComponents/Form/SelectComponent";
 import {FormContext} from "../../Context/FormContext";
 import {
     filterPostData,
-    getErrorMessages
+    getErrorMessages, isValidFileType
 } from "../../Config/HelperUtils";
 import EditorComponent from "../../CommonComponents/Form/EditorComponent";
 import UploadAttachment from "../../CommonComponents/Form/UploadAttachment";
 import {articleSchema} from "../../../validations/ValidationSchema";
 import {addArticle, updateArticleById} from "../../../services/Article";
+import {toast} from "react-toastify";
 
 const optionForStatus = [
     {value: "enable", label: "Enable"},
@@ -53,13 +54,18 @@ const ArticleForm = ({
     };
 
     const handleSubmit = async () => {
+        if (inputData?.thumbnail && !isValidFileType(['image/jpeg', 'image/png'], inputData?.thumbnail?.type)) {
+            toast.warning('Only .jpg, .png, .jpeg allowed!')
+            return;
+        }
+
         let postData = {
             title: inputData.title,
             description: inputData.description,
             categoryId: inputData.category?.value,
             status: inputData.status?.value
         };
-        if(inputData.thumbnail){
+        if (inputData.thumbnail) {
             postData['thumbnail'] = inputData.thumbnail
         }
         articleSchema
@@ -137,7 +143,7 @@ const ArticleForm = ({
                 <Col>
                     <Form.Group controlId={"course_thumbnail"} key={`course_thumbnail`}>
                         <Form.Label>Upload Article Thumbnail</Form.Label>
-                        <UploadAttachment name="thumbnail" errors={errors}/>
+                        <UploadAttachment name="thumbnail" errors={errors} accept="image/*"/>
                     </Form.Group>
                 </Col>
             </Row>

@@ -51,6 +51,7 @@ const CourseAttachmentUploadComponent = ({identifier}) => {
                         addFile={addNewAttachment}
                         fileName={renderFileName}
                         findFile={findAttachmentById}
+                        accept={'image/*, text/*, application/pdf'}
                     />
                 </Col>
                 <Col md={3}>
