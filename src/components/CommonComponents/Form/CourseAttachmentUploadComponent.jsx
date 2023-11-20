@@ -5,7 +5,7 @@ import "../../../assets/styles/Form.scss";
 import FileComponent from "./FileComponent";
 import {FormContext} from "../../Context/FormContext";
 
-const CourseAttachmentUploadComponent = ({identifier}) => {
+const CourseAttachmentUploadComponent = ({identifier, errors}) => {
     const [fileTitle, setFileTitle] = useState(null);
     const [fileDescription, setFileDescription] = useState(null);
 
@@ -47,6 +47,7 @@ const CourseAttachmentUploadComponent = ({identifier}) => {
             <Row>
                 <Col md={4} className="pl-0">
                     <FileComponent
+                        error={!!errors?.[`attachment_${identifier}`]}
                         identifier={identifier}
                         addFile={addNewAttachment}
                         fileName={renderFileName}
@@ -56,7 +57,7 @@ const CourseAttachmentUploadComponent = ({identifier}) => {
                 </Col>
                 <Col md={3}>
                     <Form.Control
-                        className="form-style"
+                        className={(`title_${identifier}` in errors) ? 'field-error form-style' : 'form-style'}
                         type="text"
                         placeholder="Enter Title"
                         name={`name${identifier}`}

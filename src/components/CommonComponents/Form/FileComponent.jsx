@@ -3,7 +3,7 @@ import "../../../assets/styles/Upload.scss";
 import {isValidFileType, mapFileTypes} from "../../Config/HelperUtils";
 import {toast} from "react-toastify";
 
-const FileComponent = ({identifier, addFile, fileName, findFile, accept = "*/*"}) => {
+const FileComponent = ({identifier, addFile, fileName, findFile, accept = "*/*", error = false}) => {
 
     const handleFileName = (e) => {
         e.preventDefault();
@@ -30,7 +30,7 @@ const FileComponent = ({identifier, addFile, fileName, findFile, accept = "*/*"}
     };
 
     return (
-        <div className="fileUpload btn btn-orange" key={`attachment${identifier}`}>
+        <div className={`fileUpload btn btn-orange ${error ? 'file-upload-error' : ''}`} key={`attachment${identifier}`}>
             <img src="/upload.png" className="icon" alt="img"/>
             <span className="uploadDescription" id={`upload${identifier}`}>
                 {fileName()}

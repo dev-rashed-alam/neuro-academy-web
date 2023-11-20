@@ -124,11 +124,33 @@ const CourseForm = ({
         if (inputData["type"]?.value) {
             return files.map(item => (
                 <div className="pt-1 pb-1" key={`custom_upload_attachment_${item}`}>
-                    <CourseAttachmentUploadComponent identifier={item}/>
+                    <CourseAttachmentUploadComponent errors={errors} identifier={item}/>
                 </div>
             ));
         }
     };
+
+    const checkAttachmentValidation = () => {
+        let errorList = [];
+        if (files.length > 0) {
+            for (let item of files) {
+                let isFileExist = attachments.find(obj => obj.identifier === item);
+                if (!isFileExist?.file) {
+                    errorList.push({
+                        path: `attachment_${item}`,
+                        message: 'File Required!'
+                    })
+                }
+                if (!isFileExist?.title) {
+                    errorList.push({
+                        path: `title_${item}`,
+                        message: 'Title Required!'
+                    })
+                }
+            }
+        }
+        return errorList;
+    }
 
     const handleSubmit = () => {
         if (inputData?.thumbnail && !isValidFileType(['image/jpeg', 'image/png'], inputData?.thumbnail?.type)) {
@@ -139,22 +161,31 @@ const CourseForm = ({
             ...inputData,
             isThumbnailExist: selectedCourse?.id ? !!selectedCourse.thumbnail : !!inputData.thumbnail
         }
+        const attachmentErrors = checkAttachmentValidation()
         courseSchema
             .validate(objForValidate, {abortEarly: false})
             .then(async () => {
-                setLoader(true);
-                let postData = {...inputData, categoryId: inputData.category?.map(item => item.value)}
-                delete postData.category
-                delete postData.type
-                if (selectedCourse?.id) await updateCourseById(postData, selectedCourse.id, youtubeVideos, tutorials, attachments)
-                if (!selectedCourse?.id) await addCourse(postData, youtubeVideos, tutorials, attachments)
-                await fetchCourseList();
-                handleClose();
-                setLoader(false);
+                if (attachmentErrors.length === 0) {
+                    setLoader(true);
+                    let postData = {...inputData, categoryId: inputData.category?.map(item => item.value)}
+                    delete postData.category
+                    delete postData.type
+                    if (selectedCourse?.id) await updateCourseById(postData, selectedCourse.id, youtubeVideos, tutorials, attachments)
+                    if (!selectedCourse?.id) await addCourse(postData, youtubeVideos, tutorials, attachments)
+                    await fetchCourseList();
+                    handleClose();
+                    setLoader(false);
+                } else {
+                    setErrors(getErrorMessages({inner: attachmentErrors}))
+                }
             })
             .catch(function (err) {
                 setLoader(false)
-                setErrors(getErrorMessages(err));
+                let cloneError = {inner: [...err.inner]}
+                if(attachmentErrors.length > 0) {
+                    cloneError = {inner:  [...err.inner, ...attachmentErrors]}
+                }
+                setErrors(getErrorMessages(cloneError));
             });
     };
 
@@ -190,7 +221,7 @@ const CourseForm = ({
                 addNewYoutubeVideos(tmpYoutubeVideos);
                 let videoIds = tmpYoutubeVideos.map(item => item.videoId)
                 const duration = await fetchYoutubeVideoDuration(videoIds)
-                setInputData(prev => ({...prev, courseDuration : parseInt(prev.courseDuration || 0) + duration}))
+                setInputData(prev => ({...prev, courseDuration: parseInt(prev.courseDuration || 0) + duration}))
                 if ("nextPageToken" in response) {
                     handleYoutubePlaylist(response.nextPageToken);
                 } else {
