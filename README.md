@@ -19,7 +19,7 @@ https://neuro-academy.netlify.app/
 
 ***
 
-1. Copy .env.example and rename it to .env
+1. Copy `.env.example` and rename it to `.env`
 2. Add your YouTube API key in "REACT_APP_YOUTUBE_API_KEY" this variable
 3. In root folder run `npm install`
 4. In root folder run `npm start`
