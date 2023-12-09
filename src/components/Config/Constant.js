@@ -1,8 +1,7 @@
-const dateFormat = "dd-MM-yyyy";
-const API_BASE_URL = "https://academy.algomatrixs.com";
-// const API_BASE_URL = "http://localhost:5000";
-const youtubeUrl = "https://www.googleapis.com/youtube/v3";
-const youtubeApiKey = "AIzaSyDf60k7A9Jg54hGwLgw1Hx5wKiEuiGu1Ko";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const dateFormat = process.env.REACT_APP_DATE_FORMAT;
+const youtubeUrl = process.env.REACT_APP_YOUTUBE_API_URL;
+const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
 
 const apiEndPoints = {
     login: `${API_BASE_URL}/login`,

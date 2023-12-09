@@ -1,9 +1,9 @@
-# Academy Web Project Using React JS
+# Neuro Academy Web
 
 ***
 
 #### Live Demo Link
-
+https://neuro-academy.netlify.app/
 
 
 ***
@@ -12,20 +12,21 @@
 
 ***
 
-1. Node version `14.20.1`
+1. Node version `16.20.1`
 2. Yarn version `1.22.19`
 
 #### Installation process
 
 ***
 
-1. git clone `https://github.com/dev-rashed-alam/academy-web.git`
-2. In root folder run `npm install`
-3. In root folder run `npm start`
+1. copy .env.example and rename it to .env
+2. Add your YouTube API key in "REACT_APP_YOUTUBE_API_KEY" this variable
+3. In root folder run `npm install`
+4. In root folder run `npm start`
 
 #### Admin credentials
 
 ***
 
-1. Email `admin@gmail.com`
-2. Password `secret`
+1. Email `dev.rashedalam@gmail.com`
+2. Password `12345678`
