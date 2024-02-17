@@ -9,7 +9,10 @@ import {ReactComponent as IconHat} from "../../../assets/images/icons/loginLogo.
 import {printApiErrors} from "../../Config/HelperUtils";
 
 const Login = (props) => {
-    const [inputData, setInputData] = useState({});
+    const [inputData, setInputData] = useState({
+        email: "dev.rashedalam@gmail.com",
+        password: "12345678"
+    });
     const {setLoader} = useContext(FormContext);
 
     const handleChange = (e) => {
@@ -48,14 +51,14 @@ const Login = (props) => {
                     <input
                         type="email"
                         name="email"
-                        value={inputData.email || "dev.rashedalam@gmail.com"}
+                        value={inputData.email}
                         placeholder="Email Address"
                         onChange={handleChange}
                     />
                     <input
                         type="password"
                         name="password"
-                        value={inputData.password || "12345678"}
+                        value={inputData.password}
                         placeholder="password"
                         onChange={handleChange}
                     />
