@@ -48,14 +48,14 @@ const Login = (props) => {
                     <input
                         type="email"
                         name="email"
-                        value={inputData.email || ""}
+                        value={inputData.email || "dev.rashedalam@gmail.com"}
                         placeholder="Email Address"
                         onChange={handleChange}
                     />
                     <input
                         type="password"
                         name="password"
-                        value={inputData.password || ""}
+                        value={inputData.password || "12345678"}
                         placeholder="password"
                         onChange={handleChange}
                     />
