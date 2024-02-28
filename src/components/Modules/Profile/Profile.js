@@ -215,6 +215,8 @@ const Profile = () => {
                                     ? "form-control field-error"
                                     : "form-control"
                             }
+                            readOnly={true}
+                            placeholder={"Disabled due to testing purpose"}
                             value={inputData.password || ""}
                             onChange={handleChange}
                             autoComplete="new-password"
@@ -237,6 +239,8 @@ const Profile = () => {
                             name="confirmPassword"
                             value={inputData.confirmPassword || ""}
                             onChange={handleChange}
+                            readOnly={true}
+                            placeholder={"Disabled due to testing purpose"}
                             className={
                                 errors &&
                                 Object.keys(errors).length > 0 &&
