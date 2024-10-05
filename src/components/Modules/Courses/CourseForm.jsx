@@ -23,6 +23,7 @@ import CustomVideoList from "./CustomVideoList";
 import {findAllCategories} from "../../../services/Category";
 import CourseAttachmentUploadComponent from "../../CommonComponents/Form/CourseAttachmentUploadComponent";
 import CourseMaterialList from "./CourseMaterialList";
+import CourseMCQ from "./CourseMCQ";
 
 const optionForCourseUpload = [
     {value: "youtube", label: "Youtube Link"}
@@ -481,6 +482,7 @@ const CourseForm = ({
             {renderUploadedAttachments()}
             {renderAttachmentUploadButton()}
             <CourseMaterialList selectedCourse={selectedCourse}/>
+            <CourseMCQ />
             <Row>
                 <Col>
                     <EditorComponent

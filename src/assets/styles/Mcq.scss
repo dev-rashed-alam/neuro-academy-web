@@ -1,0 +1,85 @@
+.form-container {
+  background-color: #2a3042;
+  padding: 20px;
+  border: 1px solid #726e6e;
+  border-radius: 8px;
+  margin: auto;
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: 700;
+  border: none;
+  margin-bottom: 5px;
+}
+
+.form-description {
+  font-size: 16px;
+  font-weight: 400;
+  color: #5f6368;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.form-question {
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+.form-option {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 5px 0;
+}
+
+.form-option-row {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.delete-option-btn {
+  background-color: transparent;
+  color: #5f6368;
+  border: none;
+  font-size: 18px;
+  width: 25px !important;
+}
+
+.add-option-btn {
+  font-size: 14px;
+  color: #1967d2;
+}
+
+.add-option-btn:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+button:focus,
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+input[type='text']::placeholder {
+  color: #5f6368;
+  font-weight: 400;
+}
+
+.form-switch input {
+  color: #1967d2;
+}
+
+.mcq-question .col {
+  padding: 0 !important;
+}
+
+.question-container {
+  border-radius: 8px;
+  border: 1px solid #726e6e;
+  padding: 20px;
+  margin-bottom: 20px;
+}
