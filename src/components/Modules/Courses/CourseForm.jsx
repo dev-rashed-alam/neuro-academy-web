@@ -24,6 +24,7 @@ import {findAllCategories} from "../../../services/Category";
 import CourseAttachmentUploadComponent from "../../CommonComponents/Form/CourseAttachmentUploadComponent";
 import CourseMaterialList from "./CourseMaterialList";
 import CourseMCQ from "./CourseMCQ";
+import DraftMcq from "./DraftMcq";
 
 const optionForCourseUpload = [
     {value: "youtube", label: "Youtube Link"}
@@ -37,6 +38,9 @@ const CourseForm = ({
                     }) => {
     const [categories, setCategories] = useState([]);
     const [errors, setErrors] = useState({});
+    const [isShowMCQ, setIsShowMCQ] = useState(false)
+    const [mcqs, setMcqs] = useState([])
+    const [mcqErrors, setMcqErrors] = useState({})
     const {
         setLoader,
         videos,
@@ -166,13 +170,17 @@ const CourseForm = ({
         courseSchema
             .validate(objForValidate, {abortEarly: false})
             .then(async () => {
+                if(Object.keys(mcqErrors).length > 0 || isShowMCQ) {
+                    toast.warning("Please Save MCQ Question Before Submit!")
+                    return;
+                }
                 if (attachmentErrors.length === 0) {
                     setLoader(true);
                     let postData = {...inputData, categoryId: inputData.category?.map(item => item.value)}
                     delete postData.category
                     delete postData.type
-                    if (selectedCourse?.id) await updateCourseById(postData, selectedCourse.id, youtubeVideos, tutorials, attachments)
-                    if (!selectedCourse?.id) await addCourse(postData, youtubeVideos, tutorials, attachments)
+                    if (selectedCourse?.id) await updateCourseById(postData, selectedCourse.id, youtubeVideos, tutorials, attachments, mcqs)
+                    if (!selectedCourse?.id) await addCourse(postData, youtubeVideos, tutorials, attachments, mcqs)
                     await fetchCourseList();
                     handleClose();
                     setLoader(false);
@@ -183,8 +191,8 @@ const CourseForm = ({
             .catch(function (err) {
                 setLoader(false)
                 let cloneError = {inner: [...err.inner]}
-                if(attachmentErrors.length > 0) {
-                    cloneError = {inner:  [...err.inner, ...attachmentErrors]}
+                if (attachmentErrors.length > 0) {
+                    cloneError = {inner: [...err.inner, ...attachmentErrors]}
                 }
                 setErrors(getErrorMessages(cloneError));
             });
@@ -357,6 +365,12 @@ const CourseForm = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const handleMcqSave = (postData) => {
+        setMcqs(prev => [...prev, postData])
+        setIsShowMCQ(false)
+        setMcqErrors({})
+    }
+
     return (
         <ModalComponent
             show={modalShow}
@@ -482,7 +496,22 @@ const CourseForm = ({
             {renderUploadedAttachments()}
             {renderAttachmentUploadButton()}
             <CourseMaterialList selectedCourse={selectedCourse}/>
-            <CourseMCQ />
+            <Row>
+                <Col>
+                    <Button
+                        disabled={isShowMCQ}
+                        name="Add New MCQ"
+                        className="btn btn-primary mt-2 mb-2"
+                        onClickEvent={() => setIsShowMCQ(true)}
+                    />
+                </Col>
+            </Row>
+            {isShowMCQ && <CourseMCQ
+                onSave={handleMcqSave}
+                errors={mcqErrors}
+                setErrors={setMcqErrors}
+            />}
+            {mcqs.length > 0 && <DraftMcq mcqList={mcqs}/>}
             <Row>
                 <Col>
                     <EditorComponent

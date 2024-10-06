@@ -6,12 +6,11 @@ import {v4 as uuidv4} from 'uuid';
 import "../../../assets/styles/Mcq.scss"
 
 const uId = uuidv4();
-const MultipleChoiceForm = () => {
+const MultipleChoiceForm = ({onSave, errors, setErrors}) => {
     const [questionInfo, setQuestionInfo] = useState({
         title: "",
         description: ""
     });
-
     const [questionList, setQuestionList] = useState([
         {questionText: "", options: [{text: "", isCorrect: false}], uId: uId}
     ]);
@@ -86,6 +85,9 @@ const MultipleChoiceForm = () => {
                             value={item.questionText}
                             onChange={(e) => addQuestionText(e, item.uId)}
                         />
+                        {errors?.[`question_${item.uId}`] && <Form.Control.Feedback type="invalid">
+                            {errors[`question_${item.uId}`]}
+                        </Form.Control.Feedback>}
                     </Form.Group>
                     {item.options.map((option, index) => (
                         <Row key={`option_${index}`} className="align-items-center mb-3 mcq-question">
@@ -129,9 +131,45 @@ const MultipleChoiceForm = () => {
                             </Col>
                         </Row>
                     ))}
+                    {errors?.[`option_${item.uId}`] && <Form.Control.Feedback type="invalid">
+                        {errors[`option_${item.uId}`]}
+                    </Form.Control.Feedback>}
                 </div>
             )
         })
+    }
+
+    const isValid = () => {
+        const tmpErrors = {};
+        if (!questionInfo?.title) {
+            tmpErrors['title'] = 'Title is required'
+        }
+        if (!questionInfo?.description) {
+            tmpErrors['description'] = 'Description is required'
+        }
+
+        for (let item of questionList) {
+            if (!item?.questionText) {
+                tmpErrors[`question_${item.uId}`] = 'Question is required'
+            }
+            const isOptionExist = item.options.filter(option => option.text !== '')
+            if (isOptionExist.length === 0) {
+                tmpErrors[`option_${item.uId}`] = 'Option is required'
+            } else {
+                let isQuestionAnswerExist = item.options.filter(option => option.isCorrect === true)
+                if (isQuestionAnswerExist.length === 0) {
+                    tmpErrors[`option_${item.uId}`] = 'At least one answer is required'
+                }
+            }
+        }
+        setErrors(tmpErrors)
+        return Object.keys(tmpErrors).length === 0
+    }
+
+    const handleDraft = () => {
+        if (isValid()) {
+            onSave({...questionInfo, questions: questionList})
+        }
     }
 
     return (
@@ -141,7 +179,7 @@ const MultipleChoiceForm = () => {
                     <Form.Control
                         type="text"
                         placeholder="Untitled form"
-                        className="form-style mb-3"
+                        className="form-style mb-2"
                         value={questionInfo.title}
                         onChange={(e) => {
                             e.preventDefault();
@@ -152,6 +190,9 @@ const MultipleChoiceForm = () => {
                             }))
                         }}
                     />
+                    {errors?.title && <Form.Control.Feedback type="invalid">
+                        {errors.title}
+                    </Form.Control.Feedback>}
                     <Form.Control
                         as="textarea"
                         placeholder="Form description"
@@ -166,6 +207,9 @@ const MultipleChoiceForm = () => {
                             }))
                         }}
                     />
+                    {errors?.description && <Form.Control.Feedback type="invalid">
+                        {errors.description}
+                    </Form.Control.Feedback>}
                 </Form.Group>
                 {renderQuestionList()}
                 <Col className="text-center">
@@ -173,7 +217,7 @@ const MultipleChoiceForm = () => {
                         Add question
                     </Button>
                     &nbsp;
-                    <Button className="btn btn-primary" onClick={addQuestion}>
+                    <Button className="btn btn-primary" onClick={handleDraft}>
                         Draft question
                     </Button>
                 </Col>

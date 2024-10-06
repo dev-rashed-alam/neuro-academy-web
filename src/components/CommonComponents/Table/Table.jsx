@@ -14,141 +14,141 @@ import {MdFirstPage, MdLastPage} from "react-icons/md";
 import {RiSearchEyeLine} from "react-icons/ri";
 
 const Styles = styled.div`
-  .table-wrapper {
-    display: block;
-    width: 100%;
-    overflow: hidden;
-    overflow-x: auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+    .table-wrapper {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        overflow-x: auto;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 
-  table {
-    border-spacing: 0;
-    width: 100% !important;
-    color: #c3cbe4;
-    font-family: "Poppins", sans-serif;
-    font-size: 0.8125rem;
-    line-height: 1.5;
-    white-space: nowrap;
+    table {
+        border-spacing: 0;
+        width: 100% !important;
+        color: #c3cbe4;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        white-space: nowrap;
 
-    tr {
-      :last-child {
-        td {
-          border-bottom: 0;
+        tr {
+            :last-child {
+                td {
+                    border-bottom: 0;
+                }
+            }
+
+            th {
+                border-top: 1px solid #32394e;
+                background-color: #32394e;
+                font-weight: 600 !important;
+            }
         }
-      }
 
-      th {
-        border-top: 1px solid #32394e;
-        background-color: #32394e;
-        font-weight: 600 !important;
-      }
+        th,
+        td {
+            margin: 0;
+            padding: 0.75rem;
+            border-bottom: 1px solid #32394e;
+            line-height: 1.5;
+            font-weight: 400;
+        }
     }
 
-    th,
-    td {
-      margin: 0;
-      padding: 0.75rem;
-      border-bottom: 1px solid #32394e;
-      line-height: 1.5;
-      font-weight: 400;
-    }
-  }
+    .pagination {
+        padding: 0.5rem;
+        float: right;
 
-  .pagination {
-    padding: 0.5rem;
-    float: right;
+        svg {
+            cursor: pointer;
+        }
 
-    svg {
-      cursor: pointer;
-    }
+        span {
+            padding: 7px 20px 5px;
+            line-height: 1.5;
+            font-weight: 400;
+            color: #c3cbe4;
+            font-family: "Poppins", sans-serif;
+            font-size: 0.8125rem;
+        }
 
-    span {
-      padding: 7px 20px 5px;
-      line-height: 1.5;
-      font-weight: 400;
-      color: #c3cbe4;
-      font-family: "Poppins", sans-serif;
-      font-size: 0.8125rem;
-    }
-
-    button {
-      border: none;
-      background-color: transparent;
-      color: #fff;
-      font-size: 1.3rem;
-      outline: none;
-    }
-  }
-
-  .search {
-    padding: 1rem 0;
-    float: right;
-    clear: both;
-    overflow: hidden;
-
-    .input-group {
-      border-bottom: 1px solid #fff !important;
-      width: auto;
-
-      .input-group-text {
-        background-color: transparent;
-        border: none;
-        padding: 0 10px 0 0;
-      }
+        button {
+            border: none;
+            background-color: transparent;
+            color: #fff;
+            font-size: 1.3rem;
+            outline: none;
+        }
     }
 
-    input {
-      border: none;
-      height: 36px;
-      padding-left: 0;
-      background-color: #2a3042;
-      box-shadow: none;
-      color: #c3cbe4 !important;
-      font-family: "Poppins", sans-serif !important;
-      font-size: 0.8125rem !important;
-      line-height: 1.5 !important;
-      font-weight: 400 !important;
+    .search {
+        padding: 1rem 0;
+        float: right;
+        clear: both;
+        overflow: hidden;
+
+        .input-group {
+            border-bottom: 1px solid #fff !important;
+            width: auto;
+
+            .input-group-text {
+                background-color: transparent;
+                border: none;
+                padding: 0 10px 0 0;
+            }
+        }
+
+        input {
+            border: none;
+            height: 36px;
+            padding-left: 0;
+            background-color: #2a3042;
+            box-shadow: none;
+            color: #c3cbe4 !important;
+            font-family: "Poppins", sans-serif !important;
+            font-size: 0.8125rem !important;
+            line-height: 1.5 !important;
+            font-weight: 400 !important;
+        }
     }
-  }
 
-  .custom-checkbox {
-    text-align: center;
-    padding-left: 0.5rem !important;
-  }
+    .custom-checkbox {
+        text-align: center;
+        padding-left: 0.5rem !important;
+    }
 
-  .custom-control-label::after,
-  .custom-control-label::before {
-    position: absolute;
-    top: 0.10938rem;
-    left: -0.5rem;
-    display: block;
-    width: 1rem;
-    height: 1rem;
-    content: "";
-    box-shadow: none !important;
-    outline: none !important;
-    border: none !important;
-  }
+    .custom-control-label::after,
+    .custom-control-label::before {
+        position: absolute;
+        top: 0.10938rem;
+        left: -0.5rem;
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        content: "";
+        box-shadow: none !important;
+        outline: none !important;
+        border: none !important;
+    }
 
-  .custom-control-label::before {
-    pointer-events: none;
-    background-color: #2e3548;
-    border: 1px solid #32394e;
-  }
+    .custom-control-label::before {
+        pointer-events: none;
+        background-color: #2e3548;
+        border: 1px solid #32394e;
+    }
 
-  .custom-checkbox .custom-control-label::before {
-    border-radius: 0.25rem;
-  }
+    .custom-checkbox .custom-control-label::before {
+        border-radius: 0.25rem;
+    }
 
-  .custom-control-label::before,
-  .custom-file-label,
-  .custom-select {
-    transition: background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
+    .custom-control-label::before,
+    .custom-file-label,
+    .custom-select {
+        transition: background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
 `;
 
 function GlobalFilter({
@@ -187,6 +187,7 @@ function Table({
                    selection,
                    paginationUtil,
                    triggerPagination,
+                   search = true
                }) {
     const {
         getTableProps,
@@ -211,13 +212,13 @@ function Table({
 
     return (
         <>
-            <div className="search">
+            {search && <div className="search">
                 <GlobalFilter
                     preGlobalFilteredRows={preGlobalFilteredRows}
                     globalFilter={state.globalFilter}
                     setGlobalFilter={setGlobalFilter}
                 />
-            </div>
+            </div>}
             <div className="table-wrapper">
                 <table {...getTableProps()}>
                     <thead>
@@ -293,6 +294,7 @@ function TableComponent({
                             pagination,
                             paginationUtil,
                             triggerPagination,
+                            search = true
                         }) {
     const columns = React.useMemo(() => tableColumn, [tableColumn]);
 
@@ -309,6 +311,7 @@ function TableComponent({
                         pagination={pagination}
                         paginationUtil={paginationUtil}
                         triggerPagination={triggerPagination}
+                        search={search}
                     />
                 </Styles>
             </Card.Body>

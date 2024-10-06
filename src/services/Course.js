@@ -24,10 +24,13 @@ export const fetchCourseById = async (courseId) => {
     }
 }
 
-const processCourseData = (postData, youtubeVideos, customVideos, attachments) => {
+const processCourseData = (postData, youtubeVideos, customVideos, attachments, mcqs = []) => {
     const formData = new FormData();
     for (let item in postData) {
         formData.append(item, postData[item])
+    }
+    if(mcqs.length > 0){
+        formData.append('mcqs', JSON.stringify(mcqs));
     }
     if (customVideos) {
         let i = 0;
@@ -90,9 +93,9 @@ const processCourseData = (postData, youtubeVideos, customVideos, attachments) =
     return formData
 }
 
-export const updateCourseById = async (postData, id, youtubeVideos = [], customVideos = undefined, attachments = undefined) => {
+export const updateCourseById = async (postData, id, youtubeVideos = [], customVideos = undefined, attachments = undefined, mcqs = []) => {
     try {
-        const formData = processCourseData(postData, youtubeVideos, customVideos, attachments)
+        const formData = processCourseData(postData, youtubeVideos, customVideos, attachments, mcqs)
         const {data} = await apiHandler.PUT("courses", id, formData)
         return data
     } catch (error) {
@@ -100,9 +103,9 @@ export const updateCourseById = async (postData, id, youtubeVideos = [], customV
     }
 }
 
-export const addCourse = async (postData, youtubeVideos = [], customVideos = undefined, attachments = undefined) => {
+export const addCourse = async (postData, youtubeVideos = [], customVideos = undefined, attachments = undefined, mcqs = []) => {
     try {
-        const formData = processCourseData(postData, youtubeVideos, customVideos, attachments)
+        const formData = processCourseData(postData, youtubeVideos, customVideos, attachments, mcqs)
         const {data} = await apiHandler.POST("courses", formData)
         return data
     } catch (error) {
