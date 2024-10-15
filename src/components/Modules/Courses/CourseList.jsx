@@ -65,7 +65,7 @@ const CourseList = () => {
     const renderUpdateButton = (item) => {
         return (
             <Button
-                name="Update"
+                name="Details"
                 className="btn btn-danger btn-sm"
                 onClickEvent={() => openModalForUpdate(item)}
             />

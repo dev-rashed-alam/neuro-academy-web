@@ -19,6 +19,7 @@ const apiEndPoints = {
     dashboardCounts: `${API_BASE_URL}/dashboard/all-counts`,
     weeklyPurchaseReport: `${API_BASE_URL}/dashboard/purchase/report/this-week`,
     yearlyPurchaseReport: `${API_BASE_URL}/dashboard/purchase/report/this-year`,
+    userByUserType: `${API_BASE_URL}/users/user-type`,
 };
 
 

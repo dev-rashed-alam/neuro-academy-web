@@ -3,7 +3,7 @@ import {
     FaUserGraduate,
     FaCodepen,
     FaBookReader,
-    FaBlog,
+    FaBlog, FaUsers,
 } from "react-icons/fa";
 import {FiSettings} from "react-icons/fi";
 import {NavLink} from "react-router-dom";
@@ -88,12 +88,12 @@ class Sidebar extends Component {
                     "Course Management",
                     "isHoverItemTwo"
                 )}
-                {/*{this.renderSingleMenu(*/}
-                {/*    "/students",*/}
-                {/*    <FaUsers/>,*/}
-                {/*    "Student Management",*/}
-                {/*    "isHoverItemThree"*/}
-                {/*)}*/}
+                {this.renderSingleMenu(
+                    "/students",
+                    <FaUsers/>,
+                    "Student Management",
+                    "isHoverItemThree"
+                )}
                 {this.renderSingleMenu(
                     "/orders",
                     <GiPaintBucket/>,

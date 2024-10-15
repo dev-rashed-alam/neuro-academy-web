@@ -11,6 +11,7 @@ import ArticleList from "../Modules/Articles/ArticleList";
 import { getToken } from "../Config/SessionUtils";
 import Profile from "../Modules/Profile/Profile";
 import PurchaseDetails from "../Modules/Purchases/PurchaseDetails";
+import UserList from "../Modules/User/UserList";
 
 const ProtectedRoute = () => {
   if (getToken() !== null) {
@@ -27,6 +28,7 @@ const ProtectedRoute = () => {
           />
           <Route exact={true} path="/courses" component={CourseList} />
           <Route exact={true} path="/categories" component={CategoryList} />
+          <Route exact={true} path="/students" component={UserList} />
           <Route exact={true} path="/coupons" component={CouponList} />
           <Route exact={true} path="/articles" component={ArticleList} />
           <Route exact={true} path="/settings" component={Profile} />

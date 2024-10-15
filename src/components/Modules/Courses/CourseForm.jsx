@@ -89,6 +89,9 @@ const CourseForm = ({
                     postData["totalVideos"] = data.youtubeVideos.length;
                     addNewYoutubeVideos(data.youtubeVideos)
                 }
+                if(data?.mcqs?.length > 0){
+                    setMcqs(data.mcqs)
+                }
                 setInputData(postData);
                 setLoader(false);
             }).catch((error) => {
