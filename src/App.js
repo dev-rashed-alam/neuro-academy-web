@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./assets/styles/App.scss";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ProtectedRoute from "./components/Route/ProtectedRoute";
 import Login from "./components/Modules/Login/Login";
 import LoaderComponent from "./components/CommonComponents/Loader/Loader";
@@ -12,12 +12,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/*" component={ProtectedRoute} />
         </Switch>
-      </Router>
+      </BrowserRouter>
       <LoaderComponent showLoader={loader} />
       <Notification />
     </div>

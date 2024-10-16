@@ -514,7 +514,7 @@ const CourseForm = ({
                 errors={mcqErrors}
                 setErrors={setMcqErrors}
             />}
-            {mcqs.length > 0 && <DraftMcq mcqList={mcqs}/>}
+            {mcqs.length > 0 && <DraftMcq mcqList={mcqs} selectedCourse={selectedCourse}/>}
             <Row>
                 <Col>
                     <EditorComponent

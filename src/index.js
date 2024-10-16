@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import FormContextProvider from "./components/Context/FormContext";
 
 ReactDOM.render(
-  <HashRouter>
+  <BrowserRouter>
     <FormContextProvider>
       <App />
     </FormContextProvider>
-  </HashRouter>,
+  </BrowserRouter>,
   document.getElementById("root")
 );

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Form, Button, Row, Col, Container} from 'react-bootstrap';
 import {FaRegTrashAlt} from "react-icons/fa";
 import {IoIosAddCircle} from "react-icons/io";
@@ -6,7 +6,7 @@ import {v4 as uuidv4} from 'uuid';
 import "../../../assets/styles/Mcq.scss"
 
 const uId = uuidv4();
-const MultipleChoiceForm = ({onSave, errors, setErrors}) => {
+const CourseMCQ = ({onSave, errors, setErrors, isReadOnly = false, dataSet = null}) => {
     const [questionInfo, setQuestionInfo] = useState({
         title: "",
         description: ""
@@ -14,6 +14,31 @@ const MultipleChoiceForm = ({onSave, errors, setErrors}) => {
     const [questionList, setQuestionList] = useState([
         {questionText: "", options: [{text: "", isCorrect: false}], uId: uId}
     ]);
+
+    useEffect(() => {
+        if (dataSet !== null) {
+            setQuestionInfo({
+                title: dataSet.mcq.title,
+                description: dataSet.mcq.description
+            })
+            if (dataSet?.studentResponse?.responses) {
+                let tmpList = [];
+                for (let item of dataSet?.studentResponse?.responses) {
+                    const selectedQuestion = dataSet.mcq.questions.find(question => question.id === item.questionId)
+                    const tmpOptions = selectedQuestion.options.map(option => ({
+                        ...option,
+                        selectedByUser: [...item.selectedOptionIds].includes(option.id)
+                    }))
+                    tmpList.push({
+                        questionText: selectedQuestion.questionText,
+                        options: tmpOptions,
+                        uId: item.id
+                    })
+                }
+                setQuestionList(tmpList)
+            }
+        }
+    }, [dataSet]);
 
     const handleOptionChange = (e, optionIdx, questionId) => {
         let value = e.target.value;
@@ -84,6 +109,7 @@ const MultipleChoiceForm = ({onSave, errors, setErrors}) => {
                             className="form-style"
                             value={item.questionText}
                             onChange={(e) => addQuestionText(e, item.uId)}
+                            readOnly={isReadOnly}
                         />
                         {errors?.[`question_${item.uId}`] && <Form.Control.Feedback type="invalid">
                             {errors[`question_${item.uId}`]}
@@ -97,18 +123,20 @@ const MultipleChoiceForm = ({onSave, errors, setErrors}) => {
                                     name={`question_option_${index}`}
                                     checked={option.isCorrect}
                                     onChange={(e) => handleIsCorrect(item.uId, index, e)}
+                                    disabled={isReadOnly}
                                 />
                             </Col>
                             <Col>
                                 <Form.Control
                                     type="text"
                                     placeholder={`Option ${index + 1}`}
-                                    className="form-style"
+                                    className={`form-style ${option?.selectedByUser ? 'highlight-border' : ''}`}
                                     value={option.text}
                                     onChange={(e) => handleOptionChange(e, index, item.uId)}
+                                    readOnly={isReadOnly}
                                 />
                             </Col>
-                            <Col xs="auto">
+                            {!isReadOnly && <Col xs="auto">
                                 {item.options.length > 1 && <Button
                                     variant="outline-light"
                                     className="delete-option-btn"
@@ -128,7 +156,7 @@ const MultipleChoiceForm = ({onSave, errors, setErrors}) => {
                                 >
                                     <IoIosAddCircle/>
                                 </Button>
-                            </Col>
+                            </Col>}
                         </Row>
                     ))}
                     {errors?.[`option_${item.uId}`] && <Form.Control.Feedback type="invalid">
@@ -172,11 +200,14 @@ const MultipleChoiceForm = ({onSave, errors, setErrors}) => {
         }
     }
 
+    console.log(isReadOnly)
+
     return (
         <Container className="form-container mt-4 mb-4">
             <Form>
                 <Form.Group controlId="formTitle" className="mb-4">
                     <Form.Control
+                        readOnly={isReadOnly}
                         type="text"
                         placeholder="Untitled form"
                         className="form-style mb-2"
@@ -194,6 +225,7 @@ const MultipleChoiceForm = ({onSave, errors, setErrors}) => {
                         {errors.title}
                     </Form.Control.Feedback>}
                     <Form.Control
+                        readOnly={isReadOnly}
                         as="textarea"
                         placeholder="Form description"
                         className="form-style"
@@ -212,7 +244,7 @@ const MultipleChoiceForm = ({onSave, errors, setErrors}) => {
                     </Form.Control.Feedback>}
                 </Form.Group>
                 {renderQuestionList()}
-                <Col className="text-center">
+                {!isReadOnly && <Col className="text-center">
                     <Button className="btn btn-primary" onClick={addQuestion}>
                         Add question
                     </Button>
@@ -220,10 +252,10 @@ const MultipleChoiceForm = ({onSave, errors, setErrors}) => {
                     <Button className="btn btn-primary" onClick={handleDraft}>
                         Draft question
                     </Button>
-                </Col>
+                </Col>}
             </Form>
         </Container>
     );
 };
 
-export default MultipleChoiceForm;
+export default CourseMCQ;

@@ -176,3 +176,12 @@ export const fetchYoutubePlaylist = (playListId, urlSegment) => {
             .catch((error) => reject(error));
     });
 };
+
+export const findAllStudentMcqByCourseAndMcqId = async (courseId, mcqId) => {
+    try {
+        const {data} = await apiHandler.GET("mcqs", `/courses/${courseId}/mcq/${mcqId}`)
+        return data
+    } catch (error) {
+        printApiErrors(error)
+    }
+}

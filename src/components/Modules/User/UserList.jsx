@@ -35,10 +35,8 @@ const tableColumn = [
 ];
 
 const UserList = () => {
-    const [modal, setModal] = useState(false);
     const [tableData, setTableDta] = useState([]);
-    const {setLoader, resetContext} = useContext(FormContext);
-    const [selectedCategory, setSelectedCategory] = useState({});
+    const {setLoader} = useContext(FormContext);
 
     useEffect(() => {
         fetchStudentList();

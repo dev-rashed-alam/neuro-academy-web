@@ -24,14 +24,13 @@ const tableColumn = [
         Header: "Status",
         accessor: "status",
     },
-    {
-        Header: "Action",
-        accessor: "action",
-    }
+    // {
+    //     Header: "Action",
+    //     accessor: "action",
+    // }
 ];
 
-const DraftMcq = ({mcqList}) => {
-
+const DraftMcq = ({mcqList, selectedCourse}) => {
     const [tableData, setTableData] = useState([]);
 
     const renderStatusButton = (mcq) => {
@@ -40,11 +39,14 @@ const DraftMcq = ({mcqList}) => {
                 name={mcq?.id ? 'View Submissions' : 'Pending Question'}
                 className={`btn ${mcq?.id ? 'btn-primary' : 'btn-danger'} btn-sm`}
                 disabled={!mcq?.id}
+                onClickEvent={() => {
+                    window.open(`/course/${selectedCourse.id}/mcq/${mcq.id}`, '_blank')
+                }}
             />
         );
     };
 
-   const renderActionButton = (mcq) => {
+    const renderActionButton = (mcq) => {
         return (
             <Button
                 name='Delete'
@@ -64,22 +66,25 @@ const DraftMcq = ({mcqList}) => {
             action: renderActionButton(item)
         }))
         setTableData(tmpTableData)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mcqList])
 
     return (
-        <Row>
-            <Col className={"custom-video-list"}>
-                {mcqList?.length > 0 && (
-                    <TableComponent
-                        tableColumn={tableColumn}
-                        tableData={tableData}
-                        selection={false}
-                        pagination={false}
-                        search={false}
-                    />
-                )}
-            </Col>
-        </Row>
+        <>
+            <Row>
+                <Col className={"custom-video-list"}>
+                    {mcqList?.length > 0 && (
+                        <TableComponent
+                            tableColumn={tableColumn}
+                            tableData={tableData}
+                            selection={false}
+                            pagination={false}
+                            search={false}
+                        />
+                    )}
+                </Col>
+            </Row>
+        </>
     )
 }
 
