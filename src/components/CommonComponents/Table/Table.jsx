@@ -27,7 +27,7 @@ const Styles = styled.div`
     table {
         border-spacing: 0;
         width: 100% !important;
-        color: #c3cbe4;
+        color: #000;
         font-family: "Poppins", sans-serif;
         font-size: 0.8125rem;
         line-height: 1.5;
@@ -41,8 +41,8 @@ const Styles = styled.div`
             }
 
             th {
-                border-top: 1px solid #32394e;
-                background-color: #32394e;
+                border-top: 1px solid #dee2e6;
+                background-color: transparent;
                 font-weight: 600 !important;
             }
         }
@@ -51,7 +51,7 @@ const Styles = styled.div`
         td {
             margin: 0;
             padding: 0.75rem;
-            border-bottom: 1px solid #32394e;
+            border-bottom: 1px solid #dee2e6;
             line-height: 1.5;
             font-weight: 400;
         }
@@ -90,7 +90,7 @@ const Styles = styled.div`
         overflow: hidden;
 
         .input-group {
-            border-bottom: 1px solid #fff !important;
+            border-bottom: 1px solid #dee2e6 !important;
             width: auto;
 
             .input-group-text {
@@ -104,9 +104,9 @@ const Styles = styled.div`
             border: none;
             height: 36px;
             padding-left: 0;
-            background-color: #2a3042;
+            background-color: $background-color_1;
             box-shadow: none;
-            color: #c3cbe4 !important;
+            color: #000 !important;
             font-family: "Poppins", sans-serif !important;
             font-size: 0.8125rem !important;
             line-height: 1.5 !important;
@@ -132,11 +132,10 @@ const Styles = styled.div`
         outline: none !important;
         border: none !important;
     }
-
     .custom-control-label::before {
         pointer-events: none;
         background-color: #2e3548;
-        border: 1px solid #32394e;
+        border: 1px solid #dee2e6;
     }
 
     .custom-checkbox .custom-control-label::before {

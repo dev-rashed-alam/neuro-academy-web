@@ -1,13 +1,13 @@
 @import "Reset";
 
 .card {
-  background-color: #2a3042;
   border: 0 solid #32394e;
   border-radius: .25rem;
   position: relative;
   word-wrap: break-word;
   margin-bottom: 24px;
   box-shadow: 0 .75rem 1.5rem rgba(18,38,63,.03);
+  background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%) !important;
 }
 .cardBody {
   background-color: transparent;

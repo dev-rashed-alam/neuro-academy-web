@@ -17,7 +17,8 @@ const customStyles = {
     // ...base,
     padding: "8px 12px",
     "&:hover": {
-      backgroundColor: "#000000 !important",
+      cursor: "pointer !important",
+      backgroundColor: "#e3e3e3 !important",
     },
   }),
 };

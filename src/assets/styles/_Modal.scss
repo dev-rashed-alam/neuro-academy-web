@@ -1,6 +1,8 @@
+@import "Global";
+
 .modal-content {
-  background-color: #2a3042 !important;
-  border: 1px solid #32394e !important;
+  background-color: $background-color_1 !important;
+  border: 1px solid $border_bottom_color !important;
   border-radius: .4rem !important;
   color: #bfc8e2 !important;
   font-size: 0.9rem !important;
@@ -18,7 +20,7 @@
 }
 
 .modal-header {
-  border-bottom: 1px solid #32394e !important;
+  border-bottom: 1px solid $border_bottom_color !important;
 }
 
 .modal-title{
@@ -27,7 +29,7 @@
 }
 
 .modal-footer {
-  border-top: 1px solid #32394e !important;
+  border-top: 1px solid $border_bottom_color !important;
 }
 
 .close,.close:hover,.close:focus{

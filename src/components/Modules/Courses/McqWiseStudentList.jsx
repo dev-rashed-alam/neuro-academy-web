@@ -53,7 +53,7 @@ const McqWiseStudentList = () => {
         const data = await findAllStudentMcqByCourseAndMcqId(courseId, mcqId);
         setSelectedMCQ(data.mcq)
         setCourseInfo({
-            courseName: data.studentResponse[0].courseId.title,
+            courseName: data.studentResponse?.[0]?.courseId?.title,
             mcqTitle: data.mcq.title
         })
         let resultSet = [];

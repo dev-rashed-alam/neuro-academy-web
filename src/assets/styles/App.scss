@@ -1,31 +1,18 @@
 @import "Reset";
 @import "Button";
 @import "Modal";
-
-$color_1: #27367f;
-$color_2: #fff;
-$color_3: #b1b1b5;
-$color_4: #d0cfcf;
-$color_5: #8c909a;
-$color_6: inherit;
-$color_7: #ffffff;
-$color_8: #a6b0cf;
-$font-family_1: "Poppins", sans-serif;
-$background-color_1: #2a3042;
-$background-color_2: transparent;
-$background-color_3: #32394e;
-$background-color_4: #556ee6;
+@import "Global";
 
 .navbar {
   font-weight: 400;
   transition: background 0.25s ease;
-  border-bottom: 1px solid #2a2c40;
+  //border-bottom: 1px solid #2a2c40;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
 
   .navbar-brand-wrapper {
-    background: #2a3042;
+    background: $background-color_1;
     transition: width 0.25s ease, background 0.25s ease;
     width: 240px;
     height: 70px;
@@ -62,12 +49,12 @@ $background-color_4: #556ee6;
   }
 
   .navbar-menu-wrapper {
-    background: #2a3042;
+    background: $background-color_1;
     transition: width 0.25s ease;
     color: $color_3;
     width: calc(100% - 240px);
     height: 70px;
-    border-left: 1px solid #2a2c40;
+    //border-left: 1px solid #2a2c40;
     padding-left: 1.5rem;
 
     .sidebar-toggle {
@@ -98,8 +85,9 @@ $background-color_4: #556ee6;
 }
 
 .sidebar {
+  box-shadow: 7px 0 60px rgba(0, 0, 0, 0.05);
   min-height: calc(100vh - 70px);
-  background: #2a3042;
+  background: $background-color_1;
   font-family: $font-family_1;
   font-weight: 400;
   position: fixed;
@@ -124,7 +112,7 @@ $background-color_4: #556ee6;
 
         &:hover {
           > .nav-link {
-            background: #202946;
+            background: transparent;
             color: $color_4;
           }
         }
@@ -174,15 +162,15 @@ $background-color_4: #556ee6;
         position: relative;
 
         .menu-title {
-          color: $color_2;
+          color: $color_5;
         }
 
         .menu-icon {
-          color: $color_2;
+          color: $color_5;
         }
 
         .menu-arrow {
-          color: $color_2;
+          color: $color_5;
         }
       }
     }
@@ -302,7 +290,6 @@ $background-color_4: #556ee6;
     list-style: none;
     background-color: $background-color_1;
     background-clip: padding-box;
-    border: 1px solid #32394e;
     border-radius: 0.25rem;
     display: none;
 
@@ -323,19 +310,18 @@ $background-color_4: #556ee6;
           display: flex;
           align-items: flex-start;
 
-          &:hover {
-            background-color: $background-color_3;
+          &:hover{
+            background: #e3e3e3;
           }
 
           .avatar {
             height: 2rem;
             width: 2rem;
-            margin-right: 1rem !important;
 
             .avatar-title {
               align-items: center;
               background-color: $background-color_4;
-              color: $color_2;
+              color: $color_5;
               display: flex;
               font-weight: 500;
               height: 100%;
@@ -348,7 +334,7 @@ $background-color_4: #556ee6;
 
           .media-body {
             flex: 1 1;
-            color: $color_5;
+            color: $color_5 !important;
 
             h6 {
               font-size: 0.8rem;
@@ -361,6 +347,9 @@ $background-color_4: #556ee6;
             svg {
               font-size: 15px;
               padding-bottom: 3px;
+            }
+            button{
+              color: $color_5 !important;
             }
           }
         }
@@ -463,7 +452,7 @@ $background-color_4: #556ee6;
               display: flex;
               -webkit-align-items: center;
               align-items: center;
-              background: #2a3042;
+              background: $background-color_1;
               padding: 0.5rem 1.4rem;
               left: 70px;
               position: absolute;
@@ -482,7 +471,7 @@ $background-color_4: #556ee6;
 
             &:hover {
               .menu-title {
-                background: #2a3042;
+                background: $background-color_1;
               }
             }
           }
@@ -490,7 +479,7 @@ $background-color_4: #556ee6;
           .collapse {
             display: block;
             padding: 0.5rem 0;
-            background: #2a3042;
+            background: $background-color_1;
             border-radius: 0 0 5px 0;
             position: absolute;
             left: 70px;

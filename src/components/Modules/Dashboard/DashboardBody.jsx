@@ -79,7 +79,7 @@ const DashboardBody = () => {
                 <Col xs={12} sm={12} md={12} lg={12} xl={6} className="mt-3 mb-5">
                     <Card>
                         <Card.Body>
-                            <h3 className="text-center">Daily Sales Report</h3>
+                            <h3 className="text-center text-black">Daily Sales Report</h3>
                             <LineChart weeklyData={weeklyPurchase}/>
                         </Card.Body>
                     </Card>

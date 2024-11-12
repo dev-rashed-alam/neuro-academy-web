@@ -1,6 +1,8 @@
+@import "Global";
+
 .order-details {
   padding: 2rem;
-  background-color: #2a3042;
+  background-color: $background-color_1;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
   overflow: hidden;
   border-radius: 0.75rem;
@@ -19,11 +21,12 @@
       text-transform: uppercase;
       font-size: 1.25rem;
       font-weight: 700;
+      color: $color_5;
 
       .text-gray-500 {
         font-size: .75rem;
         margin-top: 0.25rem;
-        color: rgb(195, 203, 228);
+        color: $color_5;
         font-family: Poppins, sans-serif;
 
         .capitalize {
@@ -67,12 +70,12 @@
         font-weight: 700;
         display: block;
         text-transform: uppercase;
-        color: rgb(195, 203, 228);
+        color: $color_5;
         font-family: Poppins, sans-serif;
       }
 
       .text-gray-500 {
-        color: rgb(195, 203, 228);
+        color: $color_5;
         font-family: Poppins, sans-serif;
         font-size: 0.8125rem;
       }

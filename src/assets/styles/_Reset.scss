@@ -1,4 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
+@import "Global";
+
 * {
   scrollbar-width: thin;
   scrollbar-color: transparent;
@@ -9,9 +11,11 @@
   width: 8px;
   height: 5px;
 }
+
 *::-webkit-scrollbar-track {
   background: transparent;
 }
+
 *::-webkit-scrollbar-thumb {
   background-color: #8890ac !important;
   border-radius: 20px;
@@ -21,20 +25,24 @@
 .App,
 .sidebar-icon-only {
   overflow: hidden;
-  font-family: "Poppins",sans-serif;
-  background: #222736;
+  font-family: "Poppins", sans-serif;
+  background: #f1f4f6;
 }
+
 a:hover {
   cursor: pointer;
   text-decoration: none;
 }
-.p-20{
+
+.p-20 {
   padding-top: 20px !important;
   padding-bottom: 20px !important;
 }
+
 .p-0 {
   padding: 0 !important;
 }
+
 .fixed-top {
   position: fixed;
   top: 0;
@@ -42,31 +50,41 @@ a:hover {
   left: 0;
   z-index: 1030;
 }
+
 .flex-row {
   flex-direction: row !important;
 }
+
 .navbar {
+  border: none;
+
   .navbar-menu-wrapper {
     .navbar-nav {
       flex-direction: row !important;
     }
   }
 }
+
 .d-flex {
   display: flex !important;
 }
+
 .text-center {
   text-align: center !important;
 }
+
 .justify-content-center {
   justify-content: center !important;
 }
+
 .align-items-center {
   align-items: center !important;
 }
+
 .justify-content-lg-start {
   justify-content: flex-start !important;
 }
+
 .container-fluid {
   width: 100%;
   padding-right: 15px;
@@ -74,48 +92,62 @@ a:hover {
   margin-right: auto;
   margin-left: auto;
 }
+
 .flex-column {
   flex-direction: column !important;
 }
+
 .menu-icon {
   font-size: 1.25rem;
   line-height: 1;
   margin-right: 1.125rem;
   color: #8c909a;
 }
+
 .menu-arrow {
   margin-left: auto;
 }
+
 .nav-link {
   cursor: pointer;
 }
+
 article {
   display: block;
 }
+
 aside {
   display: block;
 }
+
 figcaption {
   display: block;
 }
+
 figure {
   display: block;
 }
+
 footer {
   display: block;
 }
+
 header {
   display: block;
 }
+
 hgroup {
   display: block;
 }
+
 main {
   display: block;
 }
+
 nav {
   display: block;
 }
+
 section {
   display: block;
 }
@@ -125,19 +157,23 @@ ul {
     line-height: 1.8;
   }
 }
+
 ol {
   li {
     line-height: 1.8;
   }
 }
+
 dl {
   li {
     line-height: 1.8;
   }
 }
-h1,h2,h3,h4,h5,h6,p,small{
+
+h1, h2, h3, h4, h5, h6, p, small {
   color: #f6f6f6;
 }
+
 .menu-icon .badge {
   position: absolute;
   top: 1.2rem;
@@ -150,10 +186,12 @@ h1,h2,h3,h4,h5,h6,p,small{
   animation: pulse 2s infinite;
 
 }
+
 .badge-danger {
   color: #fff;
   background-color: #f46a6a;
 }
+
 .badge {
   display: inline-block;
   padding: 0.2em 0.2em;
@@ -163,29 +201,32 @@ h1,h2,h3,h4,h5,h6,p,small{
   text-align: center;
   border-radius: 0.25rem;
 }
-.content-wrapper{
+
+.content-wrapper {
   padding: 2.5rem 2.5rem;
   width: 100%;
 }
-.card{
-  background-color: #2a3042;
+
+.card {
+  background-color: $background-color_1;
   background-clip: border-box;
   border: 0 solid #32394e;
   border-radius: .25rem;
-  box-shadow: 0 .75rem 1.5rem rgba(18,38,63,.03);
+  box-shadow: 0 .75rem 1.5rem rgba(18, 38, 63, .03);
 }
+
 .list-items {
   list-style-type: none;
   padding: 0 15px;
   margin-bottom: 0;
 
-  li{
+  li {
     color: #ffffff;
     font-size: 12px;
   }
 }
 
-.revenue{
+.revenue {
   padding: 9px 0;
 }
 
@@ -198,14 +239,35 @@ h1,h2,h3,h4,h5,h6,p,small{
 }
 
 .chart-details {
-  p{
+  p {
     font-size: 14px;
     margin: 0 auto;
     padding: 5px 0;
+    color: $color_9 !important;
   }
-  h3{
+
+  h3 {
     font-size: 16px;
     margin: 0 auto;
     padding: 5px 0;
+    color: $color_9 !important;
+  }
+}
+
+.text-black {
+  color: $color_9 !important;
+}
+
+.modal-header {
+  border-bottom-color: $border_bottom_color !important;
+
+  .modal-title {
+    color: $color_9 !important;
+  }
+
+  .close {
+    span {
+      color: $color_9 !important;
+    }
   }
 }

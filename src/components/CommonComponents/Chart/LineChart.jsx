@@ -43,14 +43,14 @@ function LineChart({weeklyData}) {
                     ticks: {
                         min: 0,
                         stepSize: 50,
-                        fontColor: "#fff",
+                        fontColor: "#000",
                     },
                 },
             ],
             xAxes: [
                 {
                     ticks: {
-                        fontColor: "#fff",
+                        fontColor: "#000",
                     },
                 },
             ],

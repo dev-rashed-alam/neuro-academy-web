@@ -82,7 +82,7 @@ const PurchaseList = () => {
                 paymentMethod: item.paymentMethod,
                 userName: userName === undefined ? '' : userName,
                 courseTitle: renderCourseTitle(item.courses),
-                purchaseAmount: item.purchasePrice,
+                purchaseAmount: Number(item?.purchasePrice)?.toFixed(2),
                 purchaseDate: formatDate(item.createdAt),
                 action: renderViewButton(item),
             });

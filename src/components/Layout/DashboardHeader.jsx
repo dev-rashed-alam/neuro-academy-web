@@ -33,8 +33,7 @@ class DashboardHeader extends Component {
                 <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
                     <Link className="navbar-brand brand-logo" to="/dashboard">
             <span className="img">
-              <FaFreeCodeCamp/>
-                &nbsp;&nbsp;E-Academy
+              <img src="/porasona-bd.webp" alt="logo"/>
             </span>
                     </Link>
                     <Link className="navbar-brand brand-logo-mini" to="/">

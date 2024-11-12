@@ -43,10 +43,9 @@ const tableColumn = [
 
 const CouponList = () => {
   const [modal, setModal] = useState(false);
-  const [paginationUtil, ] = useState({});
   const [tableData, setTableDta] = useState([]);
   const { setLoader, resetContext } = useContext(FormContext);
-  const [couponListUtil, setCouponListUtil] = useState("/admin/coupons");
+  const [couponListUtil] = useState("/admin/coupons");
   const [selectedCoupon, setSelectedCoupon] = useState({});
 
   useEffect(() => {
@@ -115,9 +114,6 @@ const CouponList = () => {
           <TableComponent
             tableColumn={tableColumn}
             tableData={tableData}
-            pagination={true}
-            triggerPagination={setCouponListUtil}
-            paginationUtil={paginationUtil}
           />
         </Col>
       </Row>

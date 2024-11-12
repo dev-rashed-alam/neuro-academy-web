@@ -1,8 +1,8 @@
-
+@import "Global";
 .btn-orange
 {
   background-color: transparent;
-  border-color: #777!important;
+  border-color: $border_bottom_color !important;
   color: #777;
   text-align: left;
   width:100%;
