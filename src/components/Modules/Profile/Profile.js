@@ -215,7 +215,7 @@ const Profile = () => {
                                     ? "form-control field-error"
                                     : "form-control"
                             }
-                            readOnly={true}
+                            readOnly={false}
                             placeholder={"Disabled due to testing purpose"}
                             value={inputData.password || ""}
                             onChange={handleChange}
@@ -239,7 +239,7 @@ const Profile = () => {
                             name="confirmPassword"
                             value={inputData.confirmPassword || ""}
                             onChange={handleChange}
-                            readOnly={true}
+                            readOnly={false}
                             placeholder={"Disabled due to testing purpose"}
                             className={
                                 errors &&

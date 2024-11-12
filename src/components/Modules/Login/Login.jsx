@@ -10,8 +10,8 @@ import {printApiErrors} from "../../Config/HelperUtils";
 
 const Login = (props) => {
     const [inputData, setInputData] = useState({
-        email: "dev.rashedalam@gmail.com",
-        password: "12345678"
+        email: "",
+        password: ""
     });
     const {setLoader} = useContext(FormContext);
 
