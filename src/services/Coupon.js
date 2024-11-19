@@ -21,7 +21,7 @@ export const updateCouponById = async (postData, id) => {
 
 export const findAllCoupons = async () => {
     try {
-        const {data} = await apiHandler.GET("coupon")
+        const {data} = await apiHandler.GET("coupon", "?page=1&limit=1000")
         return data.data
     } catch (error) {
         printApiErrors(error)

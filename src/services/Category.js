@@ -21,7 +21,7 @@ export const updateCategoryById = async (postData, id) => {
 
 export const findAllCategories = async () => {
     try {
-        const {data} = await apiHandler.GET("findAllCategories")
+        const {data} = await apiHandler.GET("findAllCategories", "?page=1&limit=1000")
         return data.data
     }catch (error){
         printApiErrors(error)

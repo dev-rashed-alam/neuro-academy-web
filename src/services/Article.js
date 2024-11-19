@@ -29,7 +29,7 @@ export const updateArticleById = async (postData, id) => {
 
 export const findAllArticles = async () => {
     try {
-        const {data} = await apiHandler.GET("findAllArticles")
+        const {data} = await apiHandler.GET("findAllArticles", '?page=1&limit=1000')
         return data.data
     }catch (error){
         printApiErrors(error)

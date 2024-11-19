@@ -8,7 +8,7 @@ import axios from "axios";
 
 export const fetchCourses = async () => {
     try {
-        const {data} = await apiHandler.GET("courses")
+        const {data} = await apiHandler.GET("courses",'?page=1&limit=1000')
         return data.data
     } catch (error) {
         printApiErrors(error)

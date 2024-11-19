@@ -3,7 +3,7 @@ import {printApiErrors} from "../components/Config/HelperUtils";
 
 export const findAllUsersByUserType = async () => {
     try {
-        const {data} = await apiHandler.GET("userByUserType", '/student')
+        const {data} = await apiHandler.GET("userByUserType", '/student?page=1&limit=1000')
         return data.data
     } catch (error) {
         printApiErrors(error)
