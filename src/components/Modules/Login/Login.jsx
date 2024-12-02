@@ -5,7 +5,7 @@ import {FormContext} from "../../Context/FormContext";
 import {toast} from "react-toastify";
 import {removeUserSession, setUserSession} from "../../Config/SessionUtils";
 import {doLogin} from "../../../services/Login";
-import {ReactComponent as IconHat} from "../../../assets/images/icons/loginLogo.svg";
+import LoginLogo from "../../../assets/images/login-logo.jpg";
 import {printApiErrors} from "../../Config/HelperUtils";
 
 const Login = (props) => {
@@ -45,7 +45,7 @@ const Login = (props) => {
         <section className={styles.loginPage}>
             <div className={styles.form}>
                 <div className={styles.thumbnail}>
-                    <IconHat/>
+                    <img src={LoginLogo} alt="login-logo"/>
                 </div>
                 <form>
                     <input
